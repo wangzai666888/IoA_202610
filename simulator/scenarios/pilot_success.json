@@ -1,0 +1,24 @@
+{
+  "scenario_id": "pilot_success_boundary_route",
+  "config": {
+    "width": 100.0,
+    "height": 100.0,
+    "dt": 1.0,
+    "agent_speed": 2.0,
+    "target_speed": 1.0,
+    "observation_radius": 25.0,
+    "observation_period": 5,
+    "support_radius": 15.0,
+    "marker_radius": 5.0,
+    "hold_seconds": 3,
+    "max_time": 120
+  },
+  "target": {
+    "route": [[0, 40], [12, 40], [12, 55], [101, 55]]
+  },
+  "agents": [
+    {"id": "UAV_observer", "carrier_type": "UAV", "role": "observer", "position": [5, 40]},
+    {"id": "UUV_leader", "carrier_type": "UUV", "role": "leader", "position": [7, 45]},
+    {"id": "USV_marker", "carrier_type": "USV", "role": "marker", "position": [38, 70]}
+  ]
+}

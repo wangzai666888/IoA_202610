@@ -1,6 +1,8 @@
 import asyncio
 import json
 import os
+import time
+import uuid
 import random
 import re
 import urllib
@@ -48,7 +50,30 @@ from common.utils.database_utils import AutoStoredDict
 from common.utils.milvus_utils import ConfigMilvusWrapper
 
 from .task_management import TaskEntry, TaskManager, TaskStatus
+from .sim_round_state import (
+    begin_round, parse_round_id, round_message_count, generate_valid_discussion_response,
+)
+from .sim_round_state import round_status as snapshot_sim_round
+from .capture_execution import (
+    CAPTURE_COORDINATION_PROMPT, capture_assignment, capture_round_conclusion,
+)
+from .capture_state import (
+    next_phase, role_members, missing_observers, ready_to_close, make_batch,
+    decode_batch, accept_batch, record_result, plan_waypoints,
+)
+from common.capture_protocol import BATCH_PREFIX
 from .websocket_client import WebSocketClient
+
+
+def _capture_prompt_start(comm_info: CommunicationInfo) -> int:
+    if os.environ.get("SIM_URL") and comm_info.sim_round_id:
+        return comm_info.sim_prompt_message_start
+    return 0
+
+
+def _capture_task_view(comm_info: CommunicationInfo, task_manager: TaskManager) -> str:
+    start = comm_info.sim_round_task_start if os.environ.get("SIM_URL") and comm_info.sim_round_id else 0
+    return task_manager.tasks_view(start_index=start)
 
 TEAM_UP_TOOLS = [
     {
@@ -221,6 +246,7 @@ class CommunicationLayer:
         obs_kwargs: dict = {},
         max_turns: int | None = None,
         skip_naming: bool = True,
+        sim_round_id: str | None = None,
     ) -> Tuple[str, str]:
         """
         Launch a group chat targetted on the given goal.
@@ -240,6 +266,12 @@ class CommunicationLayer:
             Tuple[str, str]: The id of the chat session and the conclusion of the chat session.
         """
         new_message = None
+        if sim_round_id is not None:
+            if not os.environ.get("SIM_URL"):
+                raise ValueError("sim_round_id is only supported by capture clients")
+            parse_round_id(sim_round_id)
+            if max_turns is None:
+                raise ValueError("simulation rounds require max_turns")
         if comm_id is None:
             # team up: determine the team members, return the comm id.
             cont_input = None
@@ -252,13 +284,39 @@ class CommunicationLayer:
                 max_turns=max_turns,
                 skip_naming=skip_naming,
             )
+            if sim_round_id is not None:
+                comm_info = self.comm_bank[comm_id]
+                begin_round(
+                    comm_info, self.task_manager_bank[comm_id],
+                    sim_round_id, max_turns, goal,
+                )
+                self.comm_bank[comm_id] = comm_info
         else:
             # continue the previous discussion
             if comm_id not in self.comm_bank:
                 return comm_id, f"Could not find the communication session: {comm_id}."
             comm_info: CommunicationInfo = self.comm_bank[comm_id]
-            comm_info.conclusion = None
-            comm_info.max_turns = max_turns
+            if sim_round_id is not None:
+                previous = comm_info.sim_round_id
+                if previous is None:
+                    raise ValueError("cannot continue a non-simulation discussion as a simulation round")
+                old_episode, old_time = parse_round_id(previous)
+                new_episode, new_time = parse_round_id(sim_round_id)
+                if old_episode != new_episode or new_time != old_time + 1:
+                    raise ValueError("simulation round must continue the same episode one second later")
+                prior = snapshot_sim_round(comm_info, self.task_manager_bank[comm_id])
+                if (not prior["concluded"] or prior["pending_tasks"]
+                        or prior["failed_tasks"] or prior["await_agents"] or prior["round_error"]):
+                    raise RuntimeError("previous simulation round has not fully completed")
+                if cont_input is None:
+                    raise ValueError("simulation continuation requires cont_input")
+                begin_round(
+                    comm_info, self.task_manager_bank[comm_id],
+                    sim_round_id, max_turns, goal,
+                )
+            else:
+                comm_info.conclusion = None
+                comm_info.max_turns = max_turns
             self.comm_bank[comm_id] = comm_info
             if cont_input is not None:
                 # if the continuation message is provided, then send the message to all the team members.
@@ -267,13 +325,16 @@ class CommunicationLayer:
                     content=cont_input["content"],
                     sender=cont_input["sender"],
                     comm_id=comm_id,
-                    next_speaker=random.choice([t["name"] for t in comm_info.team_members]),
+                    next_speaker=(self.name if sim_round_id is not None else
+                                  random.choice([t["name"] for t in comm_info.team_members])),
                     state=CommunicationState.DISCUSSION,
                     type=CommunicationType.DISCUSSION,
                     goal=comm_info.goal,
                     team_members=comm_info.team_members,
                     team_up_depth=comm_info.team_up_depth,
                     is_collaborative_planning_enabled=comm_info.is_collaborative_planning_enabled,
+                    proposal_id=sim_round_id or "",
+                    max_turns=max_turns,
                 )
                 self.comm_bank[comm_id] = comm_info
                 await self._send_message(new_message)
@@ -288,11 +349,27 @@ class CommunicationLayer:
 
         # check the conclusion field in polling
         while True:
+            if sim_round_id is not None:
+                round_error = self.comm_bank[comm_id].sim_round_error
+                if round_error:
+                    raise RuntimeError(f"simulation round {sim_round_id} failed: {round_error}")
             conclusion = self.comm_bank[comm_id].conclusion
             if conclusion is None:
                 await asyncio.sleep(5)
             else:
                 return comm_id, conclusion
+
+    def simulation_round_status(self, comm_id: str) -> dict:
+        if not os.environ.get("SIM_URL"):
+            raise PermissionError("simulation status is disabled")
+        if comm_id not in self.comm_bank:
+            raise KeyError("unknown communication session")
+        comm_info = self.comm_bank[comm_id]
+        if comm_info.sim_round_id is None:
+            raise ValueError("session has no simulation round")
+        status = snapshot_sim_round(comm_info, self.task_manager_bank[comm_id])
+        status["agent_name"] = self.name
+        return status
 
     async def _naming_team(self, goal: str, team_members: list[str] = []) -> str:
         prepend_prompt = [
@@ -468,7 +545,7 @@ class CommunicationLayer:
             team_members = []
             for item in agents_upated_for_contact:
                 if isinstance(item, dict) and item.get("name") != self.name:
-                    if item.get("name" not in self.agent_contact):
+                    if item.get("name") not in self.agent_contact:
                         self.agent_contact[item.get("name")] = item
                     team_members.append(item)
 
@@ -607,10 +684,53 @@ class CommunicationLayer:
             )
             self.task_manager_bank[comm_id] = TaskManager(comm_id)
 
+        if os.environ.get("SIM_URL") and new_message and new_message.proposal_id:
+            incoming = new_message.proposal_id
+            try:
+                episode, sim_time = parse_round_id(incoming)
+            except ValueError:
+                logger.error("Ignoring an invalid simulation round identifier")
+                return
+            comm_info = self.comm_bank[comm_id]
+            if incoming != comm_info.sim_round_id:
+                if comm_info.sim_round_id is not None:
+                    old_episode, old_time = parse_round_id(comm_info.sim_round_id)
+                    if episode != old_episode or sim_time <= old_time:
+                        logger.error("Ignoring an old or foreign simulation round message")
+                        return
+                    prior = snapshot_sim_round(comm_info, self.task_manager_bank[comm_id])
+                    if (sim_time != old_time + 1 or not prior["concluded"]
+                            or prior["pending_tasks"] or prior["await_agents"]):
+                        comm_info.sim_round_error = "new round arrived before previous round completed"
+                        self.comm_bank[comm_id] = comm_info
+                        logger.error(comm_info.sim_round_error)
+                        return
+                begin_round(
+                    comm_info, self.task_manager_bank[comm_id],
+                    incoming, new_message.max_turns, new_message.goal,
+                )
+                self.comm_bank[comm_id] = comm_info
+
         if new_message is None:
             # This agent is the first speaker.
             return await self._coordination_discussion(new_message, comm_id, obs_kwargs)
         else:
+            info = self.comm_bank[comm_id]
+            capture = getattr(info, "sim_capture_state", None)
+            if capture is not None:
+                if new_message.type == CommunicationType.SYNC_TASK_ASSIGNMENT:
+                    receivers = new_message.next_speaker
+                    receivers = [receivers] if isinstance(receivers, str) else receivers
+                    accept_batch(capture, decode_batch(new_message.content, new_message.sender),
+                                 new_message.sender, receivers)
+                elif new_message.type == CommunicationType.ASYNC_TASK_ASSIGNMENT:
+                    raise ValueError("capture phases require synchronous task batches")
+                elif new_message.type == CommunicationType.INFORM_TASK_RESULT and new_message.sender != self.name:
+                    if not record_result(capture, new_message.sender, new_message.task_conclusion):
+                        return  # Duplicate receipts cannot unblock another batch.
+                elif new_message.type == CommunicationType.CONCLUSION and not ready_to_close(capture):
+                    raise RuntimeError("capture conclusion arrived before required action receipts")
+                self.comm_bank[comm_id] = info
             new_message.content = f"[{new_message.sender}]: {new_message.content}"
             if new_message.sender != self.name:
                 self._update_memory_and_task_manager(new_message, comm_id)
@@ -653,7 +773,7 @@ class CommunicationLayer:
                     "role": "system",
                     "content": Template(COMM_TASK_MANAGEMENT_APPEND_PROMPT).safe_substitute(
                         {
-                            "task_management_view": task_manager.tasks_view(),
+                            "task_management_view": _capture_task_view(comm_info, task_manager),
                             "goal": comm_info.goal,
                         }
                     ),
@@ -669,7 +789,7 @@ class CommunicationLayer:
                     "role": "system",
                     "content": Template(COMM_TASK_MANAGEMENT_APPEND_PROMPT).safe_substitute(
                         {
-                            "task_management_view": task_manager.tasks_view(),
+                            "task_management_view": _capture_task_view(comm_info, task_manager),
                             "goal": comm_info.goal,
                         }
                     ),
@@ -694,7 +814,7 @@ class CommunicationLayer:
                     "role": "system",
                     "content": Template(COMM_TASK_MANAGEMENT_APPEND_PROMPT).safe_substitute(
                         {
-                            "task_management_view": task_manager.tasks_view(),
+                            "task_management_view": _capture_task_view(comm_info, task_manager),
                             "goal": comm_info.goal,
                         }
                     ),
@@ -705,6 +825,10 @@ class CommunicationLayer:
 
         if observation != "":
             append_prompt.append(f"Current Observation:\n{observation}")
+        if os.environ.get("SIM_URL") and comm_info.sim_round_id:
+            # This also overrides descriptions cached by the registry before
+            # the capture performance update. No database reset is needed.
+            append_prompt.append(CAPTURE_COORDINATION_PROMPT)
         return prepend_prompt, collaborative_management_msgs, append_prompt
 
     def _get_pause_prompt(self, comm_id: str):
@@ -716,7 +840,7 @@ class CommunicationLayer:
                 "role": "system",
                 "content": Template(COMM_TASK_MANAGEMENT_APPEND_PROMPT).safe_substitute(
                     {
-                        "task_management_view": task_manager.tasks_view(),
+                        "task_management_view": _capture_task_view(comm_info, task_manager),
                         "goal": comm_info.goal,
                     }
                 ),
@@ -754,7 +878,7 @@ class CommunicationLayer:
 
         pause_response: LLMResult = await self.llm.agenerate_response(
             prepend_prompt=prepend_prompt,
-            history=(await comm_info.memory.to_messages()) + pause_messages,
+            history=(await comm_info.memory.to_messages(start_index=_capture_prompt_start(comm_info))) + pause_messages,
             append_prompt=append_prompt,
             response_format={"type": "json_object"},
         )
@@ -786,24 +910,88 @@ class CommunicationLayer:
 
         await self._send_message(message_to_send)
 
+    async def _generate_capture_response(self, comm_id: str):
+        info = self.comm_bank[comm_id]
+        capture = info.sim_capture_state
+        if self.name not in role_members(capture, "leader"):
+            return
+        phase = next_phase(capture)
+        if phase == "waiting":
+            return
+        if phase == "complete":
+            await self._conclude_group_discussion(comm_id)
+            return
+        if info.max_turns is not None and round_message_count(info) >= info.max_turns:
+            raise RuntimeError("capture message budget exhausted before required actions completed")
+        if phase == "waypoint":
+            if capture["time"] and capture["time"] % capture["period"]:
+                actions = []  # No new sample: continue the accepted destination.
+            else:
+                actions = await plan_waypoints(self.llm, capture)
+            if not actions:
+                capture["waypoints_decided"] = True
+                self.comm_bank[comm_id] = info
+                return await self._generate_capture_response(comm_id)
+        else:
+            names = missing_observers(capture) if phase == "observe" else role_members(capture, "marker")
+            tool = "sim_observe" if phase == "observe" else "sim_try_tag"
+            actions = [{"agent_id": name, "tool": tool, "arguments": {}} for name in names]
+        batch = make_batch(capture, phase, actions)
+        receivers = [task["agent_id"] for task in batch["tasks"]]
+        accept_batch(capture, batch, self.name, receivers)
+        content = BATCH_PREFIX + json.dumps(batch, ensure_ascii=False)
+        info.memory.add_messages(LLMResult(content=f"[{self.name}]: {content}", name=self.name, role="assistant"))
+        manager = self.task_manager_bank[comm_id]
+        manager.task_assign_manager.register_await_agents(receivers)
+        self.task_manager_bank[comm_id] = manager
+        self.comm_bank[comm_id] = info
+        await self._send_message(AgentMessage(
+            content=content, sender=self.name, comm_id=comm_id, next_speaker=receivers,
+            state=CommunicationState.DISCUSSION, type=CommunicationType.SYNC_TASK_ASSIGNMENT,
+            goal=info.goal, team_members=info.team_members, team_up_depth=info.team_up_depth,
+            is_collaborative_planning_enabled=False, max_turns=info.max_turns,
+        ))
+
     async def _generate_response(self, comm_id: str, obs_kwargs: dict = {}):
         comm_info = self.comm_bank[comm_id]
+        if getattr(comm_info, "sim_capture_state", None) is not None:
+            return await self._generate_capture_response(comm_id)
 
         prepend_prompt, collaborative_management_msgs, append_prompt = self._get_discussion_prompt(comm_id, obs_kwargs)
 
         max_turns = comm_info.max_turns
-        curr_turn = len(await comm_info.memory.to_messages())
+        curr_turn = (
+            round_message_count(comm_info) if os.environ.get("SIM_URL") and comm_info.sim_round_id
+            else len(await comm_info.memory.to_messages())
+        )
+        if (os.environ.get("SIM_URL") and comm_info.sim_round_id
+                and max_turns is not None and curr_turn >= max_turns):
+            await self._conclude_group_discussion(comm_id)
+            return
         if max_turns is not None and curr_turn >= max_turns:
             append_prompt.append(
                 "The discussion has reached the maximum turns. Now you must send a message with type `conclude_group_discussion` anyway."
             )
 
-        response: LLMResult = await self.llm.agenerate_response(
-            prepend_prompt=prepend_prompt,
-            history=(await comm_info.memory.to_messages()) + collaborative_management_msgs,
-            append_prompt=append_prompt,
-            response_format={"type": "json_object"},
-        )
+        history = (await comm_info.memory.to_messages(
+            start_index=_capture_prompt_start(comm_info)
+        )) + collaborative_management_msgs
+        if os.environ.get("SIM_URL") and comm_info.sim_round_id:
+            response: LLMResult = await generate_valid_discussion_response(
+                self.llm, prepend_prompt=prepend_prompt, history=history,
+                append_prompt=append_prompt,
+                allowed_types=set(COMMUNICATION_TYPE_MAP),
+                on_invalid=lambda number, error: logger.warn(
+                    f"Invalid simulation discussion response from {self.name}, "
+                    f"attempt {number}/2: {error}"
+                ),
+            )
+        else:
+            response: LLMResult = await self.llm.agenerate_response(
+                prepend_prompt=prepend_prompt, history=history,
+                append_prompt=append_prompt,
+                response_format={"type": "json_object"},
+            )
 
         parsed_response = response.content
 
@@ -922,7 +1110,7 @@ class CommunicationLayer:
             task_abstract,
             context_information,
             completion_criteria,
-        ) = await self._rephrase_task_to_tool_agent(comm_id, observation)
+        ) = await self._rephrase_task_to_tool_agent(comm_id, observation, assignment=new_message)
         task_manager: TaskManager = self.task_manager_bank[comm_id]
         task_id = task_manager.create_task(task_desc, task_abstract, self.name, status=TaskStatus.TO_START)
         self.comm_bank[comm_id] = comm_info
@@ -985,6 +1173,14 @@ class CommunicationLayer:
         The discussion will be paused until the current agent returns the result.
         """
         comm_info: CommunicationInfo = self.comm_bank[comm_id]
+        capture = getattr(comm_info, "sim_capture_state", None)
+        if capture is not None:
+            batch = decode_batch(new_message.content, new_message.sender)
+            contract = next(task for task in batch["tasks"] if task["agent_id"] == self.name)
+            if contract["id"] in capture["started"]:
+                return
+            capture["started"].append(contract["id"])
+            self.comm_bank[comm_id] = comm_info
         observation = self.observation_func(**obs_kwargs)
 
         (
@@ -993,7 +1189,7 @@ class CommunicationLayer:
             task_abstract,
             context_information,
             completion_criteria,
-        ) = await self._rephrase_task_to_tool_agent(comm_id, observation)
+        ) = await self._rephrase_task_to_tool_agent(comm_id, observation, assignment=new_message)
         task_manager = self.task_manager_bank[comm_id]
         task_id = task_manager.create_task(task_desc, task_abstract, self.name, status=TaskStatus.TO_START)
 
@@ -1060,7 +1256,7 @@ class CommunicationLayer:
             "role": "system",
             "content": Template(COMM_TASK_MANAGEMENT_APPEND_PROMPT).safe_substitute(
                 {
-                    "task_management_view": task_manager.tasks_view(),
+                    "task_management_view": _capture_task_view(comm_info, task_manager),
                     "goal": comm_info.goal,
                 }
             ),
@@ -1072,7 +1268,7 @@ class CommunicationLayer:
             "role": "system",
             "content": Template(COMM_PLANNER_PROMPT).safe_substitute(
                 {
-                    "task_management_view": task_manager.tasks_view(),
+                    "task_management_view": _capture_task_view(comm_info, task_manager),
                     "goal": comm_info.goal,
                     "Dynamic_Collaborative_Planner": task_manager.get_latest_plan(),
                 }
@@ -1084,24 +1280,51 @@ class CommunicationLayer:
 
         response: LLMResult = await self.llm.agenerate_response(
             prepend_prompt=prepend_prompt,
-            history=(await comm_info.memory.to_messages()) + append_msgs,
+            history=(await comm_info.memory.to_messages(start_index=_capture_prompt_start(comm_info))) + append_msgs,
             append_prompt=append_prompt,
         )
         updated_plan = response.content
         print(f"updated_plan: {updated_plan}")
         return updated_plan
 
-    async def tool_agent_run(self, task_desc: str):
-        if self.tool_agent:
-            return await self.tool_agent.run(task_desc)
-        else:
-            prepend_prompt = [f"{self.desc}"]
-            response: LLMResult = await self.llm.agenerate_response(
-                prepend_prompt=prepend_prompt,
-                append_prompt=task_desc,
+    async def tool_agent_run(self, task_desc: str, sim_round_id: str | None = None):
+        run_id = uuid.uuid4().hex[:8]
+        started = time.perf_counter()
+        preview = " ".join(task_desc.split())[:120]
+
+        logger.info(
+            f"[ACTIVITY] agent={self.name} run_id={run_id} "
+            f"event=task_start task={preview!r}"
+        )
+
+        try:
+            if self.tool_agent:
+                if os.environ.get("SIM_URL"):
+                    conclusion = await self.tool_agent.run(task_desc, sim_round_id=sim_round_id)
+                else:
+                    conclusion = await self.tool_agent.run(task_desc)
+            else:
+                prepend_prompt = [f"{self.desc}"]
+                response = await self.llm.agenerate_response(
+                    prepend_prompt=prepend_prompt,
+                    append_prompt=task_desc,
+                )
+                conclusion = response.content
+
+            logger.info(
+                f"[ACTIVITY] agent={self.name} run_id={run_id} "
+                f"event=task_complete duration_s={time.perf_counter() - started:.1f}"
             )
-            conclusion = response.content
             return conclusion
+
+        except Exception as exc:
+            logger.error(
+                "ACTIVITY",
+                f"agent={self.name} run_id={run_id} event=task_error "
+                f"duration_s={time.perf_counter() - started:.1f} "
+                f"error={type(exc).__name__}: {exc}",
+            )
+            raise
 
     async def _call_tool_agent_and_inform(
         self,
@@ -1134,37 +1357,46 @@ class CommunicationLayer:
 """
         comm_info: CommunicationInfo = self.comm_bank[comm_id]
 
-        # TODO: complete the task assigned with a team or alone
-        if self.support_nested_teams:
-            team_up, thought_trajectory = await self._require_teamwork(task_content)
+        task_status = TaskStatus.COMPLETED
+        if getattr(comm_info, "sim_capture_state", None) is not None:
+            task_content = task_desc  # Preserve the exact structured local contract.
+        try:
+            # TODO: complete the task assigned with a team or alone
+            if self.support_nested_teams:
+                team_up, thought_trajectory = await self._require_teamwork(task_content)
+            else:
+                team_up = False
 
-        else:
-            team_up = False
+            team_up_depth = comm_info.team_up_depth
+            if team_up and (team_up_depth is None):
+                task_conclusion = await self.launch_goal(
+                    goal_content_in_nested_team_up,
+                    is_collaborative_planning_enabled=comm_info.is_collaborative_planning_enabled,
+                )
+            elif team_up and (team_up_depth >= 1):
+                task_conclusion = await self.launch_goal(
+                    goal_content_in_nested_team_up,
+                    team_up_depth=team_up_depth - 1,
+                    is_collaborative_planning_enabled=comm_info.is_collaborative_planning_enabled,
+                )
+            else:
+                task_conclusion = await self.tool_agent_run(
+                    task_content, sim_round_id=comm_info.sim_round_id,
+                )
+            if (not task_conclusion or
+                    str(task_conclusion).strip().strip('"') == "Failed to handle the task."):
+                task_status = TaskStatus.FAILED
+        except Exception as exc:
+            if not os.environ.get("SIM_URL"):
+                raise
+            logger.error(f"Simulation tool task {task_id} failed: {type(exc).__name__}: {exc}")
+            task_conclusion = f"Tool task failed: {type(exc).__name__}: {exc}"
+            task_status = TaskStatus.FAILED
 
-        team_up_depth = comm_info.team_up_depth
-        if team_up and (team_up_depth is None):
-            # the agent decides to team up and there's no limit to the depth of teaming up
-            task_conclusion = await self.launch_goal(
-                # task_content,
-                goal_content_in_nested_team_up,
-                is_collaborative_planning_enabled=comm_info.is_collaborative_planning_enabled,
-            )
-        elif team_up and (team_up_depth >= 1):
-            # the agent decides to team up and it's within the depth limit of teaming up
-            task_conclusion = await self.launch_goal(
-                # task_content,
-                goal_content_in_nested_team_up,
-                team_up_depth=team_up_depth - 1,
-                is_collaborative_planning_enabled=comm_info.is_collaborative_planning_enabled,
-            )
-        elif team_up and (team_up_depth <= 0):
-            # the agent decides to team up but it's out of the depth limit of teaming up
-            task_conclusion = await self.tool_agent_run(task_content)
-        else:
-            # the agent decides not to team up or the config is set not to team up.
-            task_conclusion = await self.tool_agent_run(task_content)
-
-        await self._inform_task_result(task_desc, task_conclusion, next_speaker, comm_id, task_id, task_abstract)
+        await self._inform_task_result(
+            task_desc, task_conclusion, next_speaker, comm_id, task_id,
+            task_abstract, task_status=task_status,
+        )
 
     async def _require_teamwork(self, task: str) -> bool:
         local_contact = self.agent_contact.items()
@@ -1205,11 +1437,28 @@ class CommunicationLayer:
         comm_id: str,
         task_id: str,
         task_abstract: str,
+        task_status: TaskStatus = TaskStatus.COMPLETED,
     ):
         comm_info: CommunicationInfo = self.comm_bank[comm_id]
-        task_result_inform = Template(EXEC_TASK_CONCLUSION_APPEND_PROMPT).safe_substitute(
-            {"task_desc": task_desc, "task_conclusion": task_conclusion}
-        )
+        capture = getattr(comm_info, "sim_capture_state", None)
+        if capture is not None:
+            try:
+                if task_status == TaskStatus.FAILED:
+                    raise ValueError(str(task_conclusion))
+                record_result(capture, self.name, task_conclusion)
+            except (ValueError, KeyError, TypeError) as exc:
+                task_status = TaskStatus.FAILED
+                task_conclusion = f"Tool task failed contract validation: {exc}"
+                capture["errors"].append(task_conclusion)
+                comm_info.sim_round_error = task_conclusion
+        if os.environ.get("SIM_URL") and comm_info.sim_round_id:
+            # Keep full executor receipts, without repeating the assignment
+            # (which remains available in task_desc and the task manager).
+            task_result_inform = f"任务 {task_id} {task_status.name}\n{task_conclusion}"
+        else:
+            task_result_inform = Template(EXEC_TASK_CONCLUSION_APPEND_PROMPT).safe_substitute(
+                {"task_desc": task_desc, "task_conclusion": task_conclusion}
+            )
         message_to_send = AgentMessage(
             content=task_result_inform,
             sender=self.name,
@@ -1235,7 +1484,7 @@ class CommunicationLayer:
             task_desc,
             task_abstract,
             self.name,
-            status=TaskStatus.COMPLETED,
+            status=task_status,
             conclusion=task_conclusion,
             msg_in_memory=result,
         )
@@ -1248,8 +1497,12 @@ class CommunicationLayer:
 
         await self._send_message(message_to_send)
 
-    async def _rephrase_task_to_tool_agent(self, comm_id: str, observation: str = ""):
+    async def _rephrase_task_to_tool_agent(self, comm_id: str, observation: str = "", assignment=None):
         comm_info: CommunicationInfo = self.comm_bank[comm_id]
+
+        if os.environ.get("SIM_URL") and comm_info.sim_round_id:
+            return capture_assignment(self.name, comm_info.sim_round_id, assignment,
+                                      getattr(comm_info, "sim_capture_state", None))
 
         prepend_prompt = [
             Template(self.system_prompt_template).safe_substitute(
@@ -1275,7 +1528,7 @@ class CommunicationLayer:
         if observation != "":
             prepend_prompt.append(f"Current Observation:\n{observation}")
 
-        messages = comm_info.memory.messages
+        messages = comm_info.memory.messages[_capture_prompt_start(comm_info):]
         recent_history, recent_history_list = self._get_hybrid_recent_history(messages, comm_id)
         system_msg = {
             "role": "system",
@@ -1440,16 +1693,27 @@ class CommunicationLayer:
         Let the agent conclude the group discussion.
         """
         comm_info: CommunicationInfo = self.comm_bank[comm_id]
+        capture = getattr(comm_info, "sim_capture_state", None)
+        if capture is not None:
+            status = snapshot_sim_round(comm_info, self.task_manager_bank[comm_id])
+            if (not ready_to_close(capture) or status["pending_tasks"]
+                    or status["failed_tasks"] or status["await_agents"]):
+                raise RuntimeError("cannot conclude capture round before required actions and tasks complete")
 
-        append_prompt = [Template(COMM_CONCLUDE_APPEND_PROMPT).safe_substitute({"goal": comm_info.goal})]
-        history = await comm_info.memory.to_messages()
-        if len(history) > 0:
-            history[0]["content"] = "The history of the GROUP DISCUSSION:\n" + history[0]["content"]
-        response: LLMResult = await self.llm.agenerate_response(
-            history=history,
-            append_prompt=append_prompt,
-        )
-        parsed_response = response.content
+        if os.environ.get("SIM_URL") and comm_info.sim_round_id:
+            parsed_response = capture_round_conclusion(
+                snapshot_sim_round(comm_info, self.task_manager_bank[comm_id])
+            )
+        else:
+            append_prompt = [Template(COMM_CONCLUDE_APPEND_PROMPT).safe_substitute({"goal": comm_info.goal})]
+            history = await comm_info.memory.to_messages(start_index=_capture_prompt_start(comm_info))
+            if len(history) > 0:
+                history[0]["content"] = "The history of the GROUP DISCUSSION:\n" + history[0]["content"]
+            response: LLMResult = await self.llm.agenerate_response(
+                history=history,
+                append_prompt=append_prompt,
+            )
+            parsed_response = response.content
         message_to_send = AgentMessage(
             content=parsed_response,
             sender=self.name,
@@ -1473,10 +1737,18 @@ class CommunicationLayer:
 
     async def _send_message(self, payload: AgentMessage):
         """Send a message to the chat session."""
+        if os.environ.get("SIM_URL") and payload.comm_id in self.comm_bank:
+            comm_info = self.comm_bank[payload.comm_id]
+            if comm_info.sim_round_id is not None:
+                payload.proposal_id = comm_info.sim_round_id
+                payload.max_turns = comm_info.max_turns
+                payload.goal = comm_info.goal
         try:
             await self.server_websocket.send_message(payload.model_dump_json())
         except Exception as e:
             logger.error(f"Failed to send the message. {e}")
+            if os.environ.get("SIM_URL"):
+                raise
             return {"status": "failed", "message": str(e)}
         return {"status": "success"}
 
@@ -1485,12 +1757,26 @@ class CommunicationLayer:
             message = await self.server_websocket.receive_message()
             comm_id = message.comm_id
             logger.info(f"Received message: {str(message)}")
-            match message.state:
-                case CommunicationState.DISCUSSION | CommunicationState.VOTE:
-                    await self.coordination(message, comm_id, max_turns=message.max_turns)
-                # TODO: complete execution cases
-                case _:
-                    logger.error(f"Unknown state: {message.state}")
+            try:
+                match message.state:
+                    case CommunicationState.DISCUSSION | CommunicationState.VOTE:
+                        await self.coordination(message, comm_id, max_turns=message.max_turns)
+                    # TODO: complete execution cases
+                    case _:
+                        logger.error(f"Unknown state: {message.state}")
+            except Exception as exc:
+                if not os.environ.get("SIM_URL") or comm_id not in self.comm_bank:
+                    raise
+                info = self.comm_bank[comm_id]
+                if not info.sim_round_id or info.sim_round_id != message.proposal_id:
+                    raise
+                info.sim_round_error = f"{type(exc).__name__}: {exc}"
+                self.comm_bank[comm_id] = info
+                logger.error(
+                    "Simulation round",
+                    f"agent={self.name} round={info.sim_round_id} "
+                    f"coordination_error={info.sim_round_error}",
+                )
 
     async def shutdown(self):
         if self.tool_agent is not None:

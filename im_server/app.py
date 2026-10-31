@@ -1,4 +1,6 @@
 import json
+import asyncio
+from collections import defaultdict
 import uuid
 from copy import deepcopy
 from datetime import datetime
@@ -144,17 +146,27 @@ async def websocket_endpoint(websocket: WebSocket, agent_name: str):
             if parsed_data.comm_id not in session_manager.sessions:
                 logger.error(f"Failed to find the session {parsed_data.comm_id} for {agent_name}")
 
-            record = chat_record_manager[parsed_data.comm_id]
-            record["chat_record"].append(parsed_data)
-            chat_record_manager[parsed_data.comm_id] = record
-            await send_to_frontend(json.loads(parsed_data.model_dump_json()), "message")
-            for receiver in session_manager.sessions[parsed_data.comm_id]:
-                # 3. Forward the message to all the members including the sender itself.
-                await connection_manager.send_personal_message(receiver, parsed_data)
+            await broadcast_session_message(parsed_data)
 
     except WebSocketDisconnect:
         agent_name = quote(agent_name)
         await connection_manager.disconnect(agent_name)
+
+
+session_broadcast_locks = defaultdict(asyncio.Lock)
+
+
+async def broadcast_session_message(message):
+    # A leader can respond before the prior broadcast has reached its last
+    # recipient. Serialize whole broadcasts so every member sees the same
+    # receipt-before-next-phase order, even with different sender sockets.
+    async with session_broadcast_locks[message.comm_id]:
+        record = chat_record_manager[message.comm_id]
+        record["chat_record"].append(message)
+        chat_record_manager[message.comm_id] = record
+        await send_to_frontend(json.loads(message.model_dump_json()), "message")
+        for receiver in session_manager.sessions[message.comm_id]:
+            await connection_manager.send_personal_message(receiver, message)
 
 
 @app.websocket("/chatlist_ws")

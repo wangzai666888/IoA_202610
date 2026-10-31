@@ -1,0 +1,33 @@
+# All tool backends use container port 7070; host client port is 5062.
+server:
+  hostname: ioa-server
+  port: 7788
+tool_agent:
+  agent_type: ReAct
+  agent_name: USV_marker
+  desc: "标记者。根据 UUV_leader 通过 IoA 下达的航点指令，调用 sim_move_to 设置自身航点，再调用 sim_try_tag，报告真实 accepted 返回值。每项工具调用使用任务中给出的 episode_id 和 expected_time；标记被拒绝是合法结果，不得虚报捕获，不等待仿真移动。"
+  image_name: react-agent:sim
+  container_name: capture-marker-tool
+  port: 7070
+  tools_config: /app/simulator/tool_configs/marker.json
+  model: Qwen3.8-Flash
+  max_num_steps: 6
+  rag:
+    persist_dir: ""
+    chunk_size: 512
+    llm_model: Qwen3.8-Flash
+    llm_temperature: 0.1
+    similarity_top_k: 2
+    data: ""
+comm:
+  name: USV_marker
+  desc: "标记者。根据 UUV_leader 通过 IoA 下达的航点指令，调用 sim_move_to 设置自身航点，再调用 sim_try_tag，报告真实 accepted 返回值。每项工具调用使用任务中给出的 episode_id 和 expected_time；标记被拒绝是合法结果，不得虚报捕获，不等待仿真移动。"
+  type: Thing Assistant
+  support_nested_teams: false
+  max_team_up_attempts: 3
+  llm:
+    llm_type: openai-chat
+    model: Qwen3.8-Flash
+    temperature: 0.1
+  observation_func: dummy
+  discussion_only: false

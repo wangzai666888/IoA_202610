@@ -1,0 +1,9 @@
+outputs
+*.local.json
+*.local.env
+__pycache__
+**/__pycache__
+tests
+.idea
+.git
+*.md

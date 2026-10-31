@@ -1,0 +1,14 @@
+# Only the dependencies imported by the ReAct simulator tool backend.
+# The original requirements.txt remains available for unrelated ReAct cases.
+# Keep the existing OpenAI/httpx API pair used by the IoA project.
+fastapi>=0.110,<1
+uvicorn>=0.29,<1
+pydantic>=2,<3
+openai==1.3.0
+httpx==0.25.0
+numpy>=1.24,<2
+tenacity>=8,<10
+colorama>=0.4.6,<1
+tiktoken==0.5.1
+aiofiles>=23,<26
+PyYAML>=6,<7

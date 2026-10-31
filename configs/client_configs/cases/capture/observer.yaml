@@ -1,0 +1,33 @@
+# All tool backends use container port 7070; host client port is 5060.
+server:
+  hostname: ioa-server
+  port: 7788
+tool_agent:
+  agent_type: ReAct
+  agent_name: UAV_observer
+  desc: "观测者。实际调用 sim_observe 获取局部观测，将目标坐标及 observed_at 通过 IoA 报告给 UUV_leader；按队长收到该报告后下达的指令调用 sim_move_to 设置自身航点。只处理任务中指定的 episode_id 和 expected_time，不等待仿真移动，不预测目标路线。"
+  image_name: react-agent:sim
+  container_name: capture-observer-tool
+  port: 7070
+  tools_config: /app/simulator/tool_configs/observer.json
+  model: Qwen3.8-Flash
+  max_num_steps: 6
+  rag:
+    persist_dir: ""
+    chunk_size: 512
+    llm_model: Qwen3.8-Flash
+    llm_temperature: 0.1
+    similarity_top_k: 2
+    data: ""
+comm:
+  name: UAV_observer
+  desc: "观测者。实际调用 sim_observe 获取局部观测，将目标坐标及 observed_at 通过 IoA 报告给 UUV_leader；按队长收到该报告后下达的指令调用 sim_move_to 设置自身航点。只处理任务中指定的 episode_id 和 expected_time，不等待仿真移动，不预测目标路线。"
+  type: Thing Assistant
+  support_nested_teams: false
+  max_team_up_attempts: 3
+  llm:
+    llm_type: openai-chat
+    model: Qwen3.8-Flash
+    temperature: 0.1
+  observation_func: dummy
+  discussion_only: false

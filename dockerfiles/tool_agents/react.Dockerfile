@@ -29,5 +29,9 @@ COPY im_client/llms /app/llms
 COPY im_client/memory /app/memory
 COPY im_client/prompts /app/prompts
 
+# Agent-side adapters only: no simulator state, routes or controller credentials.
+COPY simulator/__init__.py simulator/http_client.py simulator/ioa_tools.py /app/simulator/
+RUN python -m simulator.ioa_tools --output-dir /app/simulator/tool_configs
+
 # Set the entry point for running the test_react_agent python file
 ENTRYPOINT [ "python", "react_agent.py" ]

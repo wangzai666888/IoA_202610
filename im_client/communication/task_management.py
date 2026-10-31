@@ -236,15 +236,19 @@ class TaskManager(Serializable):
         if task:
             self.msg2task[msg_in_memory] = task
 
-    def tasks_view(self):
+    def tasks_view(self, start_index: int = 0):
         content = ""
         head = "The view of task management:\n"
         content += head
+        shown = 0
         for task_index, task in self.tasks.values():
+            if task_index < start_index:
+                continue
             prefix = f"=== task index : {str(task_index)}===\n"
             content += prefix + str(task)
+            shown += 1
 
-        if len(self.tasks) == 0:
+        if shown == 0:
             content += "No tasks existed\n"
 
         return content

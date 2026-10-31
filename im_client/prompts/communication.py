@@ -76,7 +76,7 @@ If the message type is 'discussion', `next_people` should be the only one next s
 If current group discussion depends on the results of the tasks In Progress, you should pause the group discussion until those tasks completed. Correspondingly specify the message type as 'pause', and specify next_people to yourself as it's you to start the resumption of the group discussion afterwards.
 
 ## Conclude Group Discussion(`conclude_group_discussion`)
-The message type is used to officially end a group discussion when the goal overall has been achieved. When the goal overall has been achieved, all tasks are completed and there are no pending issues in the future plans, the assistant in the current turn can declare the group discussion concluded. In this case, the `next_people` field is not applicable.
+The message type is used to officially end a group discussion when the goal overall has been achieved. When the goal overall has been achieved, all tasks are completed and there are no pending issues in the future plans, the assistant in the current turn can declare the group discussion concluded. In this case, set `next_people` to the empty JSON list []. The protocol routes the conclusion to the current speaker automatically.
 
 
 You are ${name}. Now it's your turn to speak, adhering to the basic rules of collaboration in the network to achieve the goal overall.
@@ -88,7 +88,7 @@ _TASK_ASSIGNMENT_WITH_PLAN_RESPONSE_FORMAT = """You need to respond in the follo
     "content": "The content of your message in your turn",
     "thought": "internal monologue before specifying 'message_type', 'next_people'.",
     "message_type": "Select only one option from ['discussion', 'async_task_assign', 'sync_task_assign', 'pause', 'conclude_group_discussion'].",
-    "next_people": "list[str] | str, either the next speaker in group discussion or owners in task assignments. If message_type is 'discussion', 'pause', next_people should be str(only one speaker specified to speak in the next turn). If message_type is 'async_task_assign' or 'sync_task_assign', next_people should be a list of agent names as the task owners in this turn (anyone including **yourself** allowed).",
+    "next_people": "list[str] | str, either the next speaker in group discussion or owners in task assignments. If message_type is 'discussion', 'pause', next_people should be str(only one speaker specified to speak in the next turn). If message_type is 'async_task_assign' or 'sync_task_assign', next_people should be a list of agent names as the task owners in this turn (anyone including **yourself** allowed). If message_type is conclude_group_discussion, next_people must be the empty JSON list [].",
     "thought_on_Dynamic_Collaborative_Planner": "internal monologue before specifying 'update_Dynamic_Collaborative_Planner'.",
     "update_Dynamic_Collaborative_Planner": "bool type, whether the Dynamic Collaborative Planner should be updated or not."
 }
@@ -100,7 +100,7 @@ _TASK_ASSIGNMENT_WITHOUT_PLAN_RESPONSE_FORMAT = """You need to respond in the fo
     "content": "The content of your message in your turn",
     "thought": "internal monologue before specifying 'message_type', 'next_people'.",
     "message_type": "Select only one option from ['discussion', 'async_task_assign', 'sync_task_assign', 'pause', 'conclude_group_discussion'].",
-    "next_people": "list[str] | str, either the next speaker in group discussion or owners in task assignments. If message_type is 'discussion', 'pause', next_people should be str(only one speaker specified to speak in the next turn). If message_type is 'async_task_assign' or 'sync_task_assign', next_people should be a list of agent names as the task owners in this turn (anyone including **yourself** allowed)."
+    "next_people": "list[str] | str, either the next speaker in group discussion or owners in task assignments. If message_type is 'discussion', 'pause', next_people should be str(only one speaker specified to speak in the next turn). If message_type is 'async_task_assign' or 'sync_task_assign', next_people should be a list of agent names as the task owners in this turn (anyone including **yourself** allowed). If message_type is conclude_group_discussion, next_people must be the empty JSON list []."
 }
 ```"""
 
@@ -114,7 +114,7 @@ The 'discussion' message type is used for various forms of group interactions th
 If the message type is 'discussion', `next_people` should be the only one next speaker in group discussion.
 
 ## Conclude Group Discussion(`conclude_group_discussion`)
-The message type is used to officially end a group discussion when the goal overall has been achieved. When the goal overall has been achieved, all tasks are completed and there are no pending issues in the future plans, the assistant in the current turn can declare the group discussion concluded. In this case, the `next_people` field is not applicable.
+The message type is used to officially end a group discussion when the goal overall has been achieved. When the goal overall has been achieved, all tasks are completed and there are no pending issues in the future plans, the assistant in the current turn can declare the group discussion concluded. In this case, set `next_people` to the empty JSON list []. The protocol routes the conclusion to the current speaker automatically.
 
 
 You are ${name}. Now it's your turn to speak, adhering to the basic rules of collaboration in the network to achieve the goal overall."""
@@ -125,7 +125,7 @@ _DISCUSSION_ONLY_RESPONSE_FORMAT = """You need to respond in the following json 
     "content": "The content of your message in your turn",
     "thought": "internal monologue before specifying 'message_type', 'next_people'.",
     "message_type": "Select only one option from ['discussion', 'conclude_group_discussion'].",
-    "next_people": "str, the next speaker in group discussion. If message_type is 'discussion', next_people should be str(only one speaker specified to speak in the next turn). If message_type is "conclude_group_discussion", the next_people should be yourself."
+    "next_people": "str, the next speaker in group discussion. If message_type is 'discussion', next_people should be str(only one speaker specified to speak in the next turn). If message_type is conclude_group_discussion, next_people must be the empty JSON list []."
 }
 ```"""
 

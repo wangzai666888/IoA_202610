@@ -1,0 +1,94 @@
+{
+  "update": "nine_candidates_five_team_continuous_ioa",
+  "date": "2026-10-26",
+  "requires": "Existing three-agent complete IoA run and chat export version",
+  "validation": {
+    "python_tests_passed": 45,
+    "scripted_capture_time": 18,
+    "five_agent_http_with_fake_ioa": "passed",
+    "five_agent_replay_js_runtime": "passed",
+    "docker_and_real_five_agent_ioa": "awaiting Ubuntu validation"
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "4fdc389ab03e6610c3c41db216e7abba301af576d6cc3b098f3010d094be106a"
+    },
+    {
+      "path": ".dockerignore",
+      "sha256": "227da4c09e3743eef01523a2de7c19e994d280ee829e27d82ab703abcbee19a3"
+    },
+    {
+      "path": "simulator/.dockerignore",
+      "sha256": "1df785ae367a36fceb3cc457f841fe7400fc8261cd99625a74446e07a52214d1"
+    },
+    {
+      "path": "simulator/team_selection.py",
+      "sha256": "39f81416ae409438bcf80fec0759ecff5a2e8a6a8057cfa0675484b1c27f39e7"
+    },
+    {
+      "path": "simulator/scenarios/five_team.json",
+      "sha256": "2ca7370d0db239e0d88a51fccd9a40763853ad49e6e76146a3df8dd03e5c988c"
+    },
+    {
+      "path": "simulator/prepare_team.py",
+      "sha256": "dc2c53f7ffe948425f75ff14d15aef37644a34c3f4300d80067df88f12003639"
+    },
+    {
+      "path": "simulator/tests/test_five_team.py",
+      "sha256": "7c65d1800581bfac89e6d8c68120650e8775948b205aa4ab35823cad355c0d10"
+    },
+    {
+      "path": "dockerfiles/compose/simulator_five.yaml",
+      "sha256": "af2af183dc0b5627614742870464ceb1505aa64fc7cd38fedd9856c07b28d516"
+    },
+    {
+      "path": "simulator/FIVE_TEAM_IOA_GUIDE.md",
+      "sha256": "47291ec25d8fc45bd4ea27d409f986a21b7e8f5040ad650696821f664c3397f1"
+    },
+    {
+      "path": "simulator/core.py",
+      "sha256": "61ae507e9a3117b093a6d5e031570ef1927f8c0ff06db9b8139a0da580d2690a"
+    },
+    {
+      "path": "simulator/scenario.py",
+      "sha256": "c4eb75ed5c2c718bb74697ae26ad96981913ad14c8ebd388dd6c20f79aa3d1f3"
+    },
+    {
+      "path": "simulator/scripted_run.py",
+      "sha256": "d20998b8ac77e70a74fda78ca4da5d423dcce8586c8c8cc9c159e0b9a8dbdc48"
+    },
+    {
+      "path": "simulator/replay.py",
+      "sha256": "54aafe2098a8795c3786cdd51d24c511b910c49852ad7cc91136f9d36654a863"
+    },
+    {
+      "path": "simulator/service.py",
+      "sha256": "ab4b5d24fab19d88764b42acc2078651800c98e6eaae4e7faaf3bd7564b69280"
+    },
+    {
+      "path": "simulator/ioa_run.py",
+      "sha256": "e8a76461861e58e756ae099113d90fce53c844d1a4967220f4c94965553762a1"
+    },
+    {
+      "path": "simulator/tests/test_replay.cjs",
+      "sha256": "cb27fb6ea53c8247f931a829269e0db9390d74052585d8753e7306216c45918d"
+    },
+    {
+      "path": "simulator/README.md",
+      "sha256": "81c8fcca4f0114bc7d957c7717885d5b2f149b93d31deea64062f050396f2487"
+    },
+    {
+      "path": "simulator/CONTINUOUS_IOA_RUN.md",
+      "sha256": "2ff0c5c5e66bd6d0142fbb153e31f37cc0307ccea0596eabf169d7af73919010"
+    },
+    {
+      "path": "simulator/HTTP_IOA_GUIDE.md",
+      "sha256": "8cea85e7d37e5c7a697568e863b843ae4b2f4f6ca37b79b3cfe45a01d42cb66a"
+    },
+    {
+      "path": "simulator/UBUNTU_IOA_WIRING.md",
+      "sha256": "d9b83568643ee03f6920e9b00b8b47cc854d569111880dbd78e57f785d53ee0b"
+    }
+  ]
+}

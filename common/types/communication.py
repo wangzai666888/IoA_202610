@@ -28,6 +28,7 @@ class LaunchGoalParam(BaseModel):
     obs_kwargs: dict[str, Any] = {}
     max_turns: int | None = None
     skip_naming: bool = True
+    sim_round_id: str | None = None
 
     @root_validator(pre=True)
     def handle(cls, values):
@@ -93,6 +94,18 @@ class CommunicationInfo(BaseModel):
     is_collaborative_planning_enabled: bool = False
     max_turns: int | None = None
     curr_turn: int = 0
+    # Capture-mode round bookkeeping; old persisted sessions use these defaults.
+    sim_round_id: str | None = None
+    sim_episode_id: str | None = None
+    sim_time: int | None = None
+    sim_round_message_start: int = 0
+    sim_round_task_start: int = 0
+    # Keep the full audit trail, but send only the recent observation interval
+    # plus the current round back to the model in capture mode.
+    sim_round_message_starts: list[int] = Field(default_factory=list)
+    sim_prompt_message_start: int = 0
+    sim_round_error: str | None = None
+    sim_capture_state: dict | None = None
 
 
 class AgentMessage(BaseModel):

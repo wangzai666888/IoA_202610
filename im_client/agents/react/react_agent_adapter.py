@@ -1,3 +1,4 @@
+import os
 import uuid
 from typing import Dict, List
 
@@ -12,11 +13,14 @@ from common.log import logger
 import httpx
 
 from .. import AgentAdapter
+from .capture_guard import render_capture_result
+from common.capture_protocol import decode_task, decode_receipt_report
 
 
 class TaskDesc(BaseModel):
     task_desc: str
     uid: str
+    sim_round_id: str | None = None
 
 
 class MemoryAdded(BaseModel):
@@ -37,12 +41,22 @@ class ReActAgent(AgentAdapter):
         self.task_desc = ""
         self.url = f"http://{global_config['tool_agent']['container_name']}:7070"
 
-    async def run(self, task_desc: str):
+    async def run(self, task_desc: str, sim_round_id: str | None = None):
         uid = uuid.uuid4().hex
-        data = TaskDesc(task_desc=task_desc, uid=uid)
+        if os.environ.get("SIM_URL") and sim_round_id is None:
+            raise ValueError("capture tool task requires a simulation round")
+        data = TaskDesc(task_desc=task_desc, uid=uid, sim_round_id=sim_round_id)
         headers = {"Content-Type": "application/json"}
         async with httpx.AsyncClient(timeout=httpx.Timeout(None)) as client:
             response = await client.post(self.url + "/run", json=data.model_dump(), headers=headers)
+        response.raise_for_status()
+        if os.environ.get("SIM_URL"):
+            result = render_capture_result(response.json(), uid, sim_round_id, self.agent_name)
+            contract = decode_task(task_desc, sim_round_id, self.agent_name)
+            if contract is not None:
+                decode_receipt_report(result, contract)
+            logger.info(f"Received verified capture response: {result}")
+            return result
         logger.info(f"Received response: {response.text}")
         return response.text
 

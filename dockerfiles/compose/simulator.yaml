@@ -1,0 +1,31 @@
+services:
+  simulator:
+    image: ioa-simulator:local
+    build:
+      context: ../../simulator
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:8090:8090"
+    volumes:
+      - type: bind
+        source: ../../simulator/service_auth.local.json
+        target: /run/simulator/auth.json
+        read_only: true
+        bind:
+          create_host_path: false
+      - ../../simulator/outputs:/app/outputs
+      - ../../simulator/scenarios:/app/simulator/scenarios:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/health', timeout=2).read()"]
+      interval: 5s
+      timeout: 3s
+      retries: 6
+    networks:
+      default:
+        aliases:
+          - ioa-simulator
+
+networks:
+  default:
+    name: agent_network
+    external: true

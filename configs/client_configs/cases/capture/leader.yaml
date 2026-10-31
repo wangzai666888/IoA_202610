@@ -1,0 +1,33 @@
+# All tool backends use container port 7070; host client port is 5061.
+server:
+  hostname: ioa-server
+  port: 7788
+tool_agent:
+  agent_type: ReAct
+  agent_name: UUV_leader
+  desc: "跟踪协调者及队长。只使用 UAV_observer 通过 IoA 实际报告的观测坐标及 observed_at，给各成员安排航点。自己初始化时设置航点，之后仅在目的地变化时调用 sim_move_to；所有成员都不每秒重复分配相同航点任务。采用同步任务分配，确保观测、报告、分配、执行顺序；不能替其他成员调用工具，不能自行观测或预测目标路线。"
+  image_name: react-agent:sim
+  container_name: capture-leader-tool
+  port: 7070
+  tools_config: /app/simulator/tool_configs/leader.json
+  model: Qwen3.8-Flash
+  max_num_steps: 6
+  rag:
+    persist_dir: ""
+    chunk_size: 512
+    llm_model: Qwen3.8-Flash
+    llm_temperature: 0.1
+    similarity_top_k: 2
+    data: ""
+comm:
+  name: UUV_leader
+  desc: "跟踪协调者及队长。只使用 UAV_observer 通过 IoA 实际报告的观测坐标及 observed_at，给各成员安排航点。自己初始化时设置航点，之后仅在目的地变化时调用 sim_move_to；所有成员都不每秒重复分配相同航点任务。采用同步任务分配，确保观测、报告、分配、执行顺序；不能替其他成员调用工具，不能自行观测或预测目标路线。"
+  type: Thing Assistant
+  support_nested_teams: false
+  max_team_up_attempts: 3
+  llm:
+    llm_type: openai-chat
+    model: Qwen3.8-Flash
+    temperature: 0.1
+  observation_func: dummy
+  discussion_only: false

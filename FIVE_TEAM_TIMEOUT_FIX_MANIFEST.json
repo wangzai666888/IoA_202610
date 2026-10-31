@@ -1,0 +1,28 @@
+{
+  "update": "five_agent_t5_malformed_discussion_response",
+  "date": "2026-10-26",
+  "root_cause": "leader model discussion JSON missing content; uncaught KeyError stopped _listen_message",
+  "validation": "48 model-free Python tests passed; Ubuntu real-model verification pending",
+  "files": [
+    {
+      "path": "im_client/communication/sim_round_state.py",
+      "sha256": "13ee96dbe9a0446419ba9332c49ebcd7d4e4b5cb4e568c385ed1853770623262"
+    },
+    {
+      "path": "im_client/communication/communication_layer.py",
+      "sha256": "65a3df67da5960f103dd6bba63dc59bd917e7645254c1c8326cf22898990cb4f"
+    },
+    {
+      "path": "simulator/tests/test_ioa_run.py",
+      "sha256": "0e1b038bc3ce3e8614dc3447b63969e4c54d79480ee9de9be75880263f924ac5"
+    },
+    {
+      "path": "simulator/FIVE_TEAM_IOA_GUIDE.md",
+      "sha256": "d6607bf73768de4a69e17d5af78a9b1c418211dfebc2e1cd062f4ea1c53c6e3d"
+    },
+    {
+      "path": "simulator/TIMEOUT_RECOVERY.md",
+      "sha256": "eefed9afe124e51400138b6ace84e3e248923c96a876e9f7c84fb58f483fe704"
+    }
+  ]
+}

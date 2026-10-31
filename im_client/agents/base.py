@@ -52,6 +52,8 @@ class AgentAdapter:
                         f"AGENT_MODEL={config.get('model', '')}",
                         f"MAX_NUM_STEPS={config.get('max_num_steps', 20)}",
                         f"TOOLS_CONFIG={config.get('tools_config')}",
+                        f"SIM_URL={os.environ.get('SIM_URL', '')}",
+                        f"SIM_AGENT_TOKEN={os.environ.get('SIM_AGENT_TOKEN', '')}",
                         f"OPENAI_API_BASE={os.environ.get('OPENAI_API_BASE', '')}",
                         f"CUPS_SERVER={os.environ.get('CUPS_SERVER', '')}",
                         f"PRINTER_NAME={os.environ.get('PRINTER_NAME', '')}",

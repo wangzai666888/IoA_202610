@@ -42,6 +42,12 @@ else:
 
 OPENAI_RESPONSE_LOG_PATH = os.environ.get("OPENAI_RESPONSE_LOG_PATH", "")
 
+# 仿真实验的模型思考强度：
+# None：不指定，沿用当前模型服务的默认设置
+# "none"：请求关闭思考
+# "low"：请求低强度思考
+SIM_REASONING_EFFORT = "None"
+
 
 async def async_write_to_file(data: dict, filename: str):
     os.makedirs(OPENAI_RESPONSE_LOG_PATH, exist_ok=True)
@@ -127,6 +133,18 @@ class OpenAIChat(BaseChatModel):
 
         model_args = deepcopy(self.args.model_dump())
         model_args.update(kwargs)
+
+        if os.environ.get("SIM_URL"):
+            if SIM_REASONING_EFFORT is not None:
+                extra_body = dict(model_args.get("extra_body") or {})
+                extra_body["reasoning_effort"] = SIM_REASONING_EFFORT
+                model_args["extra_body"] = extra_body
+
+            print(
+                f"[SIM_REASONING] model={model_args.get('model')} "
+                f"reasoning_effort={SIM_REASONING_EFFORT or 'provider_default'}",
+                flush=True,
+            )
 
         response: ChatCompletion = await async_openai_client.chat.completions.create(
             messages=messages,
@@ -241,6 +259,18 @@ class OpenAIChat(BaseChatModel):
 
         model_args = deepcopy(self.args.model_dump())
         model_args.update(kwargs)
+        
+        if os.environ.get("SIM_URL"):
+            if SIM_REASONING_EFFORT is not None:
+                extra_body = dict(model_args.get("extra_body") or {})
+                extra_body["reasoning_effort"] = SIM_REASONING_EFFORT
+                model_args["extra_body"] = extra_body
+
+            print(
+                f"[SIM_REASONING] model={model_args.get('model')} "
+                f"reasoning_effort={SIM_REASONING_EFFORT or 'provider_default'}",
+                flush=True,
+            )
 
         response: ChatCompletion = sync_openai_client.chat.completions.create(
             messages=messages,

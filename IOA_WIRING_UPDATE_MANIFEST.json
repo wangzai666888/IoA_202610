@@ -1,0 +1,25 @@
+{
+  "instruction": "Copy files into the existing Ubuntu project root. Preserve Ubuntu .env, service_auth.local.json, databases and outputs. Build react-agent:sim with react_capture.Dockerfile.",
+  "files": {
+    ".dockerignore": "6df397df6ce7baa5ed295c73717ab88219275e92f248e1ef316c3c403e6aa2f8",
+    "dockerfiles/tool_agents/react.Dockerfile": "870fd0413cfc77f46b20a749293ac441bfab2aa70762c0e60beb7458eb43a7d3",
+    "dockerfiles/tool_agents/react_capture.Dockerfile": "7f07fd82d76a6ff8fc3bf9ca719accd0a2b63c630b870b4e1a463e282ac6ad9d",
+    "dockerfiles/compose/capture.yaml": "9c259501e555151e16f9c453c1153ac312f142819a7adb5c6cb18c4ec9f8e7f1",
+    "im_client/agents/base.py": "7989bbf80c968d42597e13a6df079fc8de6ad2f48f0373fbbf8e9fbf8795c580",
+    "im_client/agents/tools/__init__.py": "d49e28bb415f6e47db9a8380c6e6c535815e5267fcc018a3daa2d4b3bc04548b",
+    "im_client/agents/react/react_agent.py": "dbd06869da8c4d717a7cfbcedeaaf118ecadb2b386e9c43ef4c9792a270323ce",
+    "im_client/agents/react/requirements_capture.txt": "1d11c918c2718e23196003cca692510a59d181c88a825592c432199a2443672c",
+    "im_client/communication/communication_layer.py": "a4f806a3b3d318c06d9e693594f152c42bbe5be48bec0d6f88cdfa966fb96572",
+    "configs/client_configs/cases/capture/observer.yaml": "c4cf689f1f463578f5e2e37ec02c7cdb98d62aae93ddd19df9e038b60c9bfd51",
+    "configs/client_configs/cases/capture/leader.yaml": "052e7b8495727f269ef379b01247074513f043046d0028cc2792988460511d69",
+    "configs/client_configs/cases/capture/marker.yaml": "4ef17ddfa0e5556d04cfb9130d381653e50f1aee7e0d06caaeccda5c1e8152e7",
+    "simulator/prepare_ioa.py": "f15f86c9619f149bae173ed8a4a45516d65119edfb6fb874037c616d56d2dba8",
+    "simulator/ioa_check.py": "a144de11c21220e1271111c0ce350547ab3a1f590d1bd96d53878d93b85cf193",
+    "simulator/service.py": "15a559d9558a5294de8489e518bd8daf9409b5433495916029905290c8040574",
+    "simulator/tests/test_prepare_ioa.py": "3983f47c8ba093011bd7a36a5fd37424d8b852fbccff468bbd00c404f10a681c",
+    "simulator/tests/test_service.py": "d849878bd94381f13e5c5873a08f47d5b6b49c69c1480dec4be304712ae18830",
+    "simulator/README.md": "9c905b6030a21189ef8565a9d8de78a0181e4f0597ff1138fcb9587fe4045122",
+    "simulator/HTTP_IOA_GUIDE.md": "a539cbdcdd409735c0785e0ae596b792a66e6087be1ecaf47a174f52f6783f58",
+    "simulator/UBUNTU_IOA_WIRING.md": "0fc6aaf458577b76b6c5596319e85ab998c6d54db9d9949df591dbb7e7a169bd"
+  }
+}

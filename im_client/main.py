@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi import HTTPException
+import os
 from pymilvus import connections
 
 from agents import AgentAdapter
@@ -44,6 +46,16 @@ connections.connect(
 @app.post("/launch_goal")
 async def launch_goal(param: LaunchGoalParam):
     return await communicator.launch_goal(**param.model_dump())
+
+
+@app.get("/simulation/round_status")
+async def simulation_round_status(comm_id: str):
+    if not os.environ.get("SIM_URL"):
+        raise HTTPException(status_code=404, detail="simulation mode is disabled")
+    try:
+        return communicator.simulation_round_status(comm_id)
+    except (KeyError, ValueError) as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
 
 
 if __name__ == "__main__":
