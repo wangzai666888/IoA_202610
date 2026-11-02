@@ -11,6 +11,9 @@ const htmlPath = process.argv[2] || path.join(
 const html = fs.readFileSync(htmlPath, "utf8");
 const script = html.match(/<script>([\s\S]*?)<\/script>/);
 assert.ok(script, "generated HTML must contain a playback script");
+const replayMatch = script[1].match(/const replay = (\{.*\});/);
+assert.ok(replayMatch, "generated HTML must contain replay data");
+const replay = JSON.parse(replayMatch[1]);
 
 class Element {
   constructor() {
@@ -55,6 +58,7 @@ el("map").width = 900;
 el("map").height = 900;
 el("map").getContext = () => drawing;
 el("speed").value = "1";
+el("show-observation").checked = true;
 el("show-radii").checked = true;
 const timers = new Map();
 let nextTimer = 0;
@@ -84,13 +88,49 @@ const expectedMembers = Number(process.argv[3] || 3);
 assert.equal(el("legend").children.length, expectedMembers, "every team member needs a legend entry");
 assert.ok(drawingCalls.length > 0, "map must be drawn");
 assert.equal(vm.runInContext("top.browserTop", context), true);
+const scale = Math.min(750 / replay.config.width, 750 / replay.config.height);
+const observationRadius = replay.config.observation_radius * scale;
+function observationCircles() {
+  return drawingCalls.filter(call => call[0] === "arc" && Math.abs(call[3] - observationRadius) < 1e-9);
+}
+function assertObservationCenter(frame) {
+  const circles = observationCircles();
+  assert.equal(circles.length, 1, "exactly one target-centered observation circle must be drawn");
+  const point = frame.target_position;
+  assert.equal(circles[0][1], (900 - replay.config.width * scale) / 2 + point[0] * scale);
+  assert.equal(circles[0][2], (900 - replay.config.height * scale) / 2 +
+    (replay.config.height - point[1]) * scale);
+}
+assertObservationCenter(replay.trace[0]);
+const supportCircles = drawingCalls.filter(call => call[0] === "arc" &&
+  Math.abs(call[3] - replay.config.support_radius * scale) < 1e-9);
+assert.equal(supportCircles.length, replay.config.support_required === false ? 0 : 1);
+if (replay.config.support_required === false) {
+  assert.ok(el("frame-detail").textContent.includes("连续处于标记范围"));
+  assert.ok(!el("radii-label").textContent.includes("支持圈"));
+}
+el("show-radii").checked = false;
+drawingCalls.length = 0;
+el("show-radii").fire("change");
+assertObservationCenter(replay.trace[0]);
+el("show-observation").checked = false;
+drawingCalls.length = 0;
+el("show-observation").fire("change");
+assert.equal(observationCircles().length, 0, "observation circle toggle must hide only that circle");
+el("show-observation").checked = true;
+drawingCalls.length = 0;
+el("show-observation").fire("change");
+assertObservationCenter(replay.trace[0]);
+el("show-radii").checked = true;
 
 function tick() {
   assert.equal(timers.size, 1, "exactly one playback timer must be active");
+  drawingCalls.length = 0;
   [...timers.values()][0]();
 }
 tick();
 assert.equal(el("time-value").textContent, "1");
+assertObservationCenter(replay.trace[1]);
 el("play").fire("click");
 assert.equal(timers.size, 0, "pause must stop playback");
 el("next").fire("click");
@@ -116,4 +156,4 @@ el("show-plan").checked = true;
 el("show-plan").fire("change");
 el("show-radii").checked = false;
 el("show-radii").fire("change");
-console.log("PASS: initialization, playback, pause, seek, step, speed, finish, replay, overlays");
+console.log("PASS: initialization, playback, pause, seek, step, speed, finish, replay, overlays, observation circle");

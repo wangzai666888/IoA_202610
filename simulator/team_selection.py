@@ -15,19 +15,20 @@ FIVE_ROLE_COUNTS = {"observer": 2, "leader": 1, "marker": 2}
 
 def select_fixed_team(
     candidates: list[AgentState], target_position, observation_radius: float,
-    radius: float = 50.0, role_counts: dict | None = None,
+    radius: float | None = None, role_counts: dict | None = None,
 ) -> tuple[list[AgentState], dict]:
     quotas = dict(FIVE_ROLE_COUNTS if role_counts is None else role_counts)
     if (set(quotas) != set(ROLE_ORDER)
             or any(type(n) is not int or n < 1 for n in quotas.values())
             or quotas["leader"] != 1):
         raise ValueError("selection needs positive role quotas and exactly one leader")
-    if isinstance(radius, bool) or not isinstance(radius, (int, float)) or not isfinite(radius) or radius <= 0:
-        raise ValueError("selection radius must be positive and finite")
+    if radius is not None and (isinstance(radius, bool) or not isinstance(radius, (int, float))
+                               or not isfinite(radius) or radius <= 0):
+        raise ValueError("selection radius must be null (whole map) or positive and finite")
     if len({a.agent_id for a in candidates}) != len(candidates):
         raise ValueError("candidate IDs must be unique")
     distances = {a.agent_id: distance(a.pos, target_position) for a in candidates}
-    eligible = [a for a in candidates if distances[a.agent_id] <= radius + EPS]
+    eligible = [a for a in candidates if radius is None or distances[a.agent_id] <= radius + EPS]
     selected = []
     for role in ROLE_ORDER:
         ranked = sorted(
@@ -55,7 +56,8 @@ def select_fixed_team(
              "position": list(a.pos), "distance": distances[a.agent_id],
              "selected": a.agent_id in selected_ids,
              "reason": ("selected" if a.agent_id in selected_ids else
-                        "outside_radius" if distances[a.agent_id] > radius + EPS else "role_quota_filled")}
+                        "outside_radius" if radius is not None and distances[a.agent_id] > radius + EPS
+                        else "role_quota_filled")}
             for a in sorted(candidates, key=lambda a: a.agent_id)
         ],
     }

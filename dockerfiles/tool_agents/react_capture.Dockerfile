@@ -17,7 +17,7 @@ COPY im_client/memory /app/memory
 COPY im_client/prompts /app/prompts
 
 # Only agent-facing HTTP adapters; no simulator core, routes or controller token.
-COPY simulator/__init__.py simulator/http_client.py simulator/ioa_tools.py /app/simulator/
+COPY simulator/__init__.py simulator/http_client.py simulator/ioa_tools.py simulator/experiment_rules.py /app/simulator/
 RUN python -m simulator.ioa_tools --output-dir /app/simulator/tool_configs
 
 # Fail during build if a missing dependency still blocks capture-mode imports.

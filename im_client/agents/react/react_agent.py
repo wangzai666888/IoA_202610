@@ -194,7 +194,9 @@ class ReActAgentServer:
                 Template(REACT_TASK_PROMPT).safe_substitute({"task_description": self.task_desc[uid]}),
                 "只执行当前任务明确要求的动作，不扩展角色职责，不执行其他成员或后续阶段动作。"
                 "直接选择工具，无需另写 thought JSON。必须完成本任务要求的全部真实动作后才能 submit_task。"
-                "文字声明、历史回执或 sim_self_state 不能代替动作。参数缺失时报告错误，不猜坐标。"
+                "文字声明和历史回执不能代替动作。合同指定 sim_self_state 时读取一次自身状态并提交；"
+                "其他合同时 sim_self_state 不能代替指定动作。参数缺失时报告错误，不猜坐标。"
+                "标记授权由任务上下文绑定，不能自行添加、更换或延长授权。"
                 "accepted=false 和 already_captured 都是有效标记回执，不因此重试。"
                 "动作已有真实回执时不要重复调用；随后用一句话提交，执行器自动附上完整回执。",
             ]
@@ -278,6 +280,8 @@ class ReActAgentServer:
                             tool_input = bind_simulation_tool_args(
                                 tool_name, tool_input, self.sim_round_by_uid.get(uid),
                             )
+                            if tool_name == "sim_try_tag" and evidence.contract and evidence.contract.get("authorization_id"):
+                                tool_input["authorization_id"] = evidence.contract["authorization_id"]
                         observation = TOOL_MAPPING[tool_name](**tool_input)
                         if capture:
                             evidence.record(tool_name, observation)

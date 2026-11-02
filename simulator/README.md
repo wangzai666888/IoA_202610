@@ -1,6 +1,8 @@
 # 最小协同捕获仿真与动画
 
-HTTP 服务和时钟设计请见 [HTTP 与 IoA 实施指南](HTTP_IOA_GUIDE.md)。三角色工具接线、配置、Compose 和单时刻联调请见 [Ubuntu 接线操作单](UBUNTU_IOA_WIRING.md)；三角色逐秒协同请见 [逐秒 IoA 调度操作单](CONTINUOUS_IOA_RUN.md)。九候选五人固定选队及连续通信部署见 [五人实施操作单](FIVE_TEAM_IOA_GUIDE.md)。http_run 不调用模型，ioa_check 与 ioa_run 会调用模型。通信窗口尚未实现。
+十个已保存的全图随机候选场景、各场景五人配置及 `--scene 1..10` 运行方法见 [固定随机场景操作单](FIXED_SCENARIOS.md)。新场景按全图最近距离选队，并校验第 0 秒至少一名观测者发现目标。
+
+HTTP 服务和时钟设计请见 [HTTP 与 IoA 实施指南](HTTP_IOA_GUIDE.md)。三角色工具接线、配置、Compose 和单时刻联调请见 [Ubuntu 接线操作单](UBUNTU_IOA_WIRING.md)；三角色逐秒协同请见 [逐秒 IoA 调度操作单](CONTINUOUS_IOA_RUN.md)。九候选五人固定选队及连续通信部署见 [五人实施操作单](FIVE_TEAM_IOA_GUIDE.md)。五人单场景连续通信及 10 种固定两人组合、同步开放 10 秒／关闭 10 秒周期的配置和部署见 [通信窗口操作单](COMMUNICATION_WINDOWS.md)。http_run 不调用模型；ioa_check、ioa_run 与 ioa_window_run 会调用模型。
 
 `python3 -B -m simulator.ioa_run --max-rounds 0` 完成后，除轨迹 JSON、工具审计、HTML 回放与 `.ioa-run.json` 外，还会保存该局的 `.ioa-chat.json` 和 `.ioa-chat.txt`。两份对话文件来自 IoA Server 按 comm_id 保存的组内消息；导出状态与文件名写在 `.ioa-run.json` 中。
 

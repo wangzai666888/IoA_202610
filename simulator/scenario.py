@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import hashlib
+from copy import deepcopy
 from pathlib import Path
 
 from simulator.core import AgentState, CaptureEnvironment, SimConfig, _point
@@ -11,7 +13,14 @@ from simulator.team_selection import select_fixed_team
 
 def load_scenario(path: str | Path) -> CaptureEnvironment:
     source = Path(path)
-    data = json.loads(source.read_text(encoding="utf-8"))
+    raw = source.read_bytes()
+    env = scenario_from_data(json.loads(raw), default_id=source.stem)
+    # Hash exactly the bytes parsed, rather than rereading a mutable file.
+    env.scenario_sha256 = hashlib.sha256(raw).hexdigest()
+    return env
+
+
+def scenario_from_data(data: dict, *, default_id="unnamed") -> CaptureEnvironment:
     if not isinstance(data, dict):
         raise ValueError("scenario root must be a JSON object")
     try:
@@ -45,8 +54,9 @@ def load_scenario(path: str | Path) -> CaptureEnvironment:
             config=config,
             agents=agents,
             target_route=data["target"]["route"],
-            scenario_id=data.get("scenario_id", source.stem),
+            scenario_id=data.get("scenario_id", default_id),
             team_selection=selection,
+            generation=deepcopy(data.get("generation")),
         )
     except (KeyError, TypeError) as exc:
         raise ValueError(f"invalid scenario schema: {exc}") from exc

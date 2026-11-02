@@ -158,6 +158,7 @@ class CommunicationLayer:
         discussion_only: bool = False,
     ):
         self.name = name
+        self.window_sessions = {}
         self.desc = desc
         self.agent_type = agent_type
         self.tool_agent = tool_agent
@@ -1757,6 +1758,14 @@ class CommunicationLayer:
             message = await self.server_websocket.receive_message()
             comm_id = message.comm_id
             logger.info(f"Received message: {str(message)}")
+            window = getattr(self, "window_sessions", {}).get(comm_id)
+            if window is not None:
+                try:
+                    await window["session"].receive(message.model_dump(mode="json"))
+                except Exception as exc:
+                    window["session"].error = f"{type(exc).__name__}: {exc}"
+                    logger.error(f"Window receiver failed for {self.name}: {exc}")
+                continue
             try:
                 match message.state:
                     case CommunicationState.DISCUSSION | CommunicationState.VOTE:

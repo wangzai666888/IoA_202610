@@ -13,6 +13,7 @@ RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && 
 # Copy the current directory contents into container at /app
 COPY ./im_client /app
 COPY ./common /app/common
+COPY simulator/__init__.py simulator/experiment_rules.py /app/simulator/
 
 # Set the entry point for running the test_react_agent python file
 ENTRYPOINT [ "python", "main.py" ]

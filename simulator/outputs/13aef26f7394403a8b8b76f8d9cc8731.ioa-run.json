@@ -1,0 +1,2415 @@
+{
+  "kind": "fixed_team_continuous_ioa_pilot",
+  "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+  "scenario_id": "nine_candidates_five_team",
+  "members": [
+    {
+      "id": "F5_UAV_observer",
+      "role": "observer",
+      "carrier_type": "UAV"
+    },
+    {
+      "id": "F5_USV_observer",
+      "role": "observer",
+      "carrier_type": "USV"
+    },
+    {
+      "id": "F5_UUV_leader",
+      "role": "leader",
+      "carrier_type": "UUV"
+    },
+    {
+      "id": "F5_USV_marker",
+      "role": "marker",
+      "carrier_type": "USV"
+    },
+    {
+      "id": "F5_UAV_marker",
+      "role": "marker",
+      "carrier_type": "UAV"
+    }
+  ],
+  "team_selection": {
+    "rule": "nearest_per_role_then_agent_id",
+    "radius": 50.0,
+    "role_counts": {
+      "observer": 2,
+      "leader": 1,
+      "marker": 2
+    },
+    "candidate_count": 9,
+    "team_size": 5,
+    "initial_report": {
+      "observer_id": "F5_UAV_observer",
+      "observed_at": 0,
+      "target_position": [
+        0.0,
+        40.0
+      ]
+    },
+    "leader_id": "F5_UUV_leader",
+    "selected_ids": [
+      "F5_UAV_observer",
+      "F5_USV_observer",
+      "F5_UUV_leader",
+      "F5_USV_marker",
+      "F5_UAV_marker"
+    ],
+    "candidates": [
+      {
+        "id": "F5_UAV_leader",
+        "carrier_type": "UAV",
+        "role": "leader",
+        "position": [
+          28.0,
+          40.0
+        ],
+        "distance": 28.0,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_UAV_marker",
+        "carrier_type": "UAV",
+        "role": "marker",
+        "position": [
+          40.0,
+          68.0
+        ],
+        "distance": 48.82622246293481,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UAV_observer",
+        "carrier_type": "UAV",
+        "role": "observer",
+        "position": [
+          5.0,
+          40.0
+        ],
+        "distance": 5.0,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_USV_leader",
+        "carrier_type": "USV",
+        "role": "leader",
+        "position": [
+          60.0,
+          70.0
+        ],
+        "distance": 67.08203932499369,
+        "selected": false,
+        "reason": "outside_radius"
+      },
+      {
+        "id": "F5_USV_marker",
+        "carrier_type": "USV",
+        "role": "marker",
+        "position": [
+          38.0,
+          70.0
+        ],
+        "distance": 48.41487374764082,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_USV_observer",
+        "carrier_type": "USV",
+        "role": "observer",
+        "position": [
+          9.0,
+          44.0
+        ],
+        "distance": 9.848857801796104,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UUV_leader",
+        "carrier_type": "UUV",
+        "role": "leader",
+        "position": [
+          7.0,
+          45.0
+        ],
+        "distance": 8.602325267042627,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UUV_marker",
+        "carrier_type": "UUV",
+        "role": "marker",
+        "position": [
+          42.0,
+          65.0
+        ],
+        "distance": 48.877397639399746,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_UUV_observer",
+        "carrier_type": "UUV",
+        "role": "observer",
+        "position": [
+          22.0,
+          45.0
+        ],
+        "distance": 22.561028345356956,
+        "selected": false,
+        "reason": "role_quota_filled"
+      }
+    ]
+  },
+  "max_turns": 24,
+  "comm_id": "5de242cb41034eb89404357faf446272",
+  "status": "captured",
+  "capture_time": 18,
+  "time": 18,
+  "completed_rounds": 19,
+  "rounds": [
+    {
+      "time": 0,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:0",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:0\", \"discussion_closed\": true, \"task_count\": 9, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:0",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 0,
+          "concluded": true,
+          "message_count": 13,
+          "total_message_count": 13,
+          "prompt_message_count": 13,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 9,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:0",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 0,
+          "concluded": true,
+          "message_count": 13,
+          "total_message_count": 13,
+          "prompt_message_count": 13,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 9,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:0",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 0,
+          "concluded": true,
+          "message_count": 13,
+          "total_message_count": 13,
+          "prompt_message_count": 13,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 9,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:0",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 0,
+          "concluded": true,
+          "message_count": 13,
+          "total_message_count": 13,
+          "prompt_message_count": 13,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 9,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:0",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 0,
+          "concluded": true,
+          "message_count": 13,
+          "total_message_count": 13,
+          "prompt_message_count": 13,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 9,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 24.1,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 0,
+          "operation": "observe",
+          "observed_at": 0
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 0,
+          "operation": "observe",
+          "observed_at": 0
+        },
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UUV_leader",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 0,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 0,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 1,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:1",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:1\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:1",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 1,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 18,
+          "prompt_message_count": 18,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:1",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 1,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 18,
+          "prompt_message_count": 18,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:1",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 1,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 18,
+          "prompt_message_count": 18,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:1",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 1,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 18,
+          "prompt_message_count": 18,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:1",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 1,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 18,
+          "prompt_message_count": 18,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 1,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 1,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 2,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:2",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:2\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:2",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 2,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 23,
+          "prompt_message_count": 23,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:2",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 2,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 23,
+          "prompt_message_count": 23,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:2",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 2,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 23,
+          "prompt_message_count": 23,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:2",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 2,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 23,
+          "prompt_message_count": 23,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:2",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 2,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 23,
+          "prompt_message_count": 23,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 2,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 2,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 3,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:3",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:3\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:3",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 3,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 28,
+          "prompt_message_count": 28,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:3",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 3,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 28,
+          "prompt_message_count": 28,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:3",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 3,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 28,
+          "prompt_message_count": 28,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:3",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 3,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 28,
+          "prompt_message_count": 28,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:3",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 3,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 28,
+          "prompt_message_count": 28,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 3,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 3,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 4,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:4",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:4\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:4",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 4,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 33,
+          "prompt_message_count": 33,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:4",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 4,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 33,
+          "prompt_message_count": 33,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:4",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 4,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 33,
+          "prompt_message_count": 33,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:4",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 4,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 33,
+          "prompt_message_count": 33,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:4",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 4,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 33,
+          "prompt_message_count": 33,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 4,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 4,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 5,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:5",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:5\", \"discussion_closed\": true, \"task_count\": 7, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:5",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 5,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 45,
+          "prompt_message_count": 45,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:5",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 5,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 45,
+          "prompt_message_count": 45,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:5",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 5,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 45,
+          "prompt_message_count": 45,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:5",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 5,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 45,
+          "prompt_message_count": 45,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:5",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 5,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 45,
+          "prompt_message_count": 45,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 15.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 5,
+          "operation": "observe",
+          "observed_at": 5
+        },
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 5,
+          "operation": "observe",
+          "observed_at": 5
+        },
+        {
+          "agent_id": "F5_UUV_leader",
+          "time": 5,
+          "operation": "waypoint",
+          "point": [
+            5,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 5,
+          "operation": "waypoint",
+          "point": [
+            5,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 5,
+          "operation": "waypoint",
+          "point": [
+            5,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 5,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 5,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 6,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:6",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:6\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:6",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 6,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 50,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:6",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 6,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 50,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:6",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 6,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 50,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:6",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 6,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 50,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:6",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 6,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 50,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 6,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 6,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 7,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:7",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:7\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:7",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 7,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 55,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:7",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 7,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 55,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:7",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 7,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 55,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:7",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 7,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 55,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:7",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 7,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 55,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 7,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 7,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 8,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:8",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:8\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:8",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 8,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 60,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:8",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 8,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 60,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:8",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 8,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 60,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:8",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 8,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 60,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:8",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 8,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 60,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 8,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 8,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 9,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:9",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:9\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:9",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 9,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 65,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:9",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 9,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 65,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:9",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 9,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 65,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:9",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 9,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 65,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:9",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 9,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 65,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 10.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 9,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 9,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 10,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:10",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:10\", \"discussion_closed\": true, \"task_count\": 7, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:10",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 10,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 77,
+          "prompt_message_count": 44,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:10",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 10,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 77,
+          "prompt_message_count": 44,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:10",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 10,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 77,
+          "prompt_message_count": 44,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:10",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 10,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 77,
+          "prompt_message_count": 44,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:10",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 10,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 77,
+          "prompt_message_count": 44,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 10.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 10,
+          "operation": "observe",
+          "observed_at": 10
+        },
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 10,
+          "operation": "observe",
+          "observed_at": 10
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 10,
+          "operation": "waypoint",
+          "point": [
+            10,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UUV_leader",
+          "time": 10,
+          "operation": "waypoint",
+          "point": [
+            10,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 10,
+          "operation": "waypoint",
+          "point": [
+            10,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 10,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 10,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 11,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:11",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:11\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:11",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 11,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 82,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:11",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 11,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 82,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:11",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 11,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 82,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:11",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 11,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 82,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:11",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 11,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 82,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 11,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 11,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 12,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:12",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:12\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:12",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 12,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 87,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:12",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 12,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 87,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:12",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 12,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 87,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:12",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 12,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 87,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:12",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 12,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 87,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 12,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 12,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 13,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:13",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:13\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:13",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 13,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 92,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:13",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 13,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 92,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:13",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 13,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 92,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:13",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 13,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 92,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:13",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 13,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 92,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 13,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 13,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 14,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:14",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:14\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:14",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 14,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 97,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:14",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 14,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 97,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:14",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 14,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 97,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:14",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 14,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 97,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:14",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 14,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 97,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 14,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 14,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 15,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:15",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:15\", \"discussion_closed\": true, \"task_count\": 7, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:15",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 15,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 109,
+          "prompt_message_count": 44,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:15",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 15,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 109,
+          "prompt_message_count": 44,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:15",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 15,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 109,
+          "prompt_message_count": 44,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:15",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 15,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 109,
+          "prompt_message_count": 44,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:15",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 15,
+          "concluded": true,
+          "message_count": 12,
+          "total_message_count": 109,
+          "prompt_message_count": 44,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 7,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 15.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 15,
+          "operation": "observe",
+          "observed_at": 15
+        },
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 15,
+          "operation": "observe",
+          "observed_at": 15
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 15,
+          "operation": "waypoint",
+          "point": [
+            12,
+            43
+          ]
+        },
+        {
+          "agent_id": "F5_UUV_leader",
+          "time": 15,
+          "operation": "waypoint",
+          "point": [
+            12,
+            43
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 15,
+          "operation": "waypoint",
+          "point": [
+            12,
+            43
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 15,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 15,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 16,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:16",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:16\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:16",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 16,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 114,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:16",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 16,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 114,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:16",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 16,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 114,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:16",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 16,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 114,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:16",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 16,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 114,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 16,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 16,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 17,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:17",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:17\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:17",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 17,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 119,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:17",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 17,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 119,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:17",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 17,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 119,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:17",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 17,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 119,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:17",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 17,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 119,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 17,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 17,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 18,
+      "round_id": "13aef26f7394403a8b8b76f8d9cc8731:18",
+      "comm_id": "5de242cb41034eb89404357faf446272",
+      "conclusion": "{\"round_id\": \"13aef26f7394403a8b8b76f8d9cc8731:18\", \"discussion_closed\": true, \"task_count\": 2, \"pending_tasks\": [], \"failed_tasks\": [], \"await_agents\": [], \"audit\": \"pending_controller_verification\"}",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:18",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 18,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 124,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:18",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 18,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 124,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:18",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 18,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 124,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:18",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 18,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 124,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "5de242cb41034eb89404357faf446272",
+          "round_id": "13aef26f7394403a8b8b76f8d9cc8731:18",
+          "episode_id": "13aef26f7394403a8b8b76f8d9cc8731",
+          "sim_time": 18,
+          "concluded": true,
+          "message_count": 5,
+          "total_message_count": 124,
+          "prompt_message_count": 37,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 2,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 5.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 18,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 18,
+          "operation": "tag",
+          "accepted": true
+        }
+      ]
+    }
+  ],
+  "error": null,
+  "failure_context": null,
+  "artifacts": {
+    "html": "13aef26f7394403a8b8b76f8d9cc8731.html",
+    "json": "13aef26f7394403a8b8b76f8d9cc8731.json",
+    "audit": "13aef26f7394403a8b8b76f8d9cc8731.audit.json",
+    "selection": "13aef26f7394403a8b8b76f8d9cc8731.selection.json",
+    "ioa_chat_json": "13aef26f7394403a8b8b76f8d9cc8731.ioa-chat.json",
+    "ioa_chat_txt": "13aef26f7394403a8b8b76f8d9cc8731.ioa-chat.txt"
+  },
+  "chat_export_error": null,
+  "chat_message_count": 124
+}

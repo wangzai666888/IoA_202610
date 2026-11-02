@@ -60,9 +60,9 @@ def sim_move_to(episode_id: str, expected_time: int, x: float, y: float) -> str:
     )
 
 
-def sim_try_tag(episode_id: str, expected_time: int) -> str:
+def sim_try_tag(episode_id: str, expected_time: int, authorization_id: str | None = None) -> str:
     return json.dumps(
-        _client().try_tag(episode_id, expected_time), ensure_ascii=False
+        _client().try_tag(episode_id, expected_time, authorization_id), ensure_ascii=False
     )
 
 

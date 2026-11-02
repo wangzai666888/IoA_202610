@@ -161,6 +161,9 @@ cython_debug/
 #.idea/
 .idea/
 .vscode
+# Generated fixed-scene credentials and per-scene runtime configuration
+simulator/fixed_runtime/
+configs/client_configs/cases/fixed_scenes.local/
 .DS_Store
 figs
 # frontend
@@ -169,15 +172,3 @@ logs/
 **/volumes/
 results/
 **/.env
-
-# Local runs and generated data
-/cloud_runtime/
-/simulator/outputs/
-*.local/
-*.local.*
-*.env
-*.bak
-*.before-cloud-fresh
-*.db
-*.sqlite
-*.sqlite3

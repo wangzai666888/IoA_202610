@@ -12,6 +12,7 @@ COPY ./im_server/requirements.txt ./
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && pip install --no-cache-dir -r requirements.txt
 COPY ./im_server ./
 COPY ./common ./common
+COPY simulator/__init__.py simulator/experiment_rules.py /app/simulator/
 
 # Set the entry point for running the test_react_agent python file
 ENTRYPOINT [ "python", "app.py" ]

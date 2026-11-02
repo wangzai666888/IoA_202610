@@ -123,7 +123,8 @@
         <div>
           <h2>显示选项</h2>
           <label class="toggle"><input id="show-plan" type="checkbox">显示预设目标路线（仅评估回放）</label>
-          <label class="toggle"><input id="show-radii" type="checkbox" checked>显示 15 米支持圈与 5 米标记圈</label>
+          <label class="toggle"><input id="show-observation" type="checkbox" checked>显示 25 米观测圈</label>
+          <label class="toggle"><input id="show-radii" type="checkbox" checked><span id="radii-label">显示 15 米支持圈与 5 米标记圈</span></label>
         </div>
         <div class="divider"></div>
         <div>
@@ -155,6 +156,7 @@
     const playButton = document.getElementById("play");
     const speedSelect = document.getElementById("speed");
     const showPlan = document.getElementById("show-plan");
+    const showObservation = document.getElementById("show-observation");
     const showRadii = document.getElementById("show-radii");
     const colorByRole = {observer: "#1c83a5", leader: "#7763b2", marker: "#d58a2d"};
     const roleName = {observer: "搜索观测", leader: "跟踪协调", marker: "接近标记"};
@@ -223,14 +225,27 @@
 
     function drawTarget(point) {
       const [x, y] = xy(point);
+      if (showObservation.checked) {
+        ctx.save();
+        ctx.fillStyle = "rgba(65, 148, 99, .045)";
+        ctx.strokeStyle = "rgba(65, 148, 99, .7)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(x, y, replay.config.observation_radius * scale, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+      }
       if (showRadii.checked) {
         ctx.save();
         ctx.fillStyle = "rgba(28, 131, 165, .075)";
         ctx.strokeStyle = "rgba(28, 131, 165, .35)";
         ctx.beginPath();
-        ctx.arc(x, y, replay.config.support_radius * scale, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.stroke();
+        if (replay.config.support_required !== false) {
+          ctx.arc(x, y, replay.config.support_radius * scale, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.stroke();
+        }
         ctx.fillStyle = "rgba(213, 138, 45, .12)";
         ctx.strokeStyle = "rgba(213, 138, 45, .7)";
         ctx.beginPath();
@@ -325,7 +340,10 @@
       status.className = "status" + (ended ? " " + replay.status : "");
       const positions = "目标 (" + frame.target_position.map(n => n.toFixed(1)).join(", ") + ")";
       const held = Object.entries(frame.support_streaks)
-        .map(([id, count]) => id + " 连续支持 " + count + " 秒").join("；");
+        .map(([id, count]) => id + (replay.config.support_required === false ? " 连续处于标记范围 " : " 连续支持 ") + count + " 秒").join("；");
+      document.getElementById("radii-label").textContent = replay.config.support_required === false
+        ? "显示 " + replay.config.marker_radius + " 米标记圈"
+        : "显示 " + replay.config.support_radius + " 米支持圈与 " + replay.config.marker_radius + " 米标记圈";
       document.getElementById("frame-detail").textContent = positions + (held ? "；" + held : "");
       const list = document.getElementById("events");
       list.replaceChildren();
@@ -367,6 +385,7 @@
     });
     scrub.addEventListener("input", () => { stop(); frameIndex = Number(scrub.value); render(); });
     showPlan.addEventListener("change", render);
+    showObservation.addEventListener("change", render);
     showRadii.addEventListener("change", render);
     document.addEventListener("keydown", event => {
       if (event.target && /INPUT|SELECT|BUTTON/.test(event.target.tagName)) return;

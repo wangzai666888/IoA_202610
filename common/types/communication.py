@@ -135,6 +135,8 @@ class AgentMessage(BaseModel):
     is_collaborative_planning_enabled: bool = False
     # timestamp: str = Field(default_factory=lambda: str(datetime.now()))
     max_turns: int | None = None
+    # Assigned by the window router. proposal_id remains the ORIGINAL round.
+    window_delivery: dict | None = None
 
     def to_llm_result(self):
         return LLMResult(content=self.content, role="assistant", name=self.sender)

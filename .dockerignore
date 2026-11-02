@@ -1,4 +1,6 @@
 .git
+simulator/fixed_runtime/
+configs/client_configs/cases/fixed_scenes.local/
 **/node_modules
 logs/
 **/__pycache__

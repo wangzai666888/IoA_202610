@@ -1,0 +1,360 @@
+{
+  "kind": "fixed_team_continuous_ioa_pilot",
+  "episode_id": "77950a0241b24bb99060b0aaa5f67080",
+  "scenario_id": "nine_candidates_five_team",
+  "members": [
+    {
+      "id": "F5_UAV_observer",
+      "role": "observer",
+      "carrier_type": "UAV"
+    },
+    {
+      "id": "F5_USV_observer",
+      "role": "observer",
+      "carrier_type": "USV"
+    },
+    {
+      "id": "F5_UUV_leader",
+      "role": "leader",
+      "carrier_type": "UUV"
+    },
+    {
+      "id": "F5_USV_marker",
+      "role": "marker",
+      "carrier_type": "USV"
+    },
+    {
+      "id": "F5_UAV_marker",
+      "role": "marker",
+      "carrier_type": "UAV"
+    }
+  ],
+  "team_selection": {
+    "rule": "nearest_per_role_then_agent_id",
+    "radius": 50.0,
+    "role_counts": {
+      "observer": 2,
+      "leader": 1,
+      "marker": 2
+    },
+    "candidate_count": 9,
+    "team_size": 5,
+    "initial_report": {
+      "observer_id": "F5_UAV_observer",
+      "observed_at": 0,
+      "target_position": [
+        0.0,
+        40.0
+      ]
+    },
+    "leader_id": "F5_UUV_leader",
+    "selected_ids": [
+      "F5_UAV_observer",
+      "F5_USV_observer",
+      "F5_UUV_leader",
+      "F5_USV_marker",
+      "F5_UAV_marker"
+    ],
+    "candidates": [
+      {
+        "id": "F5_UAV_leader",
+        "carrier_type": "UAV",
+        "role": "leader",
+        "position": [
+          28.0,
+          40.0
+        ],
+        "distance": 28.0,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_UAV_marker",
+        "carrier_type": "UAV",
+        "role": "marker",
+        "position": [
+          40.0,
+          68.0
+        ],
+        "distance": 48.82622246293481,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UAV_observer",
+        "carrier_type": "UAV",
+        "role": "observer",
+        "position": [
+          5.0,
+          40.0
+        ],
+        "distance": 5.0,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_USV_leader",
+        "carrier_type": "USV",
+        "role": "leader",
+        "position": [
+          60.0,
+          70.0
+        ],
+        "distance": 67.08203932499369,
+        "selected": false,
+        "reason": "outside_radius"
+      },
+      {
+        "id": "F5_USV_marker",
+        "carrier_type": "USV",
+        "role": "marker",
+        "position": [
+          38.0,
+          70.0
+        ],
+        "distance": 48.41487374764082,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_USV_observer",
+        "carrier_type": "USV",
+        "role": "observer",
+        "position": [
+          9.0,
+          44.0
+        ],
+        "distance": 9.848857801796104,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UUV_leader",
+        "carrier_type": "UUV",
+        "role": "leader",
+        "position": [
+          7.0,
+          45.0
+        ],
+        "distance": 8.602325267042627,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UUV_marker",
+        "carrier_type": "UUV",
+        "role": "marker",
+        "position": [
+          42.0,
+          65.0
+        ],
+        "distance": 48.877397639399746,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_UUV_observer",
+        "carrier_type": "UUV",
+        "role": "observer",
+        "position": [
+          22.0,
+          45.0
+        ],
+        "distance": 22.561028345356956,
+        "selected": false,
+        "reason": "role_quota_filled"
+      }
+    ]
+  },
+  "max_turns": 24,
+  "comm_id": "0b73dba3f5694c5d8e6e047a9e153e25",
+  "status": "aborted",
+  "capture_time": null,
+  "time": 1,
+  "completed_rounds": 1,
+  "rounds": [
+    {
+      "time": 0,
+      "round_id": "77950a0241b24bb99060b0aaa5f67080:0",
+      "comm_id": "0b73dba3f5694c5d8e6e047a9e153e25",
+      "conclusion": "## 本轮协同捕获仿真最终总结\n\n**Episode ID:** `77950a0241b24bb99060b0aaa5f67080`  \n**Expected Time:** `0`  \n**状态:** 本轮全部规定步骤已按序执行完毕\n\n---\n\n### 1. 观测阶段（已完成）\n\n| 成员 | 工具 | 结果 |\n|------|------|------|\n| F5_UAV_observer | `sim_observe` | 发现目标，坐标 `[0.0, 40.0]`，observed_at=0 |\n| F5_USV_observer | `sim_observe` | 发现目标，坐标 `[0.0, 40.0]`，observed_at=0 |\n\n两位观测者均成功发现目标，目标坐标一致确认为 **(x=0.0, y=40.0)**。\n\n---\n\n### 2. 航点设置阶段（已完成）\n\n全部 5 名成员各自调用 `sim_move_to(x=0.0, y=40.0)`，工具回执汇总：\n\n| 成员 | accepted | waypoint | status |\n|------|----------|----------|--------|\n| F5_UUV_leader | ✅ true | [0.0, 40.0] | running |\n| F5_UAV_observer | ✅ true | [0.0, 40.0] | running |\n| F5_USV_observer | ✅ true | [0.0, 40.0] | running |\n| F5_UAV_marker | ✅ true | [0.0, 40.0] | running |\n| F5_USV_marker | ✅ true | [0.0, 40.0] | running |\n\n所有成员航点设置成功，均向目标方向移动。\n\n---\n\n### 3. 标记阶段（已完成）\n\n| 成员 | 工具 | accepted | status | 解读 |\n|------|------|----------|--------|------|\n| F5_UAV_marker | `sim_try_tag` | false | running | 正常——尚未到达目标位置 |\n| F5_USV_marker | `sim_try_tag` | false | running | 正常——尚未到达目标位置 |\n\n`accepted=false` 是本轮 time=0 时刻的正常结果，因为标记者刚设置航点、尚未到达目标坐标 [0.0, 40.0]。未出现 `already_captured`，说明目标尚未被任何一方捕获。\n\n---\n\n### 4. 本轮执行纪律确认\n\n- ✅ 所有工具调用均由成员**自身实际执行**，未使用 subtask_solver 代替\n- ✅ episode_id 和 expected_time 由 IoA 执行上下文自动绑定，调用时仅填写必要参数\n- ✅ 每位成员只给自己调用工具，未替其他成员操作\n- ✅ 未等待位置移动完成，未推进时钟\n- ✅ 未请求其他团队\n- ✅ 所有报告均如实记录工具原始回执\n\n---\n\n### 5. 下一轮预期\n\n各成员航点 (0.0, 40.0) 已生效，将在后续时间步中逐步接近目标。下一轮（expected_time=1 或更高）标记者到达目标附近后再次调用 `sim_try_tag`，届时可能出现 `accepted=true`（标记成功）或 `already_captured`（对方已抢先成功）的终局结果。",
+      "participants": {
+        "F5_UAV_observer": {
+          "comm_id": "0b73dba3f5694c5d8e6e047a9e153e25",
+          "round_id": "77950a0241b24bb99060b0aaa5f67080:0",
+          "episode_id": "77950a0241b24bb99060b0aaa5f67080",
+          "sim_time": 0,
+          "concluded": true,
+          "message_count": 14,
+          "total_message_count": 14,
+          "prompt_message_count": 14,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 9,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_observer"
+        },
+        "F5_USV_observer": {
+          "comm_id": "0b73dba3f5694c5d8e6e047a9e153e25",
+          "round_id": "77950a0241b24bb99060b0aaa5f67080:0",
+          "episode_id": "77950a0241b24bb99060b0aaa5f67080",
+          "sim_time": 0,
+          "concluded": true,
+          "message_count": 14,
+          "total_message_count": 14,
+          "prompt_message_count": 14,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 9,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_observer"
+        },
+        "F5_UUV_leader": {
+          "comm_id": "0b73dba3f5694c5d8e6e047a9e153e25",
+          "round_id": "77950a0241b24bb99060b0aaa5f67080:0",
+          "episode_id": "77950a0241b24bb99060b0aaa5f67080",
+          "sim_time": 0,
+          "concluded": true,
+          "message_count": 14,
+          "total_message_count": 14,
+          "prompt_message_count": 14,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 9,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UUV_leader"
+        },
+        "F5_USV_marker": {
+          "comm_id": "0b73dba3f5694c5d8e6e047a9e153e25",
+          "round_id": "77950a0241b24bb99060b0aaa5f67080:0",
+          "episode_id": "77950a0241b24bb99060b0aaa5f67080",
+          "sim_time": 0,
+          "concluded": true,
+          "message_count": 14,
+          "total_message_count": 14,
+          "prompt_message_count": 14,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 9,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_USV_marker"
+        },
+        "F5_UAV_marker": {
+          "comm_id": "0b73dba3f5694c5d8e6e047a9e153e25",
+          "round_id": "77950a0241b24bb99060b0aaa5f67080:0",
+          "episode_id": "77950a0241b24bb99060b0aaa5f67080",
+          "sim_time": 0,
+          "concluded": true,
+          "message_count": 14,
+          "total_message_count": 14,
+          "prompt_message_count": 14,
+          "max_turns": 24,
+          "round_error": null,
+          "task_count": 9,
+          "pending_tasks": [],
+          "failed_tasks": [],
+          "await_agents": [],
+          "agent_name": "F5_UAV_marker"
+        }
+      },
+      "elapsed_wall_seconds": 221.0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 0,
+          "operation": "observe",
+          "observed_at": 0
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 0,
+          "operation": "observe",
+          "observed_at": 0
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UUV_leader",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 0,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 0,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 0,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    }
+  ],
+  "error": null,
+  "failure_context": null,
+  "artifacts": {
+    "html": "77950a0241b24bb99060b0aaa5f67080.html",
+    "json": "77950a0241b24bb99060b0aaa5f67080.json",
+    "audit": "77950a0241b24bb99060b0aaa5f67080.audit.json",
+    "selection": "77950a0241b24bb99060b0aaa5f67080.selection.json",
+    "ioa_chat_json": "77950a0241b24bb99060b0aaa5f67080.ioa-chat.json",
+    "ioa_chat_txt": "77950a0241b24bb99060b0aaa5f67080.ioa-chat.txt"
+  },
+  "chat_export_error": null,
+  "chat_message_count": 14
+}

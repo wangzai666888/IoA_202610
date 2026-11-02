@@ -1,0 +1,3123 @@
+{
+  "kind": "five_team_communication_windows_v2",
+  "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+  "comm_id": "5420f28390734454a50a2819dd982cd0",
+  "profile": {
+    "version": 2,
+    "pair_id": null,
+    "restricted": [],
+    "condition": "continuous",
+    "selection": "explicit_pair",
+    "members": [
+      {
+        "id": "F5_UAV_observer",
+        "role": "observer",
+        "carrier_type": "UAV"
+      },
+      {
+        "id": "F5_USV_observer",
+        "role": "observer",
+        "carrier_type": "USV"
+      },
+      {
+        "id": "F5_UUV_leader",
+        "role": "leader",
+        "carrier_type": "UUV"
+      },
+      {
+        "id": "F5_USV_marker",
+        "role": "marker",
+        "carrier_type": "USV"
+      },
+      {
+        "id": "F5_UAV_marker",
+        "role": "marker",
+        "carrier_type": "UAV"
+      }
+    ],
+    "schedule": {
+      "type": "periodic",
+      "open_seconds": 10,
+      "closed_seconds": 10,
+      "period_seconds": 20,
+      "phase_seconds": 0
+    },
+    "time_unit": "simulation_seconds"
+  },
+  "members": [
+    {
+      "id": "F5_UAV_observer",
+      "role": "observer",
+      "carrier_type": "UAV"
+    },
+    {
+      "id": "F5_USV_observer",
+      "role": "observer",
+      "carrier_type": "USV"
+    },
+    {
+      "id": "F5_UUV_leader",
+      "role": "leader",
+      "carrier_type": "UUV"
+    },
+    {
+      "id": "F5_USV_marker",
+      "role": "marker",
+      "carrier_type": "USV"
+    },
+    {
+      "id": "F5_UAV_marker",
+      "role": "marker",
+      "carrier_type": "UAV"
+    }
+  ],
+  "team_selection": {
+    "rule": "nearest_per_role_then_agent_id",
+    "radius": 50.0,
+    "role_counts": {
+      "observer": 2,
+      "leader": 1,
+      "marker": 2
+    },
+    "candidate_count": 9,
+    "team_size": 5,
+    "initial_report": {
+      "observer_id": "F5_UAV_observer",
+      "observed_at": 0,
+      "target_position": [
+        0.0,
+        40.0
+      ]
+    },
+    "leader_id": "F5_UUV_leader",
+    "selected_ids": [
+      "F5_UAV_observer",
+      "F5_USV_observer",
+      "F5_UUV_leader",
+      "F5_USV_marker",
+      "F5_UAV_marker"
+    ],
+    "candidates": [
+      {
+        "id": "F5_UAV_leader",
+        "carrier_type": "UAV",
+        "role": "leader",
+        "position": [
+          28.0,
+          40.0
+        ],
+        "distance": 28.0,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_UAV_marker",
+        "carrier_type": "UAV",
+        "role": "marker",
+        "position": [
+          40.0,
+          68.0
+        ],
+        "distance": 48.82622246293481,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UAV_observer",
+        "carrier_type": "UAV",
+        "role": "observer",
+        "position": [
+          5.0,
+          40.0
+        ],
+        "distance": 5.0,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_USV_leader",
+        "carrier_type": "USV",
+        "role": "leader",
+        "position": [
+          60.0,
+          70.0
+        ],
+        "distance": 67.08203932499369,
+        "selected": false,
+        "reason": "outside_radius"
+      },
+      {
+        "id": "F5_USV_marker",
+        "carrier_type": "USV",
+        "role": "marker",
+        "position": [
+          38.0,
+          70.0
+        ],
+        "distance": 48.41487374764082,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_USV_observer",
+        "carrier_type": "USV",
+        "role": "observer",
+        "position": [
+          9.0,
+          44.0
+        ],
+        "distance": 9.848857801796104,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UUV_leader",
+        "carrier_type": "UUV",
+        "role": "leader",
+        "position": [
+          7.0,
+          45.0
+        ],
+        "distance": 8.602325267042627,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UUV_marker",
+        "carrier_type": "UUV",
+        "role": "marker",
+        "position": [
+          42.0,
+          65.0
+        ],
+        "distance": 48.877397639399746,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_UUV_observer",
+        "carrier_type": "UUV",
+        "role": "observer",
+        "position": [
+          22.0,
+          45.0
+        ],
+        "distance": 22.561028345356956,
+        "selected": false,
+        "reason": "role_quota_filled"
+      }
+    ]
+  },
+  "scenario_id": "nine_candidates_five_team",
+  "status": "captured",
+  "time": 18,
+  "capture_time": 18,
+  "leader_capture_known_at": 18,
+  "leader_informed_at_end": true,
+  "completed_rounds": 19,
+  "rounds": [
+    {
+      "time": 0,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:0",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 0,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "38a4f8e225bc4a999f395b0e1ac6a296",
+              "tool": "sim_observe"
+            },
+            {
+              "contract_id": "572b8af7f97d481bae2a9153042e66cf",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 10
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 0,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "7efcd86cf0884ff6a5ad592028eae7b7",
+              "tool": "sim_observe"
+            },
+            {
+              "contract_id": "20ff025776bf4491a5fbf4faf4ebbd4c",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 10
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 0,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "705f0f1013754fc99c33590dd9544d6d",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 10
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 0,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "50647894ea2440cf99c25bc4c02384e6",
+              "tool": "sim_move_to"
+            },
+            {
+              "contract_id": "9542cec7c1014e7cae03540a6a05fe49",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 10
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 0,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "299c2d43b80d46e89bcba1266874d48b",
+              "tool": "sim_move_to"
+            },
+            {
+              "contract_id": "28bd8efc777b4bc9b9abbd7176bedf27",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 10
+        }
+      },
+      "elapsed_wall_seconds": 13.9,
+      "queue": {
+        "time": 0,
+        "seen_by_sender": {
+          "F5_UAV_observer": 2,
+          "F5_USV_observer": 2,
+          "F5_UUV_leader": 2,
+          "F5_USV_marker": 2,
+          "F5_UAV_marker": 2
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 0,
+          "operation": "observe",
+          "observed_at": 0
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 0,
+          "operation": "observe",
+          "observed_at": 0
+        },
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UUV_leader",
+          "time": 0,
+          "operation": "waypoint",
+          "point": [
+            0,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 0,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 0,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 1,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:1",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 1,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 12
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 1,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 12
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 1,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 12
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 1,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 3,
+          "generated_count": 3,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "609b68f1ea944414ab5af1fdbd9716f1",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 12
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 1,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 3,
+          "generated_count": 3,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "5fc9e30156d14e2c8af166a00b30dd09",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 12
+        }
+      },
+      "elapsed_wall_seconds": 5.1,
+      "queue": {
+        "time": 1,
+        "seen_by_sender": {
+          "F5_UAV_observer": 2,
+          "F5_USV_observer": 2,
+          "F5_UUV_leader": 2,
+          "F5_USV_marker": 3,
+          "F5_UAV_marker": 3
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 1,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 1,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 2,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:2",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 2,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 14
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 2,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 14
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 2,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 14
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 2,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "ac4cf509035143119b5eec74369c6a67",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 14
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 2,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "de4ee82e8b0e4bc5aaf844d3b919599b",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 14
+        }
+      },
+      "elapsed_wall_seconds": 2.5,
+      "queue": {
+        "time": 2,
+        "seen_by_sender": {
+          "F5_UAV_observer": 2,
+          "F5_USV_observer": 2,
+          "F5_UUV_leader": 2,
+          "F5_USV_marker": 4,
+          "F5_UAV_marker": 4
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 2,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 2,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 3,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:3",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 3,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 16
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 3,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 16
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 3,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 16
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 3,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 5,
+          "generated_count": 5,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "3a1bdd0394604515a1acd0a7164a1f09",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 16
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 3,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 5,
+          "generated_count": 5,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "eec6a837b53b4f98b733d982a14733a1",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 16
+        }
+      },
+      "elapsed_wall_seconds": 2.0,
+      "queue": {
+        "time": 3,
+        "seen_by_sender": {
+          "F5_UAV_observer": 2,
+          "F5_USV_observer": 2,
+          "F5_UUV_leader": 2,
+          "F5_USV_marker": 5,
+          "F5_UAV_marker": 5
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 3,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 3,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 4,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:4",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 4,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 18
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 4,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 18
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 4,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 2,
+          "generated_count": 2,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 18
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 4,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "3c6553327ae3496e93c18b11d91c68af",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 18
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 4,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "59655db556f440a495c89f2622896fa3",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 18
+        }
+      },
+      "elapsed_wall_seconds": 3.4,
+      "queue": {
+        "time": 4,
+        "seen_by_sender": {
+          "F5_UAV_observer": 2,
+          "F5_USV_observer": 2,
+          "F5_UUV_leader": 2,
+          "F5_USV_marker": 6,
+          "F5_UAV_marker": 6
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 4,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 4,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 5,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:5",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 5,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "963c9161a74d4a9f89476b18a46a5332",
+              "tool": "sim_observe"
+            },
+            {
+              "contract_id": "86811f222eb3482ca234c330f45a2afb",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 28
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 5,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "9062c92a51ff4d5abd02781601b1da36",
+              "tool": "sim_observe"
+            },
+            {
+              "contract_id": "c6c10f1ec05c4d8b80ae68f3bea4e622",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 28
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 5,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "0c7b940f6ffa41de82426fb862c3ed99",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 28
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 5,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "91049aed945244b6b97821cd9d3055c3",
+              "tool": "sim_move_to"
+            },
+            {
+              "contract_id": "338289d06de84c63ae6bfcf367023f21",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 28
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 5,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "961fe63b6793432bbc2d24fd7da2efe1",
+              "tool": "sim_move_to"
+            },
+            {
+              "contract_id": "9496717721b248618e2a2d282eea4063",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 28
+        }
+      },
+      "elapsed_wall_seconds": 14.4,
+      "queue": {
+        "time": 5,
+        "seen_by_sender": {
+          "F5_UAV_observer": 4,
+          "F5_USV_observer": 4,
+          "F5_UUV_leader": 4,
+          "F5_USV_marker": 8,
+          "F5_UAV_marker": 8
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 5,
+          "operation": "observe",
+          "observed_at": 5
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 5,
+          "operation": "observe",
+          "observed_at": 5
+        },
+        {
+          "agent_id": "F5_UUV_leader",
+          "time": 5,
+          "operation": "waypoint",
+          "point": [
+            5,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 5,
+          "operation": "waypoint",
+          "point": [
+            5,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 5,
+          "operation": "waypoint",
+          "point": [
+            5,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 5,
+          "operation": "waypoint",
+          "point": [
+            5,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 5,
+          "operation": "waypoint",
+          "point": [
+            5,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 5,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 5,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 6,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:6",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 6,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 30
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 6,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 30
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 6,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 30
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 6,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 9,
+          "generated_count": 9,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "bdbaa7426fd4477db22dbb4fdea05b0f",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 30
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 6,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 9,
+          "generated_count": 9,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "ac101ca504b04fa2931aa019fd4f810a",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 30
+        }
+      },
+      "elapsed_wall_seconds": 2.3,
+      "queue": {
+        "time": 6,
+        "seen_by_sender": {
+          "F5_UAV_observer": 4,
+          "F5_USV_observer": 4,
+          "F5_UUV_leader": 4,
+          "F5_USV_marker": 9,
+          "F5_UAV_marker": 9
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 6,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 6,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 7,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:7",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 7,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 32
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 7,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 32
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 7,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 32
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 7,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 10,
+          "generated_count": 10,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "c7fcdde605394344958e476c2ee0b3a8",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 32
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 7,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 10,
+          "generated_count": 10,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "17648b1d319c40e39f7ce142bc13395c",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 32
+        }
+      },
+      "elapsed_wall_seconds": 2.4,
+      "queue": {
+        "time": 7,
+        "seen_by_sender": {
+          "F5_UAV_observer": 4,
+          "F5_USV_observer": 4,
+          "F5_UUV_leader": 4,
+          "F5_USV_marker": 10,
+          "F5_UAV_marker": 10
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 7,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 7,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 8,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:8",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 8,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 34
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 8,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 34
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 8,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 34
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 8,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 11,
+          "generated_count": 11,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "5957d1e3f68d431385c1474468f4c7cb",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 34
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 8,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 11,
+          "generated_count": 11,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "4c534e639b86403e8e11ab581dee8c1d",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 34
+        }
+      },
+      "elapsed_wall_seconds": 4.1,
+      "queue": {
+        "time": 8,
+        "seen_by_sender": {
+          "F5_UAV_observer": 4,
+          "F5_USV_observer": 4,
+          "F5_UUV_leader": 4,
+          "F5_USV_marker": 11,
+          "F5_UAV_marker": 11
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 8,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 8,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 9,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:9",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 9,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 36
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 9,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 36
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 9,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 4,
+          "generated_count": 4,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 36
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 9,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 12,
+          "generated_count": 12,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "84eb3b7bdba54eb98a1ea8e28f341b85",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 36
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 9,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 12,
+          "generated_count": 12,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "c16c7bd362a241ddb2ca124380724912",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 36
+        }
+      },
+      "elapsed_wall_seconds": 8.5,
+      "queue": {
+        "time": 9,
+        "seen_by_sender": {
+          "F5_UAV_observer": 4,
+          "F5_USV_observer": 4,
+          "F5_UUV_leader": 4,
+          "F5_USV_marker": 12,
+          "F5_UAV_marker": 12
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 9,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 9,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 10,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:10",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 10,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "fcc07ad0f9f64b129ca4c0666dc65b24",
+              "tool": "sim_observe"
+            },
+            {
+              "contract_id": "7c96c692eecc4387a90a7b81af5ea6c1",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 46
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 10,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "731abf92060046e5ab4599bc6757a29d",
+              "tool": "sim_observe"
+            },
+            {
+              "contract_id": "181fd3505dab4301b787998797db2a2c",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 46
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 10,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "77942e84885c4d86b4351fcabf350c86",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 46
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 10,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 14,
+          "generated_count": 14,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "6563eca7f0154d05b83bc2e91844a93b",
+              "tool": "sim_move_to"
+            },
+            {
+              "contract_id": "2fbc9b0a52864cf18c0f9de2c1ab3210",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 46
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 10,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 14,
+          "generated_count": 14,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "8075dde3d1234229b71acb9f2238eba0",
+              "tool": "sim_move_to"
+            },
+            {
+              "contract_id": "cc1275ec5542462fa143005f5af8c29d",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 46
+        }
+      },
+      "elapsed_wall_seconds": 13.6,
+      "queue": {
+        "time": 10,
+        "seen_by_sender": {
+          "F5_UAV_observer": 6,
+          "F5_USV_observer": 6,
+          "F5_UUV_leader": 6,
+          "F5_USV_marker": 14,
+          "F5_UAV_marker": 14
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 10,
+          "operation": "observe",
+          "observed_at": 10
+        },
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 10,
+          "operation": "observe",
+          "observed_at": 10
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 10,
+          "operation": "waypoint",
+          "point": [
+            10,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UUV_leader",
+          "time": 10,
+          "operation": "waypoint",
+          "point": [
+            10,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 10,
+          "operation": "waypoint",
+          "point": [
+            10,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 10,
+          "operation": "waypoint",
+          "point": [
+            10,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 10,
+          "operation": "waypoint",
+          "point": [
+            10,
+            40
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 10,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 10,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 11,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:11",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 11,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 48
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 11,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 48
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 11,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 48
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 11,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 15,
+          "generated_count": 15,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "4235b6a989974225800ebad40729b46a",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 48
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 11,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 15,
+          "generated_count": 15,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "0a8581ad9e75499b8e50f05c256e8f5f",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 48
+        }
+      },
+      "elapsed_wall_seconds": 3.9,
+      "queue": {
+        "time": 11,
+        "seen_by_sender": {
+          "F5_UAV_observer": 6,
+          "F5_USV_observer": 6,
+          "F5_UUV_leader": 6,
+          "F5_USV_marker": 15,
+          "F5_UAV_marker": 15
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 11,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 11,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 12,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:12",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 12,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 50
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 12,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 50
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 12,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 50
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 12,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 16,
+          "generated_count": 16,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "42017b904ef34b36a70eefdf38a9e5c0",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 50
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 12,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 16,
+          "generated_count": 16,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "331e80298afe4b808c9739d9d02f2866",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 50
+        }
+      },
+      "elapsed_wall_seconds": 1.7,
+      "queue": {
+        "time": 12,
+        "seen_by_sender": {
+          "F5_UAV_observer": 6,
+          "F5_USV_observer": 6,
+          "F5_UUV_leader": 6,
+          "F5_USV_marker": 16,
+          "F5_UAV_marker": 16
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 12,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 12,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 13,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:13",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 13,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 52
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 13,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 52
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 13,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 52
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 13,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 17,
+          "generated_count": 17,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "375accc5c2bb46e5841d1e9e055b57bc",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 52
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 13,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 17,
+          "generated_count": 17,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "bcdbaee4992e4b6899e746901dd76c5b",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 52
+        }
+      },
+      "elapsed_wall_seconds": 2.2,
+      "queue": {
+        "time": 13,
+        "seen_by_sender": {
+          "F5_UAV_observer": 6,
+          "F5_USV_observer": 6,
+          "F5_UUV_leader": 6,
+          "F5_USV_marker": 17,
+          "F5_UAV_marker": 17
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 13,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 13,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 14,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:14",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 14,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 54
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 14,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 54
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 14,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 6,
+          "generated_count": 6,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 54
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 14,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 18,
+          "generated_count": 18,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "add8d3af5f9b41fab845cc3f858a6a15",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 54
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 14,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 18,
+          "generated_count": 18,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "7df514d8f9324d229228686ef4cbf077",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 54
+        }
+      },
+      "elapsed_wall_seconds": 6.6,
+      "queue": {
+        "time": 14,
+        "seen_by_sender": {
+          "F5_UAV_observer": 6,
+          "F5_USV_observer": 6,
+          "F5_UUV_leader": 6,
+          "F5_USV_marker": 18,
+          "F5_UAV_marker": 18
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 14,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 14,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 15,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:15",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 15,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "4121f49ee74b43f381146b38e3787e12",
+              "tool": "sim_observe"
+            },
+            {
+              "contract_id": "ed4b6c58b491439dbfc35976ce48e69c",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 64
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 15,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "e6b0aae04b3b4bdc869210f53b2f5132",
+              "tool": "sim_observe"
+            },
+            {
+              "contract_id": "00b5468a5b0a4e5c86d4e86f939b9b2f",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 64
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 15,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "c981bd1fffc04092b31dac746790b3ee",
+              "tool": "sim_move_to"
+            }
+          ],
+          "received_count": 64
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 15,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 20,
+          "generated_count": 20,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "f37a321e2c6a4c84b89965e0fc93a25a",
+              "tool": "sim_move_to"
+            },
+            {
+              "contract_id": "b9b3f7d35e2e42ef99643e6a7a73a927",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 64
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 15,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 20,
+          "generated_count": 20,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "70026f9b3c364270b0a69b9422bb01f1",
+              "tool": "sim_move_to"
+            },
+            {
+              "contract_id": "9d2f505caa574d6385bda4ea3ffbc7c9",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 64
+        }
+      },
+      "elapsed_wall_seconds": 13.1,
+      "queue": {
+        "time": 15,
+        "seen_by_sender": {
+          "F5_UAV_observer": 8,
+          "F5_USV_observer": 8,
+          "F5_UUV_leader": 8,
+          "F5_USV_marker": 20,
+          "F5_UAV_marker": 20
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 15,
+          "operation": "observe",
+          "observed_at": 15
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 15,
+          "operation": "observe",
+          "observed_at": 15
+        },
+        {
+          "agent_id": "F5_UAV_observer",
+          "time": 15,
+          "operation": "waypoint",
+          "point": [
+            12,
+            43
+          ]
+        },
+        {
+          "agent_id": "F5_USV_observer",
+          "time": 15,
+          "operation": "waypoint",
+          "point": [
+            12,
+            43
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 15,
+          "operation": "waypoint",
+          "point": [
+            12,
+            43
+          ]
+        },
+        {
+          "agent_id": "F5_UUV_leader",
+          "time": 15,
+          "operation": "waypoint",
+          "point": [
+            12,
+            43
+          ]
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 15,
+          "operation": "waypoint",
+          "point": [
+            12,
+            43
+          ]
+        },
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 15,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 15,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 16,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:16",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 16,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 66
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 16,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 66
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 16,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 66
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 16,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 21,
+          "generated_count": 21,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "c81b630428b340e894614b63a04fda2d",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 66
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 16,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 21,
+          "generated_count": 21,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "e397208e04f243e58c968f1b51f4d525",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 66
+        }
+      },
+      "elapsed_wall_seconds": 3.4,
+      "queue": {
+        "time": 16,
+        "seen_by_sender": {
+          "F5_UAV_observer": 8,
+          "F5_USV_observer": 8,
+          "F5_UUV_leader": 8,
+          "F5_USV_marker": 21,
+          "F5_UAV_marker": 21
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 16,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 16,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 17,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:17",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 17,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 68
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 17,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 68
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 17,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [],
+          "received_count": 68
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 17,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 22,
+          "generated_count": 22,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "0b1d009ebd5b422995e003d580fdf41c",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 68
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 17,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 22,
+          "generated_count": 22,
+          "uplink_queued": 0,
+          "capture_known_at": null,
+          "executed": [
+            {
+              "contract_id": "52d870e2b81f4aa98e112b0db2971338",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 68
+        }
+      },
+      "elapsed_wall_seconds": 4.2,
+      "queue": {
+        "time": 17,
+        "seen_by_sender": {
+          "F5_UAV_observer": 8,
+          "F5_USV_observer": 8,
+          "F5_UUV_leader": 8,
+          "F5_USV_marker": 22,
+          "F5_UAV_marker": 22
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 17,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 17,
+          "operation": "tag",
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "time": 18,
+      "round_id": "8d9bc6e50cb44bd8858efe7ed676b3f3:18",
+      "participants": {
+        "F5_UAV_observer": {
+          "agent_name": "F5_UAV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 18,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": 18,
+          "executed": [],
+          "received_count": 70
+        },
+        "F5_USV_observer": {
+          "agent_name": "F5_USV_observer",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 18,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": 18,
+          "executed": [],
+          "received_count": 70
+        },
+        "F5_UUV_leader": {
+          "agent_name": "F5_UUV_leader",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 18,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 8,
+          "generated_count": 8,
+          "uplink_queued": 0,
+          "capture_known_at": 18,
+          "executed": [],
+          "received_count": 70
+        },
+        "F5_USV_marker": {
+          "agent_name": "F5_USV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 18,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 23,
+          "generated_count": 23,
+          "uplink_queued": 0,
+          "capture_known_at": 18,
+          "executed": [
+            {
+              "contract_id": "8fc1b8e7e6424894a9088c70706695f5",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 70
+        },
+        "F5_UAV_marker": {
+          "agent_name": "F5_UAV_marker",
+          "comm_id": "5420f28390734454a50a2819dd982cd0",
+          "episode_id": "8d9bc6e50cb44bd8858efe7ed676b3f3",
+          "time": 18,
+          "phase": "finish",
+          "busy": false,
+          "error": null,
+          "closed": false,
+          "sent_count": 23,
+          "generated_count": 23,
+          "uplink_queued": 0,
+          "capture_known_at": 18,
+          "executed": [
+            {
+              "contract_id": "c12e6b52266a44e9a1b9355fe741c2f5",
+              "tool": "sim_try_tag"
+            }
+          ],
+          "received_count": 70
+        }
+      },
+      "elapsed_wall_seconds": 2.6,
+      "queue": {
+        "time": 18,
+        "seen_by_sender": {
+          "F5_UAV_observer": 8,
+          "F5_USV_observer": 8,
+          "F5_UUV_leader": 8,
+          "F5_USV_marker": 23,
+          "F5_UAV_marker": 23
+        },
+        "settled": true,
+        "inflight": 0,
+        "queued": 0,
+        "sealed": false,
+        "closed": false,
+        "error": null
+      },
+      "uplink_queued": 0,
+      "tool_calls": [
+        {
+          "agent_id": "F5_UAV_marker",
+          "time": 18,
+          "operation": "tag",
+          "accepted": false
+        },
+        {
+          "agent_id": "F5_USV_marker",
+          "time": 18,
+          "operation": "tag",
+          "accepted": true
+        }
+      ]
+    }
+  ],
+  "error": null,
+  "elapsed_wall_seconds": 113.7,
+  "cleanup_errors": [],
+  "artifacts": {
+    "html": "8d9bc6e50cb44bd8858efe7ed676b3f3.html",
+    "json": "8d9bc6e50cb44bd8858efe7ed676b3f3.json",
+    "audit": "8d9bc6e50cb44bd8858efe7ed676b3f3.audit.json",
+    "selection": "8d9bc6e50cb44bd8858efe7ed676b3f3.selection.json",
+    "communication": "8d9bc6e50cb44bd8858efe7ed676b3f3.communication.json",
+    "ioa_chat_json": "8d9bc6e50cb44bd8858efe7ed676b3f3.ioa-chat.json",
+    "ioa_chat_txt": "8d9bc6e50cb44bd8858efe7ed676b3f3.ioa-chat.txt"
+  },
+  "experiment_snapshot": {
+    "source_sha256": {
+      "common/capture_protocol.py": "9e776804637aeb727fa381a842da611e335974f84bd3665dbc1cc049654ead11",
+      "common/communication_windows.py": "563093bff801c22bd7d5c1b261cff6398561ef898bdbda9a99a0359908562f91",
+      "common/config.py": "8616c722ddfc494774f89e9303d9b959dc4e5d218177db14ad7a62c8f9715cbb",
+      "common/log.py": "de785e3b8c0539a24a0493a54ff5cab822e100f214c82a651d47d7d28e8c6f81",
+      "common/registry.py": "a43dd1bd053a162a4fb27e34698c37a7ff9c441e30a80bb89910742b07688e82",
+      "common/types/__init__.py": "499933d80c12e8255e5c27ebb09780e743dee6b723c37b8e2a74b44cfd2e207e",
+      "common/types/agent.py": "6fa1d8f93e09305a6343e15f0c605fc2cb27d073175f7112f91cae736a83e90f",
+      "common/types/communication.py": "f8ac559d4fec800cf4a7d1f09e3c1a73913e6d7ad741803aa1adadc82339470c",
+      "common/types/llm.py": "285050ef7aeb0f202bc350a4843fc7cf9634af0e1787c6521587d7d3d9120422",
+      "common/types/server.py": "b27c0c945a48800c7df47f9a14369374ebcb8156896f43629bd9ffacab33b4a0",
+      "common/types/task.py": "2f8493e65150fc69bdf8f5d047956e3b8ae24571cb2b5eeed9aa0956e98e354d",
+      "configs/client_configs/cases/capture_five.local/F5_UAV_marker.yaml": "fac99b8c3e3fa591b3c86fbf5ea5dc18b0ccd15f31fae4a0a35a9e0ad2b4c23b",
+      "configs/client_configs/cases/capture_five.local/F5_UAV_observer.yaml": "d0509420fa5f23073b2ba91068aa548fe23ad5ca03230bc40d07a11a62d82f04",
+      "configs/client_configs/cases/capture_five.local/F5_USV_marker.yaml": "126efb8a9b9e917ba344ce1eaf83b622a34af75177cd7dabb6b67c29d364b027",
+      "configs/client_configs/cases/capture_five.local/F5_USV_observer.yaml": "7a2f499acc25d0eb1e044630bd240769c3a6f8508a0a922a98eddffa437bf4e6",
+      "configs/client_configs/cases/capture_five.local/F5_UUV_leader.yaml": "d6ac6595ca1f01f4f303b90312d15054a8fdadbde74122385b0a789b78b4d3c4",
+      "im_client/agents/react/__init__.py": "85a60bdf16eb9d6bc27733f0c436185a15fc690621670b0404c4c27e1cfe6cf8",
+      "im_client/agents/react/capture_guard.py": "655e220859857d9948ec52489f99be3b43f65005acf7ac837929750572bad5f5",
+      "im_client/agents/react/react_agent.py": "e3bc822b56a792982a2b5b3e5db484ae66a0499d337222ce262300c3364feb9b",
+      "im_client/agents/react/react_agent_adapter.py": "dc02afd9ada7128810566385b500974a29ea4e0e836d0de8f39f685223069f52",
+      "im_client/communication/__init__.py": "db603cbaeae4dfc694df27500c9d9eb093fcaf532c75f4ffe3228ca8af9cf2f3",
+      "im_client/communication/capture_execution.py": "22c2ceff6c4f5b214691125316295a4dbf558a78e4ce71f62d14c669c71ed8ce",
+      "im_client/communication/capture_state.py": "64342151ae36998f65b7876abb3db7f8926e516d86a0f835ef064e3e470c453e",
+      "im_client/communication/communication_layer.py": "caaca9842143fdfb108b09373558f304de97a4f027ca0e1ca5a73dffa11974e6",
+      "im_client/communication/sim_round_state.py": "1832129c49e3349e46d0ce2db6aecd44861b603c45b1bfa2e7f9f0bd0f77cbf2",
+      "im_client/communication/task_management.py": "640786476a251c1155dd07189a6f4f17bd9e2b23d594869635e70f38df11260a",
+      "im_client/communication/websocket_client.py": "b1960bd94174fba6d0f970c9e39565a9b9aed865442244a44d84efba3e33716d",
+      "im_client/communication/window_capture.py": "583dde93ba39d6b67b92c51dc4dcc54712b8d13e4b9f2041ce4ce275be5264b9",
+      "im_client/llms/__init__.py": "4b00b43e91a083bfea4f732e2898bffc1d709d125a01acb1b6eccc6e82312e72",
+      "im_client/llms/base.py": "a65494a833a9ba6e3cce62dd0f79f5674994e92bf7002268b337b73dd0f93989",
+      "im_client/llms/openai.py": "77c003785eb138fe4057ab82956a81f93c1b90607b46b57527ce2a9bf75df1c7",
+      "im_client/main.py": "084253b5e07bba957c3df2e07558695743242fabcc835f72ee40e7098aba7b31",
+      "im_client/prompts/__init__.py": "71d189f39f58da268e4e7e9d63fae3e6e1033a01f363bef3592d0458291f923b",
+      "im_client/prompts/communication.py": "7354b506f3354534ce7ab58a231d2689586544b18328a124152f99b7221e1760",
+      "im_client/prompts/execution.py": "6f3d3a2739e225f1b677364450392bc215120dbaad1bb05f54da8ab6c4a653ee",
+      "im_client/prompts/react.py": "05129c4d87dc0c0b6114a39256dedf5a7649a66e0b1329fda19e95bad16213aa",
+      "im_server/app.py": "ddbeb753a7e350b54b9b405558161764157d5be3b80156efeed650e393a55bfa",
+      "simulator/__init__.py": "4460b409918043ca49cfe5162a78bbc54faf9c16a84045b34cf2957577fce660",
+      "simulator/core.py": "61ae507e9a3117b093a6d5e031570ef1927f8c0ff06db9b8139a0da580d2690a",
+      "simulator/http_client.py": "a3deadbf0467fc7b8faae79d9e5cfeba8587e660904d99b121c6f02a867af63c",
+      "simulator/http_run.py": "a91cce9ac59fd416b629cb08783edca538d02f685dee5c2950aefd8c32df4666",
+      "simulator/ioa_chat.py": "a6ece33de3096d4645a3c876ca375fc1b9b333f9a1c4ca723d7f601cc9e65973",
+      "simulator/ioa_check.py": "1f2580835f84d1c47abc9cf5e9ecb5fca50fc529921bdabe87127d535d9f300d",
+      "simulator/ioa_run.py": "5c5b7dba452a9b9d123f8d0ee0c72b0e7d89e347913b6a33091ff3f886ab189a",
+      "simulator/ioa_tools.py": "d44729a6c6cd798b5e97bdd132f2859ec2ca7919f3e6f42c902d4d5535e1f811",
+      "simulator/ioa_window_run.py": "e64f0a4de0b430d2eb129aea1493da299fa89855126a305d61034e9ef96d2a7a",
+      "simulator/prepare_ioa.py": "f15f86c9619f149bae173ed8a4a45516d65119edfb6fb874037c616d56d2dba8",
+      "simulator/prepare_team.py": "4fc650b6776c795463f1eb4ed42bd798925a683f81997dd7a51faa9805912d13",
+      "simulator/replay.py": "54aafe2098a8795c3786cdd51d24c511b910c49852ad7cc91136f9d36654a863",
+      "simulator/scenario.py": "c4eb75ed5c2c718bb74697ae26ad96981913ad14c8ebd388dd6c20f79aa3d1f3",
+      "simulator/scenarios/five_team.json": "2ca7370d0db239e0d88a51fccd9a40763853ad49e6e76146a3df8dd03e5c988c",
+      "simulator/scripted_run.py": "d20998b8ac77e70a74fda78ca4da5d423dcce8586c8c8cc9c159e0b9a8dbdc48",
+      "simulator/service.py": "ab4b5d24fab19d88764b42acc2078651800c98e6eaae4e7faaf3bd7564b69280",
+      "simulator/team_selection.py": "39f81416ae409438bcf80fec0759ecff5a2e8a6a8057cfa0675484b1c27f39e7"
+    },
+    "models": {
+      "F5_UAV_observer": {
+        "comm_model": {
+          "llm_type": "openai-chat",
+          "model": "Qwen3.8-Flash",
+          "temperature": 0.1
+        },
+        "tool_model": "Qwen3.8-Flash",
+        "max_num_steps": 6
+      },
+      "F5_UUV_leader": {
+        "comm_model": {
+          "llm_type": "openai-chat",
+          "model": "Qwen3.8-Flash",
+          "temperature": 0.1
+        },
+        "tool_model": "Qwen3.8-Flash",
+        "max_num_steps": 6
+      },
+      "F5_USV_observer": {
+        "comm_model": {
+          "llm_type": "openai-chat",
+          "model": "Qwen3.8-Flash",
+          "temperature": 0.1
+        },
+        "tool_model": "Qwen3.8-Flash",
+        "max_num_steps": 6
+      },
+      "F5_UAV_marker": {
+        "comm_model": {
+          "llm_type": "openai-chat",
+          "model": "Qwen3.8-Flash",
+          "temperature": 0.1
+        },
+        "tool_model": "Qwen3.8-Flash",
+        "max_num_steps": 6
+      },
+      "F5_USV_marker": {
+        "comm_model": {
+          "llm_type": "openai-chat",
+          "model": "Qwen3.8-Flash",
+          "temperature": 0.1
+        },
+        "tool_model": "Qwen3.8-Flash",
+        "max_num_steps": 6
+      }
+    }
+  },
+  "chat_export_error": null,
+  "chat_message_count": 70
+}

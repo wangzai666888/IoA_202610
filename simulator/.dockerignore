@@ -1,6 +1,7 @@
 outputs
 *.local.json
 *.local.env
+fixed_runtime/
 __pycache__
 **/__pycache__
 tests

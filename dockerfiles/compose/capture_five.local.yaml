@@ -1,0 +1,165 @@
+{
+  "services": {
+    "f5-uav-observer": {
+      "image": "ioa-client:sim",
+      "container_name": "capture5-f5-uav-observer-client",
+      "env_file": [
+        ".env",
+        "../../simulator/five_team.local/F5_UAV_observer.env"
+      ],
+      "environment": {
+        "CUSTOM_CONFIG": "configs/cases/capture_five.local/F5_UAV_observer.yaml"
+      },
+      "volumes": [
+        "/var/run/docker.sock:/var/run/docker.sock",
+        "./volumes/capture_five/F5_UAV_observer/database:/app/database",
+        "../../configs/client_configs:/app/configs:ro"
+      ],
+      "ports": [
+        "127.0.0.1:5070:5050"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5050/openapi.json', timeout=3).read()"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 12,
+        "start_period": "30s"
+      }
+    },
+    "f5-usv-observer": {
+      "image": "ioa-client:sim",
+      "container_name": "capture5-f5-usv-observer-client",
+      "env_file": [
+        ".env",
+        "../../simulator/five_team.local/F5_USV_observer.env"
+      ],
+      "environment": {
+        "CUSTOM_CONFIG": "configs/cases/capture_five.local/F5_USV_observer.yaml"
+      },
+      "volumes": [
+        "/var/run/docker.sock:/var/run/docker.sock",
+        "./volumes/capture_five/F5_USV_observer/database:/app/database",
+        "../../configs/client_configs:/app/configs:ro"
+      ],
+      "ports": [
+        "127.0.0.1:5071:5050"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5050/openapi.json', timeout=3).read()"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 12,
+        "start_period": "30s"
+      }
+    },
+    "f5-uuv-leader": {
+      "image": "ioa-client:sim",
+      "container_name": "capture5-f5-uuv-leader-client",
+      "env_file": [
+        ".env",
+        "../../simulator/five_team.local/F5_UUV_leader.env"
+      ],
+      "environment": {
+        "CUSTOM_CONFIG": "configs/cases/capture_five.local/F5_UUV_leader.yaml"
+      },
+      "volumes": [
+        "/var/run/docker.sock:/var/run/docker.sock",
+        "./volumes/capture_five/F5_UUV_leader/database:/app/database",
+        "../../configs/client_configs:/app/configs:ro"
+      ],
+      "ports": [
+        "127.0.0.1:5072:5050"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5050/openapi.json', timeout=3).read()"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 12,
+        "start_period": "30s"
+      }
+    },
+    "f5-usv-marker": {
+      "image": "ioa-client:sim",
+      "container_name": "capture5-f5-usv-marker-client",
+      "env_file": [
+        ".env",
+        "../../simulator/five_team.local/F5_USV_marker.env"
+      ],
+      "environment": {
+        "CUSTOM_CONFIG": "configs/cases/capture_five.local/F5_USV_marker.yaml"
+      },
+      "volumes": [
+        "/var/run/docker.sock:/var/run/docker.sock",
+        "./volumes/capture_five/F5_USV_marker/database:/app/database",
+        "../../configs/client_configs:/app/configs:ro"
+      ],
+      "ports": [
+        "127.0.0.1:5073:5050"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5050/openapi.json', timeout=3).read()"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 12,
+        "start_period": "30s"
+      }
+    },
+    "f5-uav-marker": {
+      "image": "ioa-client:sim",
+      "container_name": "capture5-f5-uav-marker-client",
+      "env_file": [
+        ".env",
+        "../../simulator/five_team.local/F5_UAV_marker.env"
+      ],
+      "environment": {
+        "CUSTOM_CONFIG": "configs/cases/capture_five.local/F5_UAV_marker.yaml"
+      },
+      "volumes": [
+        "/var/run/docker.sock:/var/run/docker.sock",
+        "./volumes/capture_five/F5_UAV_marker/database:/app/database",
+        "../../configs/client_configs:/app/configs:ro"
+      ],
+      "ports": [
+        "127.0.0.1:5074:5050"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5050/openapi.json', timeout=3).read()"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 12,
+        "start_period": "30s"
+      }
+    }
+  },
+  "networks": {
+    "default": {
+      "name": "agent_network",
+      "external": true
+    }
+  }
+}

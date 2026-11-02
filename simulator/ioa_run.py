@@ -191,6 +191,31 @@ def verify_round_audit(audit: dict, episode: str, sim_time: int, period: int, me
     captured = audit.get("status") == "captured"
     if captured and not accepted.intersection(roles["marker"]):
         return ["captured status has no accepted marker request in this round"]
+    if (audit.get("experiment_rules") or {}).get("authorization_required"):
+        # v3: silence without a grant is expected, not a missing action.
+        required = {(agent, "self_state") for agent in roles["marker"]}
+        if sim_time % period == 0:
+            required.update((agent, "observe") for agent in roles["observer"])
+        if sim_time == 0:
+            required.update((member["id"], "waypoint") for member in members)
+        missing = [f"{agent}:{operation}" for agent, operation in sorted(required - calls)]
+        grants = {r["authorization_id"]: r for r in audit.get("authorization_deliveries", [])}
+        seen_tags = set()
+        current_calls = [c for c in audit["calls"] if c["time"] == sim_time]
+        for index, call in enumerate(current_calls):
+            if call["operation"] != "tag":
+                continue
+            marker = call["agent_id"]
+            grant = grants.get(call.get("authorization_id"))
+            if (marker not in roles["marker"] or marker in seen_tags or not grant
+                    or grant["marker_id"] != marker or call.get("authorization_valid") is not True
+                    or not grant["issued_at"] <= grant["delivered_at"] <= sim_time < grant["expires_at"]):
+                missing.append(f"{marker}:tag lacks unique delivered valid authorization")
+            seen_tags.add(marker)
+            preceding = {(c["agent_id"], c["operation"]) for c in current_calls[:index]}
+            if not required <= preceding:
+                missing.append(f"{marker}:tag preceded required local sensing/position/initial movement")
+        return missing
     required = set() if captured else {(agent, "tag") for agent in roles["marker"]}
     if sim_time % period == 0:
         required.update((agent, "observe") for agent in roles["observer"])

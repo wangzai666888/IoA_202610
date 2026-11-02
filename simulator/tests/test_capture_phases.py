@@ -45,8 +45,12 @@ def receipt(contract, **extra):
         result.update(observer_id=contract["agent_id"], observed_at=int(second), target_position=[0, 40])
     elif contract["tool"] == "sim_move_to":
         result.update(accepted=True, waypoint=[contract["arguments"][k] for k in ("x", "y")])
+    elif contract["tool"] == "sim_self_state":
+        result.update(agent_id=contract["agent_id"], position=[0, 40])
     else:
         result.update(accepted=False, status="running")
+        if contract.get("authorization_id"):
+            result.update(authorization_id=contract["authorization_id"], authorization_valid=True)
     result.update(extra)
     evidence = guard.CaptureTaskEvidence("task-uid", contract["round_id"], contract["agent_id"], contract)
     evidence.record(contract["tool"], json.dumps(result))
@@ -190,6 +194,7 @@ def broadcast_runtime(send):
     node = next(n for n in tree.body if isinstance(n, ast.AsyncFunctionDef) and n.name == "broadcast_session_message")
     async def frontend(*args): pass
     namespace = dict(json=json, session_broadcast_locks=defaultdict(asyncio.Lock),
+                     window_sessions={},
                      chat_record_manager=CopyBank(), session_manager=SimpleNamespace(sessions={}),
                      connection_manager=SimpleNamespace(send_personal_message=send), send_to_frontend=frontend)
     exec(compile(ast.fix_missing_locations(ast.Module(body=[node], type_ignores=[])), "broadcast", "exec"), namespace)
