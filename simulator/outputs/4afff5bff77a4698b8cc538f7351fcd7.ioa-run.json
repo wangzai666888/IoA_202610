@@ -1,0 +1,192 @@
+{
+  "kind": "fixed_team_continuous_ioa_pilot",
+  "episode_id": "4afff5bff77a4698b8cc538f7351fcd7",
+  "scenario_id": "nine_candidates_five_team",
+  "members": [
+    {
+      "id": "F5_UAV_observer",
+      "role": "observer",
+      "carrier_type": "UAV"
+    },
+    {
+      "id": "F5_USV_observer",
+      "role": "observer",
+      "carrier_type": "USV"
+    },
+    {
+      "id": "F5_UUV_leader",
+      "role": "leader",
+      "carrier_type": "UUV"
+    },
+    {
+      "id": "F5_USV_marker",
+      "role": "marker",
+      "carrier_type": "USV"
+    },
+    {
+      "id": "F5_UAV_marker",
+      "role": "marker",
+      "carrier_type": "UAV"
+    }
+  ],
+  "team_selection": {
+    "rule": "nearest_per_role_then_agent_id",
+    "radius": 50.0,
+    "role_counts": {
+      "observer": 2,
+      "leader": 1,
+      "marker": 2
+    },
+    "candidate_count": 9,
+    "team_size": 5,
+    "initial_report": {
+      "observer_id": "F5_UAV_observer",
+      "observed_at": 0,
+      "target_position": [
+        0.0,
+        40.0
+      ]
+    },
+    "leader_id": "F5_UUV_leader",
+    "selected_ids": [
+      "F5_UAV_observer",
+      "F5_USV_observer",
+      "F5_UUV_leader",
+      "F5_USV_marker",
+      "F5_UAV_marker"
+    ],
+    "candidates": [
+      {
+        "id": "F5_UAV_leader",
+        "carrier_type": "UAV",
+        "role": "leader",
+        "position": [
+          28.0,
+          40.0
+        ],
+        "distance": 28.0,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_UAV_marker",
+        "carrier_type": "UAV",
+        "role": "marker",
+        "position": [
+          40.0,
+          68.0
+        ],
+        "distance": 48.82622246293481,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UAV_observer",
+        "carrier_type": "UAV",
+        "role": "observer",
+        "position": [
+          5.0,
+          40.0
+        ],
+        "distance": 5.0,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_USV_leader",
+        "carrier_type": "USV",
+        "role": "leader",
+        "position": [
+          60.0,
+          70.0
+        ],
+        "distance": 67.08203932499369,
+        "selected": false,
+        "reason": "outside_radius"
+      },
+      {
+        "id": "F5_USV_marker",
+        "carrier_type": "USV",
+        "role": "marker",
+        "position": [
+          38.0,
+          70.0
+        ],
+        "distance": 48.41487374764082,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_USV_observer",
+        "carrier_type": "USV",
+        "role": "observer",
+        "position": [
+          9.0,
+          44.0
+        ],
+        "distance": 9.848857801796104,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UUV_leader",
+        "carrier_type": "UUV",
+        "role": "leader",
+        "position": [
+          7.0,
+          45.0
+        ],
+        "distance": 8.602325267042627,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UUV_marker",
+        "carrier_type": "UUV",
+        "role": "marker",
+        "position": [
+          42.0,
+          65.0
+        ],
+        "distance": 48.877397639399746,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_UUV_observer",
+        "carrier_type": "UUV",
+        "role": "observer",
+        "position": [
+          22.0,
+          45.0
+        ],
+        "distance": 22.561028345356956,
+        "selected": false,
+        "reason": "role_quota_filled"
+      }
+    ]
+  },
+  "max_turns": 24,
+  "comm_id": null,
+  "status": "aborted",
+  "capture_time": null,
+  "time": 0,
+  "completed_rounds": 0,
+  "rounds": [],
+  "error": "HTTPError during launch_goal at t=0 after 182.0s: HTTP Error 500: Internal Server Error",
+  "failure_context": {
+    "phase": "launch_goal",
+    "round_id": "4afff5bff77a4698b8cc538f7351fcd7:0",
+    "sim_time": 0,
+    "elapsed_wall_seconds": 182.0,
+    "tool_calls_this_second": []
+  },
+  "artifacts": {
+    "html": "4afff5bff77a4698b8cc538f7351fcd7.html",
+    "json": "4afff5bff77a4698b8cc538f7351fcd7.json",
+    "audit": "4afff5bff77a4698b8cc538f7351fcd7.audit.json",
+    "selection": "4afff5bff77a4698b8cc538f7351fcd7.selection.json"
+  },
+  "chat_export_error": "No IoA communication session was created",
+  "chat_message_count": null
+}

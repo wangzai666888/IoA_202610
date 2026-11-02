@@ -163,11 +163,19 @@ def validate_waypoint_plan(state, response):
     names = [row.get("agent_id") for row in plans if isinstance(row, dict)]
     if len(names) != len(plans) or len(set(names)) != len(names) or any(n not in state["roles"] for n in names):
         raise ValueError("waypoint plan has duplicate or unknown members")
-    if state["time"] == 0 and set(names) != set(state["roles"]):
+    recipients = state.get("waypoint_recipients")
+    if recipients is not None and set(names) != set(recipients):
+        raise ValueError("waypoint plan must cover exactly waypoint_recipients; visible observers follow locally")
+    if recipients is None and state["time"] == 0 and set(names) != set(state["roles"]):
         raise ValueError("t=0 waypoint plan must include ALL members, including both observers")
     samples = list(state["observations"].values())
     if not samples and plans:
         raise ValueError("cannot invent waypoints before a delivered visible observation")
+    if recipients is not None and samples:
+        # A window-mode plan cannot select an older positive sighting just
+        # because a different observer's old report is still retained.
+        newest = max(sample["observed_at"] for sample in samples)
+        samples = [sample for sample in samples if sample["observed_at"] == newest]
     actions = []
     for row in plans:
         if (not all(finite_coordinate(row.get(k)) for k in ("x", "y"))
@@ -189,9 +197,24 @@ async def plan_waypoints(llm, state, attempts=3):
         "你是捕获队长，只规划本阶段航点，程序负责观测/航点/标记顺序。"
         "只输出 JSON：{\"waypoints\":[{\"agent_id\":\"成员ID\",\"x\":0,\"y\":40,\"observed_at\":0}]}。"
         "例子不是目标坐标，必须使用下面真实收到的观测位置及原 observed_at，不预测路线。"
-        "t=0 必须为全部成员（包括所有观测者）规划；后续仅列需要改变目的地的成员，无变化填空列表。"
     )
     context = {key: state[key] for key in ("time", "roles", "observations", "waypoints")}
+    if "waypoint_recipients" in state:
+        prompt += (
+            "观测者自行根据本地观测跟随目标，不等待队长指挥。"
+            "只为 waypoint_recipients 中的全部成员规划，每人一条，不遗漏、不增加其他成员。"
+            "名单包含你自己、两名标记者，以及本采样周期尚未向你报告有效目标位置的观测者。"
+            "目的地未变化也列出，程序会去除重复工具动作。"
+            "observer_status 中 latest_sample 是该观测者最新已收到的采样；target_position 为 null 表示当时未看到，"
+            "latest_sample 为 null 表示还没有收到其采样。visible_at_latest_sample 只描述采样时刻，不能声称现在仍可见。"
+            "last_seen 是该观测者最后一次看到目标的历史位置，age 为距当前仿真秒数；sent_at 和 received_at 是消息时间。"
+            "所有航点必须使用 observations 中 observed_at 最新的正观测位置及其原时刻。"
+            "如果该位置早于最新未见报告或不是当前采样，只能作为历史位置引导，不得说成当前目标精确位置。"
+        )
+        context["waypoint_recipients"] = state["waypoint_recipients"]
+        context["observer_status"] = state["observer_status"]
+    else:
+        prompt += "t=0 必须为全部成员（包括所有观测者）规划；后续仅列需要改变目的地的成员，无变化填空列表。"
     feedback = ""
     for _ in range(attempts):
         reply = await llm.agenerate_response(prepend_prompt=prompt,

@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 
 from simulator.core import AgentState, CaptureEnvironment, SimConfig
-from simulator.replay import write_replay
+from simulator.replay import render_replay_html, write_replay
 from simulator.scenario import load_scenario
 from simulator.scripted_run import run_scripted_episode
 
@@ -167,6 +167,9 @@ class CaptureCoreTests(unittest.TestCase):
             self.assertEqual(len(record["agents"]), 3)
             self.assertIn("const replay = {", html)
             self.assertIn("pilot_success_boundary_route", html)
+            self.assertIn('id="show-observation"', html)
+            self.assertIn("replay.config.observation_radius * scale", html)
+            self.assertEqual(render_replay_html(record), html)
             self.assertNotIn("/*__REPLAY_DATA__*/", html)
             self.assertNotIn("http://", html)
             self.assertNotIn("https://", html)

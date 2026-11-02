@@ -17,6 +17,7 @@ services:
           create_host_path: false
       - ../../simulator/outputs:/app/outputs
       - ../../simulator/scenarios:/app/simulator/scenarios:ro
+      - ../../simulator/replay_template.html:/app/simulator/replay_template.html:ro
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/health', timeout=2).read()"]
       interval: 5s

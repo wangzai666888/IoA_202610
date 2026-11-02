@@ -10,6 +10,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from math import hypot, isfinite
 from typing import Any
+from copy import deepcopy
+from simulator.experiment_rules import validate_authorization, authorization_valid
 
 
 Point = tuple[float, float]
@@ -47,6 +49,10 @@ class SimConfig:
     marker_radius: float = 5.0
     hold_seconds: int = 3
     max_time: int = 120
+    # Legacy scripted runs retain their original rules. The v3 window runner
+    # explicitly freezes both flags on reset for EVERY comparison condition.
+    support_required: bool = True
+    authorization_required: bool = False
 
     def __post_init__(self) -> None:
         positive = (
@@ -92,6 +98,9 @@ class CaptureEnvironment:
     target_route: list[Point]
     scenario_id: str = "unnamed"
     team_selection: dict[str, Any] | None = None
+    scenario_sha256: str | None = None
+    generation: dict[str, Any] | None = None
+    experiment_rules: dict[str, Any] | None = None
     time: int = field(init=False, default=0)
     status: str = field(init=False, default="running")
     capture_time: int | None = field(init=False, default=None)
@@ -105,6 +114,7 @@ class CaptureEnvironment:
     _support_streak: dict[str, int] = field(
         init=False, repr=False, default_factory=dict
     )
+    _authorizations: dict[str, dict] = field(init=False, repr=False, default_factory=dict)
 
     def __post_init__(self) -> None:
         self._agents = {agent.agent_id: agent for agent in self.agents}
@@ -277,27 +287,69 @@ class CaptureEnvironment:
                 distance(marker.pos, self._target_pos)
                 <= self.config.marker_radius + EPS
             )
-            if observer_near and leader_near and marker_near:
+            if marker_near and (not self.config.support_required or observer_near and leader_near):
                 self._support_streak[marker.agent_id] += 1
             else:
                 self._support_streak[marker.agent_id] = 0
 
-    def try_tag(self, agent_id: str) -> dict[str, Any]:
-        """A local marker request succeeds only after sustained joint support."""
+    def register_authorization_delivery(self, receipt):
+        """Trusted controller attests ACKed transport delivery, not physical truth."""
+        if not isinstance(receipt, dict) or set(receipt) != {"grant", "message_id", "delivered_at"}:
+            raise ValueError("invalid authorization delivery evidence")
+        grant = receipt["grant"]
+        validate_authorization(grant, grant.get("episode_id"), {a.agent_id: a.role for a in self.agents})
+        delivered = receipt["delivered_at"]
+        if (type(delivered) is not int or not grant["issued_at"] <= delivered <= self.time
+                or not isinstance(receipt["message_id"], str) or not receipt["message_id"]):
+            raise ValueError("invalid authorization delivery clock/identity")
+        gid = grant["authorization_id"]
+        if gid in self._authorizations:
+            if self._authorizations[gid] != receipt:
+                raise ValueError("conflicting authorization delivery")
+            return
+        self._authorizations[gid] = deepcopy(receipt)
+        self.events.append({"time": self.time, "type": "authorization_delivery_verified",
+                            "authorization_id": gid, "marker_id": grant["marker_id"],
+                            "issued_at": grant["issued_at"], "delivered_at": delivered,
+                            "expires_at": grant["expires_at"],
+                            "expired_on_arrival": delivered >= grant["expires_at"]})
+
+    def authorization_check(self, agent_id, authorization_id):
+        receipt = self._authorizations.get(authorization_id)
+        if receipt is None:
+            return False, "authorization_not_delivered"
+        grant = receipt["grant"]
+        if grant["marker_id"] != agent_id:
+            return False, "authorization_wrong_marker"
+        if not authorization_valid(grant, self.time):
+            return False, "authorization_expired"
+        return True, None
+
+    def try_tag(self, agent_id: str, authorization_id: str | None = None) -> dict[str, Any]:
+        """Separate delivered permission from independent physical adjudication."""
         self._require_running()
         agent = self._require_agent(agent_id)
         if agent.role != "marker":
             raise PermissionError("only marker agents can request a tag")
-        accepted = self._support_streak[agent_id] >= self.config.hold_seconds
+        valid, reason = (self.authorization_check(agent_id, authorization_id)
+                         if self.config.authorization_required else (True, None))
+        if reason is None:
+            if distance(agent.pos, self._target_pos) > self.config.marker_radius + EPS:
+                reason = "marker_out_of_range"
+            elif self._support_streak[agent_id] < self.config.hold_seconds:
+                reason = "support_not_held" if self.config.support_required else "marker_hold_incomplete"
+        accepted = reason is None
+        feedback = {"accepted": accepted, "time": self.time, "reason": reason or "accepted"}
+        if self.config.authorization_required:
+            feedback.update(authorization_id=authorization_id, authorization_valid=valid)
         self.events.append({
             "time": self.time, "type": "tag_request",
-            "agent_id": agent_id, "accepted": accepted,
-            "reason": "accepted" if accepted else "support_not_held",
+            "agent_id": agent_id, **feedback,
         })
         if accepted:
             self.status = "captured"
             self.capture_time = self.time
-        return {"accepted": accepted, "time": self.time}
+        return feedback
 
     def advance_one_second(self) -> None:
         self._require_running()
@@ -340,6 +392,9 @@ class CaptureEnvironment:
     def result(self) -> dict[str, Any]:
         return {
             "scenario_id": self.scenario_id,
+            "scenario_sha256": self.scenario_sha256,
+            "generation": self.generation,
+            "experiment_rules": deepcopy(self.experiment_rules),
             "status": self.status,
             "time": self.time,
             "capture_time": self.capture_time,

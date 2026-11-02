@@ -24,6 +24,9 @@ def build_replay_record(env: CaptureEnvironment) -> dict[str, Any]:
     return {
         "schema_version": 1,
         "scenario_id": result["scenario_id"],
+        "scenario_sha256": result["scenario_sha256"],
+        "generation": result["generation"],
+        "experiment_rules": result["experiment_rules"],
         "status": result["status"],
         "capture_time": result["capture_time"],
         "end_time": result["time"],
@@ -43,14 +46,8 @@ def build_replay_record(env: CaptureEnvironment) -> dict[str, Any]:
     }
 
 
-def write_replay(env: CaptureEnvironment, html_path: str | Path) -> tuple[Path, Path]:
-    """Write self-contained HTML and its machine-readable JSON companion."""
-    record = build_replay_record(env)
-    html_path = Path(html_path)
-    if html_path.suffix.lower() != ".html":
-        raise ValueError("replay output path must end in .html")
-    html_path.parent.mkdir(parents=True, exist_ok=True)
-    json_path = html_path.with_suffix(".json")
+def render_replay_html(record: dict[str, Any]) -> str:
+    """Render a replay from its saved record, without rerunning the simulation."""
     payload = json.dumps(record, ensure_ascii=False, separators=(",", ":"))
     # An untrusted scenario ID must not terminate an inline script tag.
     safe_payload = (
@@ -64,7 +61,18 @@ def write_replay(env: CaptureEnvironment, html_path: str | Path) -> tuple[Path, 
     marker = "/*__REPLAY_DATA__*/"
     if template.count(marker) != 1:
         raise RuntimeError("replay template must contain exactly one data marker")
-    html = template.replace(marker, safe_payload)
+    return template.replace(marker, safe_payload)
+
+
+def write_replay(env: CaptureEnvironment, html_path: str | Path) -> tuple[Path, Path]:
+    """Write self-contained HTML and its machine-readable JSON companion."""
+    record = build_replay_record(env)
+    html_path = Path(html_path)
+    if html_path.suffix.lower() != ".html":
+        raise ValueError("replay output path must end in .html")
+    html_path.parent.mkdir(parents=True, exist_ok=True)
+    json_path = html_path.with_suffix(".json")
+    html = render_replay_html(record)
     json_path.write_text(
         json.dumps(record, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",

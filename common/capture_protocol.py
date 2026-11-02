@@ -9,7 +9,7 @@ TASK_PREFIX = "IOA_CAPTURE_TASK_V2\n"
 BATCH_PREFIX = "IOA_CAPTURE_BATCH_V2\n"
 RECEIPT_HEADER = "【执行器记录的真实工具回执】以下 JSON 由执行器生成，模型文字不能替代或补充回执。\n"
 ROUND_KEY = re.compile(r"[0-9a-f]{32}:[0-9]{1,3}\Z")
-ACTION_TOOLS = {"sim_observe", "sim_move_to", "sim_try_tag"}
+ACTION_TOOLS = {"sim_observe", "sim_move_to", "sim_try_tag", "sim_self_state"}
 
 
 def encode_round_goal(instructions, episode, second, period, members):
@@ -65,6 +65,9 @@ def validate_contract(contract, round_id, agent_name):
             raise ValueError("waypoint contract needs a valid observed_at")
     elif args:
         raise ValueError("observation and tag contracts take no model arguments")
+    if "authorization_id" in contract and (contract["tool"] != "sim_try_tag"
+            or not isinstance(contract["authorization_id"], str) or not contract["authorization_id"]):
+        raise ValueError("invalid tag authorization reference")
     return contract
 
 
@@ -80,13 +83,19 @@ def check_contract_receipt(contract, tool, result):
             or type(result.get("time")) is not int or result["time"] != int(second)):
         raise ValueError("capture receipt does not match its contract round")
     if tool == "sim_self_state":
-        if result.get("agent_id") != contract["agent_id"]:
+        point = result.get("position")
+        if (result.get("agent_id") != contract["agent_id"] or not isinstance(point, list)
+                or len(point) != 2 or not all(finite_coordinate(v) for v in point)):
             raise ValueError("self state belongs to another agent")
         return
     if tool != contract["tool"]:
         raise ValueError(f"contract requires {contract['tool']}, got {tool}")
     if tool in {"sim_move_to", "sim_try_tag"} and type(result.get("accepted")) is not bool:
         raise ValueError("action receipt needs boolean accepted")
+    if tool == "sim_try_tag" and contract.get("authorization_id") is not None:
+        if (result.get("authorization_id") != contract["authorization_id"]
+                or result.get("authorization_valid") is not True):
+            raise ValueError("tag receipt has no verified valid authorization")
     if tool == "sim_move_to":
         if not result["accepted"] or result.get("waypoint") != [contract["arguments"]["x"], contract["arguments"]["y"]]:
             raise ValueError("waypoint receipt differs from assigned coordinates")

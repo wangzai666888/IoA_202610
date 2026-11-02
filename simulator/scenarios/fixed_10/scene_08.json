@@ -1,0 +1,140 @@
+{
+  "scenario_id": "random_fixed_08",
+  "config": {
+    "width": 100.0,
+    "height": 100.0,
+    "dt": 1.0,
+    "agent_speed": 2.0,
+    "target_speed": 1.0,
+    "observation_radius": 25.0,
+    "observation_period": 5,
+    "support_radius": 15.0,
+    "marker_radius": 5.0,
+    "hold_seconds": 3,
+    "max_time": 120
+  },
+  "target": {
+    "route": [
+      [
+        0,
+        40
+      ],
+      [
+        12,
+        40
+      ],
+      [
+        12,
+        55
+      ],
+      [
+        101,
+        55
+      ]
+    ]
+  },
+  "selection": {
+    "radius": null,
+    "role_counts": {
+      "observer": 2,
+      "leader": 1,
+      "marker": 2
+    }
+  },
+  "candidates": [
+    {
+      "id": "F5_UAV_observer",
+      "carrier_type": "UAV",
+      "role": "observer",
+      "position": [
+        23.364041718258267,
+        18.239458970187595
+      ]
+    },
+    {
+      "id": "F5_USV_observer",
+      "carrier_type": "USV",
+      "role": "observer",
+      "position": [
+        2.271733755780725,
+        34.23923885152694
+      ]
+    },
+    {
+      "id": "F5_UUV_observer",
+      "carrier_type": "UUV",
+      "role": "observer",
+      "position": [
+        78.62517369561142,
+        94.91320631200696
+      ]
+    },
+    {
+      "id": "F5_UUV_leader",
+      "carrier_type": "UUV",
+      "role": "leader",
+      "position": [
+        78.33891058588746,
+        36.00082432931574
+      ]
+    },
+    {
+      "id": "F5_UAV_leader",
+      "carrier_type": "UAV",
+      "role": "leader",
+      "position": [
+        45.571666042893554,
+        14.613226849037165
+      ]
+    },
+    {
+      "id": "F5_USV_leader",
+      "carrier_type": "USV",
+      "role": "leader",
+      "position": [
+        82.87126776605639,
+        61.987466405626634
+      ]
+    },
+    {
+      "id": "F5_USV_marker",
+      "carrier_type": "USV",
+      "role": "marker",
+      "position": [
+        16.97200754756324,
+        19.31145727484269
+      ]
+    },
+    {
+      "id": "F5_UAV_marker",
+      "carrier_type": "UAV",
+      "role": "marker",
+      "position": [
+        3.3226938512889603,
+        21.094945613701576
+      ]
+    },
+    {
+      "id": "F5_UUV_marker",
+      "carrier_type": "UUV",
+      "role": "marker",
+      "position": [
+        88.87469300380405,
+        22.532745951876542
+      ]
+    }
+  ],
+  "generation": {
+    "method": "independent_uniform_xy_then_initial_discovery_rejection",
+    "rng": "python_random_MT19937",
+    "seed": 20261038,
+    "attempts": 7,
+    "rejected_no_initial_discovery": 6,
+    "bounds": [
+      0.0,
+      100.0
+    ],
+    "minimum_separation": null,
+    "template_sha256": "2ca7370d0db239e0d88a51fccd9a40763853ad49e6e76146a3df8dd03e5c988c"
+  }
+}

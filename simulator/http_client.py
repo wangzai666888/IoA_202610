@@ -60,15 +60,23 @@ class AgentClient(HTTPClient):
             "point": point,
         })
 
-    def try_tag(self, episode_id: str, expected_time: int) -> dict:
+    def try_tag(self, episode_id: str, expected_time: int, authorization_id: str | None = None) -> dict:
         return self.request("POST", "/agent/tag", {
             "episode_id": episode_id, "expected_time": expected_time,
+            **({"authorization_id": authorization_id} if authorization_id is not None else {}),
         })
 
 
 class ControllerClient(HTTPClient):
-    def reset(self) -> dict:
-        return self.request("POST", "/control/reset", {})
+    def scenario(self) -> dict:
+        return self.request("GET", "/control/scenario")
+
+    def reset(self, experiment_rules=None) -> dict:
+        return self.request("POST", "/control/reset", {} if experiment_rules is None else {"experiment_rules": experiment_rules})
+
+    def register_authorizations(self, episode_id, expected_time, receipts):
+        return self.request("POST", "/control/authorizations", {
+            "episode_id": episode_id, "expected_time": expected_time, "receipts": receipts})
 
     def status(self) -> dict:
         return self.request("GET", "/control/status")

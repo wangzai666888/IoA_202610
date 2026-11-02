@@ -1,0 +1,10 @@
+{
+  "condition": "continuous",
+  "schedule": {
+    "type": "periodic",
+    "open_seconds": 5,
+    "closed_seconds": 5,
+    "period_seconds": 10,
+    "phase_seconds": 0
+  }
+}

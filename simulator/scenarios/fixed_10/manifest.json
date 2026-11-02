@@ -1,0 +1,1178 @@
+{
+  "version": 1,
+  "count": 10,
+  "base_seed": 20261031,
+  "acceptance": "initial_discovery_only; no spacing or capture-outcome screening",
+  "scenes": [
+    {
+      "scene": 1,
+      "file": "scene_01.json",
+      "scenario_id": "random_fixed_01",
+      "scenario_sha256": "c1f2828beac3c6c72fb053f081c39e57c6944773d6bbd4a595bce6b340d8b30b",
+      "seed": 20261031,
+      "attempts": 1,
+      "members": [
+        {
+          "id": "F5_USV_observer",
+          "role": "observer",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_UUV_observer",
+          "role": "observer",
+          "carrier_type": "UUV"
+        },
+        {
+          "id": "F5_UUV_leader",
+          "role": "leader",
+          "carrier_type": "UUV"
+        },
+        {
+          "id": "F5_UAV_marker",
+          "role": "marker",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_USV_marker",
+          "role": "marker",
+          "carrier_type": "USV"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UUV_observer"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 2,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UUV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 3,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 4,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 5,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UUV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 6,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 7,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 8,
+          "restricted": [
+            "F5_UUV_leader",
+            "F5_UAV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 9,
+          "restricted": [
+            "F5_UUV_leader",
+            "F5_USV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 10,
+          "restricted": [
+            "F5_UAV_marker",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        }
+      ]
+    },
+    {
+      "scene": 2,
+      "file": "scene_02.json",
+      "scenario_id": "random_fixed_02",
+      "scenario_sha256": "9317522a618d84704ff9cb5a6469c10e23a01ec9c7d91392fecdeb6cb1b313b2",
+      "seed": 20261032,
+      "attempts": 3,
+      "members": [
+        {
+          "id": "F5_USV_observer",
+          "role": "observer",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_UUV_observer",
+          "role": "observer",
+          "carrier_type": "UUV"
+        },
+        {
+          "id": "F5_UUV_leader",
+          "role": "leader",
+          "carrier_type": "UUV"
+        },
+        {
+          "id": "F5_UAV_marker",
+          "role": "marker",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_USV_marker",
+          "role": "marker",
+          "carrier_type": "USV"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UUV_observer"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 2,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UUV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 3,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 4,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 5,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UUV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 6,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 7,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 8,
+          "restricted": [
+            "F5_UUV_leader",
+            "F5_UAV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 9,
+          "restricted": [
+            "F5_UUV_leader",
+            "F5_USV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 10,
+          "restricted": [
+            "F5_UAV_marker",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "file": "scene_03.json",
+      "scenario_id": "random_fixed_03",
+      "scenario_sha256": "7b412bd502c4ba4402e3978edb6c4c4af1965af41ad41b8fb46e5806bc2a6d11",
+      "seed": 20261033,
+      "attempts": 3,
+      "members": [
+        {
+          "id": "F5_UAV_observer",
+          "role": "observer",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_UUV_observer",
+          "role": "observer",
+          "carrier_type": "UUV"
+        },
+        {
+          "id": "F5_UUV_leader",
+          "role": "leader",
+          "carrier_type": "UUV"
+        },
+        {
+          "id": "F5_USV_marker",
+          "role": "marker",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_UUV_marker",
+          "role": "marker",
+          "carrier_type": "UUV"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_observer"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 2,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 3,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 4,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 5,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UUV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 6,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 7,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 8,
+          "restricted": [
+            "F5_UUV_leader",
+            "F5_USV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 9,
+          "restricted": [
+            "F5_UUV_leader",
+            "F5_UUV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 10,
+          "restricted": [
+            "F5_USV_marker",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "file": "scene_04.json",
+      "scenario_id": "random_fixed_04",
+      "scenario_sha256": "29d0873f6200bc8501122b4b258a7717190cbbff6b07381803a927f885bb6510",
+      "seed": 20261034,
+      "attempts": 1,
+      "members": [
+        {
+          "id": "F5_UAV_observer",
+          "role": "observer",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_UUV_observer",
+          "role": "observer",
+          "carrier_type": "UUV"
+        },
+        {
+          "id": "F5_USV_leader",
+          "role": "leader",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_UAV_marker",
+          "role": "marker",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_USV_marker",
+          "role": "marker",
+          "carrier_type": "USV"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_observer"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 2,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 3,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 4,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 5,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_USV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 6,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 7,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 8,
+          "restricted": [
+            "F5_USV_leader",
+            "F5_UAV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 9,
+          "restricted": [
+            "F5_USV_leader",
+            "F5_USV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 10,
+          "restricted": [
+            "F5_UAV_marker",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        }
+      ]
+    },
+    {
+      "scene": 5,
+      "file": "scene_05.json",
+      "scenario_id": "random_fixed_05",
+      "scenario_sha256": "520c3a06fc51624c3d9e37b7cf1421f991d913f77012b870f5d4c67cfe0fb419",
+      "seed": 20261035,
+      "attempts": 1,
+      "members": [
+        {
+          "id": "F5_UAV_observer",
+          "role": "observer",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_USV_observer",
+          "role": "observer",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_UAV_leader",
+          "role": "leader",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_USV_marker",
+          "role": "marker",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_UUV_marker",
+          "role": "marker",
+          "carrier_type": "UUV"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_observer"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 2,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UAV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 3,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 4,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 5,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UAV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 6,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 7,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 8,
+          "restricted": [
+            "F5_UAV_leader",
+            "F5_USV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 9,
+          "restricted": [
+            "F5_UAV_leader",
+            "F5_UUV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 10,
+          "restricted": [
+            "F5_USV_marker",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        }
+      ]
+    },
+    {
+      "scene": 6,
+      "file": "scene_06.json",
+      "scenario_id": "random_fixed_06",
+      "scenario_sha256": "003a55c765afb8648277eaf606073ef0c0d3510bb54593f13d67c34a61ab9b67",
+      "seed": 20261036,
+      "attempts": 1,
+      "members": [
+        {
+          "id": "F5_UAV_observer",
+          "role": "observer",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_USV_observer",
+          "role": "observer",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_USV_leader",
+          "role": "leader",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_UAV_marker",
+          "role": "marker",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_UUV_marker",
+          "role": "marker",
+          "carrier_type": "UUV"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_observer"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 2,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 3,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 4,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 5,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_USV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 6,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 7,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 8,
+          "restricted": [
+            "F5_USV_leader",
+            "F5_UAV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 9,
+          "restricted": [
+            "F5_USV_leader",
+            "F5_UUV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 10,
+          "restricted": [
+            "F5_UAV_marker",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        }
+      ]
+    },
+    {
+      "scene": 7,
+      "file": "scene_07.json",
+      "scenario_id": "random_fixed_07",
+      "scenario_sha256": "1b05c65fe08e9b672fdbaf26320f7d5c5fde877c48f1e8ebfeb28543f9707674",
+      "seed": 20261037,
+      "attempts": 3,
+      "members": [
+        {
+          "id": "F5_UAV_observer",
+          "role": "observer",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_UUV_observer",
+          "role": "observer",
+          "carrier_type": "UUV"
+        },
+        {
+          "id": "F5_UUV_leader",
+          "role": "leader",
+          "carrier_type": "UUV"
+        },
+        {
+          "id": "F5_USV_marker",
+          "role": "marker",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_UUV_marker",
+          "role": "marker",
+          "carrier_type": "UUV"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_observer"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 2,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 3,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 4,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 5,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UUV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 6,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 7,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 8,
+          "restricted": [
+            "F5_UUV_leader",
+            "F5_USV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 9,
+          "restricted": [
+            "F5_UUV_leader",
+            "F5_UUV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 10,
+          "restricted": [
+            "F5_USV_marker",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        }
+      ]
+    },
+    {
+      "scene": 8,
+      "file": "scene_08.json",
+      "scenario_id": "random_fixed_08",
+      "scenario_sha256": "c354c3bfd451a0d8f6586454f24c51367f5cf4ccf6a1bc1b36663c12266f8267",
+      "seed": 20261038,
+      "attempts": 7,
+      "members": [
+        {
+          "id": "F5_UAV_observer",
+          "role": "observer",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_USV_observer",
+          "role": "observer",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_UAV_leader",
+          "role": "leader",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_UAV_marker",
+          "role": "marker",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_USV_marker",
+          "role": "marker",
+          "carrier_type": "USV"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_observer"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 2,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UAV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 3,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 4,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 5,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UAV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 6,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 7,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 8,
+          "restricted": [
+            "F5_UAV_leader",
+            "F5_UAV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 9,
+          "restricted": [
+            "F5_UAV_leader",
+            "F5_USV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 10,
+          "restricted": [
+            "F5_UAV_marker",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        }
+      ]
+    },
+    {
+      "scene": 9,
+      "file": "scene_09.json",
+      "scenario_id": "random_fixed_09",
+      "scenario_sha256": "9c081884c6ce15109e8bc788e4a39188691de1e20229e20d6fcc7f2ba80898d1",
+      "seed": 20261039,
+      "attempts": 12,
+      "members": [
+        {
+          "id": "F5_UAV_observer",
+          "role": "observer",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_USV_observer",
+          "role": "observer",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_USV_leader",
+          "role": "leader",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_USV_marker",
+          "role": "marker",
+          "carrier_type": "USV"
+        },
+        {
+          "id": "F5_UUV_marker",
+          "role": "marker",
+          "carrier_type": "UUV"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_observer"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 2,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 3,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 4,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 5,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_USV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 6,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 7,
+          "restricted": [
+            "F5_USV_observer",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 8,
+          "restricted": [
+            "F5_USV_leader",
+            "F5_USV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 9,
+          "restricted": [
+            "F5_USV_leader",
+            "F5_UUV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 10,
+          "restricted": [
+            "F5_USV_marker",
+            "F5_UUV_marker"
+          ],
+          "condition": "nonleader_pair"
+        }
+      ]
+    },
+    {
+      "scene": 10,
+      "file": "scene_10.json",
+      "scenario_id": "random_fixed_10",
+      "scenario_sha256": "8842db143ac6b2d2d843ba636f6c0e520356b70ed28997eedb9c800010d84d25",
+      "seed": 20261040,
+      "attempts": 2,
+      "members": [
+        {
+          "id": "F5_UAV_observer",
+          "role": "observer",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_UUV_observer",
+          "role": "observer",
+          "carrier_type": "UUV"
+        },
+        {
+          "id": "F5_UAV_leader",
+          "role": "leader",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_UAV_marker",
+          "role": "marker",
+          "carrier_type": "UAV"
+        },
+        {
+          "id": "F5_USV_marker",
+          "role": "marker",
+          "carrier_type": "USV"
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UUV_observer"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 2,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UAV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 3,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 4,
+          "restricted": [
+            "F5_UAV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 5,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UAV_leader"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 6,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_UAV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 7,
+          "restricted": [
+            "F5_UUV_observer",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        },
+        {
+          "pair_id": 8,
+          "restricted": [
+            "F5_UAV_leader",
+            "F5_UAV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 9,
+          "restricted": [
+            "F5_UAV_leader",
+            "F5_USV_marker"
+          ],
+          "condition": "leader_pair"
+        },
+        {
+          "pair_id": 10,
+          "restricted": [
+            "F5_UAV_marker",
+            "F5_USV_marker"
+          ],
+          "condition": "nonleader_pair"
+        }
+      ]
+    }
+  ]
+}

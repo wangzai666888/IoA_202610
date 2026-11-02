@@ -1,0 +1,1496 @@
+{
+  "schema_version": 1,
+  "scenario_id": "random_fixed_01",
+  "scenario_sha256": "c1f2828beac3c6c72fb053f081c39e57c6944773d6bbd4a595bce6b340d8b30b",
+  "generation": {
+    "method": "independent_uniform_xy_then_initial_discovery_rejection",
+    "rng": "python_random_MT19937",
+    "seed": 20261031,
+    "attempts": 1,
+    "rejected_no_initial_discovery": 0,
+    "bounds": [
+      0.0,
+      100.0
+    ],
+    "minimum_separation": null,
+    "template_sha256": "2ca7370d0db239e0d88a51fccd9a40763853ad49e6e76146a3df8dd03e5c988c"
+  },
+  "experiment_rules": {
+    "version": "authorized_capture_v1",
+    "observation_period": 3,
+    "position_report_period": 1,
+    "information_max_age": 5,
+    "authorization_ttl": 5,
+    "authorization_distance": 5.0,
+    "marker_radius": 5.0,
+    "hold_seconds": 3,
+    "hold_clock": "consecutive_completed_tick_endpoints",
+    "support_required": false,
+    "authorization_required": true,
+    "decision_policy": "latest_positive_sample_and_reported_distance_no_prediction",
+    "renewal_policy": "only_after_previous_grant_expires"
+  },
+  "status": "captured",
+  "capture_time": 25,
+  "end_time": 25,
+  "config": {
+    "width": 100.0,
+    "height": 100.0,
+    "dt": 1.0,
+    "agent_speed": 2.0,
+    "target_speed": 1.0,
+    "observation_radius": 25.0,
+    "observation_period": 3,
+    "support_radius": 15.0,
+    "marker_radius": 5.0,
+    "hold_seconds": 3,
+    "max_time": 120,
+    "support_required": false,
+    "authorization_required": true
+  },
+  "agents": [
+    {
+      "id": "F5_UUV_observer",
+      "carrier_type": "UUV",
+      "role": "observer"
+    },
+    {
+      "id": "F5_USV_observer",
+      "carrier_type": "USV",
+      "role": "observer"
+    },
+    {
+      "id": "F5_UUV_leader",
+      "carrier_type": "UUV",
+      "role": "leader"
+    },
+    {
+      "id": "F5_USV_marker",
+      "carrier_type": "USV",
+      "role": "marker"
+    },
+    {
+      "id": "F5_UAV_marker",
+      "carrier_type": "UAV",
+      "role": "marker"
+    }
+  ],
+  "target_route": [
+    [
+      0.0,
+      40.0
+    ],
+    [
+      12.0,
+      40.0
+    ],
+    [
+      12.0,
+      55.0
+    ],
+    [
+      101.0,
+      55.0
+    ]
+  ],
+  "trace": [
+    {
+      "time": 0,
+      "target_position": [
+        0.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          20.873809044889136,
+          47.584420607369495
+        ],
+        "F5_USV_observer": [
+          37.565150911206956,
+          51.25186222856366
+        ],
+        "F5_UUV_leader": [
+          63.13199636230825,
+          10.789889031473132
+        ],
+        "F5_USV_marker": [
+          27.053617111264504,
+          7.9088674700757196
+        ],
+        "F5_UAV_marker": [
+          56.3262652419975,
+          18.26591325765984
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 1,
+      "target_position": [
+        1.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          18.994047123092578,
+          46.90141612907984
+        ],
+        "F5_USV_observer": [
+          35.64925029780939,
+          50.67799391650695
+        ],
+        "F5_UUV_leader": [
+          61.31686896202367,
+          11.62971789543063
+        ],
+        "F5_USV_marker": [
+          25.764523214213845,
+          9.437996936336422
+        ],
+        "F5_UAV_marker": [
+          54.4603536090928,
+          18.985895047839936
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 2,
+      "target_position": [
+        2.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          17.11428520129602,
+          46.21841165079019
+        ],
+        "F5_USV_observer": [
+          33.73334968441182,
+          50.10412560445024
+        ],
+        "F5_UUV_leader": [
+          59.50174156173909,
+          12.469546759388129
+        ],
+        "F5_USV_marker": [
+          24.475429317163186,
+          10.967126402597124
+        ],
+        "F5_UAV_marker": [
+          52.5944419761881,
+          19.705876838020032
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 3,
+      "target_position": [
+        3.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          15.234523279499465,
+          45.53540717250054
+        ],
+        "F5_USV_observer": [
+          31.817449071014252,
+          49.53025729239353
+        ],
+        "F5_UUV_leader": [
+          57.68661416145451,
+          13.309375623345627
+        ],
+        "F5_USV_marker": [
+          23.186335420112528,
+          12.496255868857826
+        ],
+        "F5_UAV_marker": [
+          50.7285303432834,
+          20.425858628200128
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 4,
+      "target_position": [
+        4.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          13.412348929638206,
+          44.710979711344805
+        ],
+        "F5_USV_observer": [
+          29.918594132438482,
+          48.90228442494908
+        ],
+        "F5_UUV_leader": [
+          55.889261562700966,
+          14.186600586370444
+        ],
+        "F5_USV_marker": [
+          22.002963054591206,
+          14.108592634090348
+        ],
+        "F5_UAV_marker": [
+          48.8781006233952,
+          21.184745873945143
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 5,
+      "target_position": [
+        5.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          11.590174579776948,
+          43.88655225018907
+        ],
+        "F5_USV_observer": [
+          28.019739193862712,
+          48.27431155750463
+        ],
+        "F5_UUV_leader": [
+          54.091908963947425,
+          15.063825549395261
+        ],
+        "F5_USV_marker": [
+          20.819590689069884,
+          15.72092939932287
+        ],
+        "F5_UAV_marker": [
+          47.027670903506994,
+          21.94363311969016
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 6,
+      "target_position": [
+        6.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          9.768000229915689,
+          43.06212478903333
+        ],
+        "F5_USV_observer": [
+          26.120884255286942,
+          47.64633869006018
+        ],
+        "F5_UUV_leader": [
+          52.294556365193884,
+          15.941050512420079
+        ],
+        "F5_USV_marker": [
+          19.63621832354856,
+          17.33326616455539
+        ],
+        "F5_UAV_marker": [
+          45.17724118361879,
+          22.702520365435173
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 7,
+      "target_position": [
+        7.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          8.215898155267384,
+          41.800784569317635
+        ],
+        "F5_USV_observer": [
+          24.25132951805261,
+          46.93587047508877
+        ],
+        "F5_UUV_leader": [
+          50.49720376644034,
+          16.818275475444896
+        ],
+        "F5_USV_marker": [
+          18.45284595802724,
+          18.94560292978791
+        ],
+        "F5_UAV_marker": [
+          43.326811463730586,
+          23.46140761118019
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 8,
+      "target_position": [
+        8.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          6.663796080619079,
+          40.53944434960194
+        ],
+        "F5_USV_observer": [
+          22.38177478081828,
+          46.225402260117356
+        ],
+        "F5_UUV_leader": [
+          48.6998511676868,
+          17.69550043846971
+        ],
+        "F5_USV_marker": [
+          17.269473592505918,
+          20.55793969502043
+        ],
+        "F5_UAV_marker": [
+          41.47638174384238,
+          24.220294856925204
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 9,
+      "target_position": [
+        9.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          6.0,
+          40.0
+        ],
+        "F5_USV_observer": [
+          20.512220043583948,
+          45.51493404514594
+        ],
+        "F5_UUV_leader": [
+          46.90249856893326,
+          18.572725401494527
+        ],
+        "F5_USV_marker": [
+          16.086101226984596,
+          22.17027646025295
+        ],
+        "F5_UAV_marker": [
+          39.62595202395418,
+          24.97918210267022
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 10,
+      "target_position": [
+        10.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          8.0,
+          40.0
+        ],
+        "F5_USV_observer": [
+          18.708506297153903,
+          44.65086418631548
+        ],
+        "F5_UUV_leader": [
+          45.10514597017972,
+          19.449950364519342
+        ],
+        "F5_USV_marker": [
+          14.902728861463274,
+          23.78261322548547
+        ],
+        "F5_UAV_marker": [
+          37.77552230406597,
+          25.738069348415234
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 11,
+      "target_position": [
+        11.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          9.0,
+          40.0
+        ],
+        "F5_USV_observer": [
+          16.904792550723858,
+          43.78679432748502
+        ],
+        "F5_UUV_leader": [
+          43.36697282969267,
+          20.439270400548832
+        ],
+        "F5_USV_marker": [
+          14.218680102047626,
+          25.661995383201646
+        ],
+        "F5_UAV_marker": [
+          35.9835444996805,
+          26.626222234234913
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 12,
+      "target_position": [
+        12.0,
+        40.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          9.0,
+          40.0
+        ],
+        "F5_USV_observer": [
+          15.101078804293813,
+          42.92272446865456
+        ],
+        "F5_UUV_leader": [
+          41.62879968920562,
+          21.42859043657832
+        ],
+        "F5_USV_marker": [
+          13.534631342631979,
+          27.54137754091782
+        ],
+        "F5_UAV_marker": [
+          34.19156669529502,
+          27.51437512005459
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 13,
+      "target_position": [
+        12.0,
+        41.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          11.0,
+          40.0
+        ],
+        "F5_USV_observer": [
+          13.64563065745208,
+          41.55098444523359
+        ],
+        "F5_UUV_leader": [
+          39.93417743710059,
+          22.49078412073882
+        ],
+        "F5_USV_marker": [
+          13.290122803936322,
+          29.52637516673628
+        ],
+        "F5_UAV_marker": [
+          32.44851190760322,
+          28.49506875575571
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 14,
+      "target_position": [
+        12.0,
+        42.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          40.0
+        ],
+        "F5_USV_observer": [
+          12.190182510610345,
+          40.17924442181262
+        ],
+        "F5_UUV_leader": [
+          38.239555184995545,
+          23.552977804899317
+        ],
+        "F5_USV_marker": [
+          13.045614265240665,
+          31.511372792554738
+        ],
+        "F5_UAV_marker": [
+          30.705457119911415,
+          29.47576239145683
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 15,
+      "target_position": [
+        12.0,
+        43.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          40.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          40.0
+        ],
+        "F5_UUV_leader": [
+          36.544932932890504,
+          24.615171489059815
+        ],
+        "F5_USV_marker": [
+          12.801105726545009,
+          33.496370418373196
+        ],
+        "F5_UAV_marker": [
+          28.96240233221961,
+          30.456456027157948
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 16,
+      "target_position": [
+        12.0,
+        44.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          42.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          42.0
+        ],
+        "F5_UUV_leader": [
+          34.85031068078546,
+          25.677365173220313
+        ],
+        "F5_USV_marker": [
+          12.556597187849352,
+          35.481368044191655
+        ],
+        "F5_UAV_marker": [
+          27.219347544527807,
+          31.437149662859067
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 17,
+      "target_position": [
+        12.0,
+        45.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          43.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          43.0
+        ],
+        "F5_UUV_leader": [
+          33.15568842868042,
+          26.73955885738081
+        ],
+        "F5_USV_marker": [
+          12.312088649153695,
+          37.46636567001011
+        ],
+        "F5_UAV_marker": [
+          25.476292756836003,
+          32.417843298560186
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 18,
+      "target_position": [
+        12.0,
+        46.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          43.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          43.0
+        ],
+        "F5_UUV_leader": [
+          31.461066176575383,
+          27.80175254154131
+        ],
+        "F5_USV_marker": [
+          12.067580110458039,
+          39.45136329582857
+        ],
+        "F5_UAV_marker": [
+          23.7332379691442,
+          33.39853693426131
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 19,
+      "target_position": [
+        12.0,
+        47.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          45.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          45.0
+        ],
+        "F5_UUV_leader": [
+          29.766443924470344,
+          28.863946225701806
+        ],
+        "F5_USV_marker": [
+          12.0,
+          40.0
+        ],
+        "F5_UAV_marker": [
+          21.990183181452394,
+          34.37923056996243
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 20,
+      "target_position": [
+        12.0,
+        48.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          46.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          46.0
+        ],
+        "F5_UUV_leader": [
+          28.071821672365306,
+          29.926139909862304
+        ],
+        "F5_USV_marker": [
+          12.0,
+          40.0
+        ],
+        "F5_UAV_marker": [
+          20.24712839376059,
+          35.359924205663546
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 21,
+      "target_position": [
+        12.0,
+        49.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          46.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          46.0
+        ],
+        "F5_UUV_leader": [
+          26.657697790761016,
+          31.340443147317558
+        ],
+        "F5_USV_marker": [
+          12.0,
+          42.0
+        ],
+        "F5_UAV_marker": [
+          19.021885782802784,
+          36.940677362957025
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 22,
+      "target_position": [
+        12.0,
+        50.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          48.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          48.0
+        ],
+        "F5_UUV_leader": [
+          25.38034523938672,
+          32.87939423799509
+        ],
+        "F5_USV_marker": [
+          12.0,
+          44.0
+        ],
+        "F5_UAV_marker": [
+          18.015504141836598,
+          38.669028019718034
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 0,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 23,
+      "target_position": [
+        12.0,
+        51.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          49.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          49.0
+        ],
+        "F5_UUV_leader": [
+          24.102992688012424,
+          34.41834532867263
+        ],
+        "F5_USV_marker": [
+          12.0,
+          46.0
+        ],
+        "F5_UAV_marker": [
+          17.00912250087041,
+          40.39737867647904
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 1,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 24,
+      "target_position": [
+        12.0,
+        52.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          49.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          49.0
+        ],
+        "F5_UUV_leader": [
+          22.82564013663813,
+          35.957296419350165
+        ],
+        "F5_USV_marker": [
+          12.0,
+          48.0
+        ],
+        "F5_UAV_marker": [
+          16.002740859904225,
+          42.12572933324005
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 2,
+        "F5_UAV_marker": 0
+      }
+    },
+    {
+      "time": 25,
+      "target_position": [
+        12.0,
+        53.0
+      ],
+      "agent_positions": {
+        "F5_UUV_observer": [
+          12.0,
+          51.0
+        ],
+        "F5_USV_observer": [
+          12.0,
+          51.0
+        ],
+        "F5_UUV_leader": [
+          21.70692053551914,
+          37.6151463685531
+        ],
+        "F5_USV_marker": [
+          12.0,
+          50.0
+        ],
+        "F5_UAV_marker": [
+          15.251385752627435,
+          43.979230210706554
+        ]
+      },
+      "support_streaks": {
+        "F5_USV_marker": 3,
+        "F5_UAV_marker": 0
+      }
+    }
+  ],
+  "events": [
+    {
+      "time": 0,
+      "type": "initial_discovery_and_team_ready"
+    },
+    {
+      "time": 0,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_observer",
+      "point": [
+        0.0,
+        40.0
+      ]
+    },
+    {
+      "time": 0,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_observer",
+      "point": [
+        0.0,
+        40.0
+      ]
+    },
+    {
+      "time": 0,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_leader",
+      "point": [
+        0.0,
+        40.0
+      ]
+    },
+    {
+      "time": 0,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_marker",
+      "point": [
+        0.0,
+        40.0
+      ]
+    },
+    {
+      "time": 0,
+      "type": "waypoint_set",
+      "agent_id": "F5_UAV_marker",
+      "point": [
+        0.0,
+        40.0
+      ]
+    },
+    {
+      "time": 3,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_observer",
+      "point": [
+        3.0,
+        40.0
+      ]
+    },
+    {
+      "time": 3,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_observer",
+      "point": [
+        3.0,
+        40.0
+      ]
+    },
+    {
+      "time": 3,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_leader",
+      "point": [
+        3.0,
+        40.0
+      ]
+    },
+    {
+      "time": 3,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_marker",
+      "point": [
+        3.0,
+        40.0
+      ]
+    },
+    {
+      "time": 3,
+      "type": "waypoint_set",
+      "agent_id": "F5_UAV_marker",
+      "point": [
+        3.0,
+        40.0
+      ]
+    },
+    {
+      "time": 6,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_observer",
+      "point": [
+        6.0,
+        40.0
+      ]
+    },
+    {
+      "time": 6,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_observer",
+      "point": [
+        6.0,
+        40.0
+      ]
+    },
+    {
+      "time": 9,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_observer",
+      "point": [
+        9.0,
+        40.0
+      ]
+    },
+    {
+      "time": 9,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_observer",
+      "point": [
+        9.0,
+        40.0
+      ]
+    },
+    {
+      "time": 10,
+      "type": "waypoint_set",
+      "agent_id": "F5_UAV_marker",
+      "point": [
+        9.0,
+        40.0
+      ]
+    },
+    {
+      "time": 10,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_marker",
+      "point": [
+        9.0,
+        40.0
+      ]
+    },
+    {
+      "time": 10,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_leader",
+      "point": [
+        9.0,
+        40.0
+      ]
+    },
+    {
+      "time": 12,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_observer",
+      "point": [
+        12.0,
+        40.0
+      ]
+    },
+    {
+      "time": 12,
+      "type": "waypoint_set",
+      "agent_id": "F5_UAV_marker",
+      "point": [
+        12.0,
+        40.0
+      ]
+    },
+    {
+      "time": 12,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_marker",
+      "point": [
+        12.0,
+        40.0
+      ]
+    },
+    {
+      "time": 12,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_leader",
+      "point": [
+        12.0,
+        40.0
+      ]
+    },
+    {
+      "time": 12,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_observer",
+      "point": [
+        12.0,
+        40.0
+      ]
+    },
+    {
+      "time": 15,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_observer",
+      "point": [
+        12.0,
+        43.0
+      ]
+    },
+    {
+      "time": 15,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_observer",
+      "point": [
+        12.0,
+        43.0
+      ]
+    },
+    {
+      "time": 18,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_observer",
+      "point": [
+        12.0,
+        46.0
+      ]
+    },
+    {
+      "time": 18,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_observer",
+      "point": [
+        12.0,
+        46.0
+      ]
+    },
+    {
+      "time": 20,
+      "type": "waypoint_set",
+      "agent_id": "F5_UAV_marker",
+      "point": [
+        12.0,
+        46.0
+      ]
+    },
+    {
+      "time": 20,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_marker",
+      "point": [
+        12.0,
+        46.0
+      ]
+    },
+    {
+      "time": 20,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_leader",
+      "point": [
+        12.0,
+        46.0
+      ]
+    },
+    {
+      "time": 21,
+      "type": "waypoint_set",
+      "agent_id": "F5_UAV_marker",
+      "point": [
+        12.0,
+        49.0
+      ]
+    },
+    {
+      "time": 21,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_observer",
+      "point": [
+        12.0,
+        49.0
+      ]
+    },
+    {
+      "time": 21,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_observer",
+      "point": [
+        12.0,
+        49.0
+      ]
+    },
+    {
+      "time": 21,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_leader",
+      "point": [
+        12.0,
+        49.0
+      ]
+    },
+    {
+      "time": 21,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_marker",
+      "point": [
+        12.0,
+        49.0
+      ]
+    },
+    {
+      "time": 22,
+      "type": "authorization_delivery_verified",
+      "authorization_id": "1a4d8e4615054baa93009d4d465a2a48",
+      "marker_id": "F5_USV_marker",
+      "issued_at": 22,
+      "delivered_at": 22,
+      "expires_at": 27,
+      "expired_on_arrival": false
+    },
+    {
+      "time": 22,
+      "type": "tag_request",
+      "agent_id": "F5_USV_marker",
+      "accepted": false,
+      "reason": "marker_out_of_range",
+      "authorization_id": "1a4d8e4615054baa93009d4d465a2a48",
+      "authorization_valid": true
+    },
+    {
+      "time": 23,
+      "type": "tag_request",
+      "agent_id": "F5_USV_marker",
+      "accepted": false,
+      "reason": "marker_hold_incomplete",
+      "authorization_id": "1a4d8e4615054baa93009d4d465a2a48",
+      "authorization_valid": true
+    },
+    {
+      "time": 24,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_marker",
+      "point": [
+        12.0,
+        52.0
+      ]
+    },
+    {
+      "time": 24,
+      "type": "waypoint_set",
+      "agent_id": "F5_USV_observer",
+      "point": [
+        12.0,
+        52.0
+      ]
+    },
+    {
+      "time": 24,
+      "type": "waypoint_set",
+      "agent_id": "F5_UAV_marker",
+      "point": [
+        12.0,
+        52.0
+      ]
+    },
+    {
+      "time": 24,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_observer",
+      "point": [
+        12.0,
+        52.0
+      ]
+    },
+    {
+      "time": 24,
+      "type": "waypoint_set",
+      "agent_id": "F5_UUV_leader",
+      "point": [
+        12.0,
+        52.0
+      ]
+    },
+    {
+      "time": 24,
+      "type": "tag_request",
+      "agent_id": "F5_USV_marker",
+      "accepted": false,
+      "reason": "marker_hold_incomplete",
+      "authorization_id": "1a4d8e4615054baa93009d4d465a2a48",
+      "authorization_valid": true
+    },
+    {
+      "time": 25,
+      "type": "tag_request",
+      "agent_id": "F5_USV_marker",
+      "accepted": true,
+      "reason": "accepted",
+      "authorization_id": "1a4d8e4615054baa93009d4d465a2a48",
+      "authorization_valid": true
+    }
+  ],
+  "team_selection": {
+    "rule": "nearest_per_role_then_agent_id",
+    "radius": null,
+    "role_counts": {
+      "observer": 2,
+      "leader": 1,
+      "marker": 2
+    },
+    "candidate_count": 9,
+    "team_size": 5,
+    "initial_report": {
+      "observer_id": "F5_UUV_observer",
+      "observed_at": 0,
+      "target_position": [
+        0.0,
+        40.0
+      ]
+    },
+    "leader_id": "F5_UUV_leader",
+    "selected_ids": [
+      "F5_UUV_observer",
+      "F5_USV_observer",
+      "F5_UUV_leader",
+      "F5_USV_marker",
+      "F5_UAV_marker"
+    ],
+    "candidates": [
+      {
+        "id": "F5_UAV_leader",
+        "carrier_type": "UAV",
+        "role": "leader",
+        "position": [
+          77.77234284077255,
+          87.26201039444962
+        ],
+        "distance": 91.00678511774674,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_UAV_marker",
+        "carrier_type": "UAV",
+        "role": "marker",
+        "position": [
+          56.3262652419975,
+          18.26591325765984
+        ],
+        "distance": 60.37399011689903,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UAV_observer",
+        "carrier_type": "UAV",
+        "role": "observer",
+        "position": [
+          30.576168180957975,
+          76.38064305024812
+        ],
+        "distance": 47.523186439671676,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_USV_leader",
+        "carrier_type": "USV",
+        "role": "leader",
+        "position": [
+          76.40180139775322,
+          58.68172126459864
+        ],
+        "distance": 78.65266661868422,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_USV_marker",
+        "carrier_type": "USV",
+        "role": "marker",
+        "position": [
+          27.053617111264504,
+          7.9088674700757196
+        ],
+        "distance": 41.97307453423049,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_USV_observer",
+        "carrier_type": "USV",
+        "role": "observer",
+        "position": [
+          37.565150911206956,
+          51.25186222856366
+        ],
+        "distance": 39.214091428877076,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UUV_leader",
+        "carrier_type": "UUV",
+        "role": "leader",
+        "position": [
+          63.13199636230825,
+          10.789889031473132
+        ],
+        "distance": 69.56205537133125,
+        "selected": true,
+        "reason": "selected"
+      },
+      {
+        "id": "F5_UUV_marker",
+        "carrier_type": "UUV",
+        "role": "marker",
+        "position": [
+          96.01793391853823,
+          87.3107892806344
+        ],
+        "distance": 107.04090067045104,
+        "selected": false,
+        "reason": "role_quota_filled"
+      },
+      {
+        "id": "F5_UUV_observer",
+        "carrier_type": "UUV",
+        "role": "observer",
+        "position": [
+          20.873809044889136,
+          47.584420607369495
+        ],
+        "distance": 22.208992322750408,
+        "selected": true,
+        "reason": "selected"
+      }
+    ]
+  }
+}

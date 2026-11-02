@@ -284,7 +284,7 @@ class DispatcherTests(unittest.TestCase):
                                            json.dumps(client.try_tag(episode_id, expected_time))})
                 result = asyncio.run(agent.run("只调用一次 sim_try_tag", "real-http-task", episode + ":11"))
                 self.assertEqual(controller.status()["time"], 11)
-                self.assertEqual(controller.audit()["calls"], [
+                self.assertEqual([{k: v for k, v in c.items() if k != "reason"} for c in controller.audit()["calls"]], [
                     {"agent_id": NAME, "time": 11, "operation": "tag", "accepted": False},
                 ])
                 text = guard.render_capture_result(result, "real-http-task", episode + ":11", NAME)

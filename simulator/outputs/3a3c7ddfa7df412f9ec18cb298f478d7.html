@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>协同捕获仿真回放</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+      color: #17293a;
+      background: #edf3f7;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .shell { max-width: 1450px; margin: 0 auto; padding: 28px; }
+    .heading {
+      display: flex; justify-content: space-between; gap: 18px;
+      align-items: flex-start; margin-bottom: 20px;
+    }
+    h1 { font-size: clamp(24px, 2.5vw, 34px); line-height: 1.2; margin: 0 0 8px; }
+    .subtitle { margin: 0; color: #5e7182; font-size: 14px; }
+    .pill {
+      padding: 9px 13px; border-radius: 999px; font-size: 13px;
+      background: #dceaf3; color: #25546c; white-space: nowrap;
+    }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 20px; }
+    .panel {
+      background: #fff; border: 1px solid #dbe5eb; border-radius: 18px;
+      box-shadow: 0 14px 40px rgba(30, 57, 74, .06);
+    }
+    .map-panel { padding: 14px; }
+    canvas { display: block; width: 100%; height: auto; border-radius: 10px; background: #f8fcfd; }
+    .controls { padding: 14px 12px 4px; }
+    .control-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    button, select {
+      font: inherit; color: #1e4057; border: 1px solid #c9d9e2;
+      background: #f7fafc; border-radius: 9px; padding: 7px 11px;
+      cursor: pointer;
+    }
+    button:hover, select:hover { background: #eaf3f8; }
+    button.primary { background: #195b79; color: white; border-color: #195b79; min-width: 76px; }
+    button.primary:hover { background: #144c67; }
+    button:focus-visible, select:focus-visible, input:focus-visible {
+      outline: 3px solid #f0af57; outline-offset: 2px;
+    }
+    input[type="range"] { width: 100%; accent-color: #195b79; margin: 13px 0 5px; }
+    .time-line { display: flex; justify-content: space-between; color: #6b7f8e; font-size: 12px; }
+    .note { margin: 10px 2px 0; font-size: 12px; color: #6b7f8e; }
+    .side { padding: 22px; }
+    .metric-label { margin: 0; text-transform: uppercase; letter-spacing: .1em; color: #6d8492; font-size: 11px; }
+    .time-big { margin: 6px 0 1px; font-size: 42px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .time-big span { font-size: 17px; color: #6b7f8e; font-weight: 500; }
+    .status { font-size: 14px; font-weight: 700; margin: 8px 0 20px; color: #1d647b; }
+    .status.captured { color: #127857; }
+    .status.escaped, .status.timeout { color: #aa4e37; }
+    .divider { height: 1px; background: #e2ebef; margin: 18px 0; }
+    h2 { font-size: 15px; margin: 0 0 14px; }
+    .legend-list { display: grid; gap: 12px; }
+    .legend-item { display: flex; align-items: center; gap: 9px; font-size: 12px; }
+    .swatch { width: 13px; height: 13px; flex: none; }
+    .swatch.UAV { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+    .swatch.USV { border-radius: 2px; }
+    .swatch.UUV { border-radius: 50%; }
+    .legend-text { min-width: 0; overflow-wrap: anywhere; }
+    .legend-text strong { display: block; font-size: 12px; color: #223f52; }
+    .legend-text small { color: #7a8e9d; }
+    .toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #526b7b; margin: 10px 0; }
+    .toggle input { accent-color: #195b79; }
+    .events { margin: 0; padding-left: 18px; color: #5d7382; font-size: 12px; line-height: 1.7; }
+    .events li { margin-bottom: 5px; }
+    @media (max-width: 950px) {
+      .layout { grid-template-columns: 1fr; }
+      .side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; }
+      .side .divider { grid-column: 1 / -1; }
+    }
+    @media (max-width: 600px) {
+      .shell { padding: 12px; }
+      .heading { display: block; }
+      .pill { display: inline-block; margin-top: 12px; }
+      .side { display: block; }
+      .map-panel { padding: 7px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="heading">
+      <div>
+        <h1>协同捕获 · 运动回放</h1>
+        <p class="subtitle" id="scenario-name"></p>
+      </div>
+      <span class="pill">仿真时间与模型调用耗时分开计算</span>
+    </header>
+    <div class="layout">
+      <section class="panel map-panel" aria-label="仿真地图与回放控制">
+        <noscript>浏览器未启用 JavaScript，无法播放运动回放。</noscript>
+        <canvas id="map" width="900" height="900" aria-label="目标和智能体运动地图"></canvas>
+        <div class="controls">
+          <div class="control-row">
+            <button class="primary" id="play" type="button">播放</button>
+            <button id="previous" type="button" aria-label="上一仿真秒">−1 秒</button>
+            <button id="next" type="button" aria-label="下一仿真秒">+1 秒</button>
+            <label for="speed">回放速度</label>
+            <select id="speed" aria-label="回放速度">
+              <option value="0.5">0.5×</option>
+              <option value="1" selected>1×</option>
+              <option value="2">2×</option>
+              <option value="4">4×</option>
+            </select>
+          </div>
+          <input id="scrub" type="range" min="0" max="0" value="0" aria-label="仿真时间轴">
+          <div class="time-line"><span>首次发现 / 初始化</span><span id="end-label"></span></div>
+          <p class="note">实线为截至当前时刻已走过的轨迹；标记成功时回放结束。</p>
+        </div>
+      </section>
+      <aside class="panel side">
+        <div>
+          <p class="metric-label">当前仿真时刻</p>
+          <p class="time-big"><span id="time-value">0</span> <span>秒</span></p>
+          <p class="status" id="status">运行中</p>
+        </div>
+        <div>
+          <h2>显示选项</h2>
+          <label class="toggle"><input id="show-plan" type="checkbox">显示预设目标路线（仅评估回放）</label>
+          <label class="toggle"><input id="show-radii" type="checkbox" checked>显示 15 米支持圈与 5 米标记圈</label>
+        </div>
+        <div class="divider"></div>
+        <div>
+          <h2>队伍成员</h2>
+          <div id="legend" class="legend-list"></div>
+        </div>
+        <div>
+          <h2>当前帧</h2>
+          <p id="frame-detail" class="subtitle"></p>
+        </div>
+        <div class="divider"></div>
+        <div>
+          <h2>关键事件</h2>
+          <ol id="events" class="events"></ol>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <script>
+    // Keep playback variables private: window.top is a non-configurable
+    // browser global, so a top-level const named top prevents initialization.
+    (() => {
+    "use strict";
+    const replay = {"schema_version":1,"scenario_id":"nine_candidates_five_team","status":"aborted","capture_time":null,"end_time":0,"config":{"width":100.0,"height":100.0,"dt":1.0,"agent_speed":2.0,"target_speed":1.0,"observation_radius":25.0,"observation_period":5,"support_radius":15.0,"marker_radius":5.0,"hold_seconds":3,"max_time":120},"agents":[{"id":"F5_UAV_observer","carrier_type":"UAV","role":"observer"},{"id":"F5_USV_observer","carrier_type":"USV","role":"observer"},{"id":"F5_UUV_leader","carrier_type":"UUV","role":"leader"},{"id":"F5_USV_marker","carrier_type":"USV","role":"marker"},{"id":"F5_UAV_marker","carrier_type":"UAV","role":"marker"}],"target_route":[[0.0,40.0],[12.0,40.0],[12.0,55.0],[101.0,55.0]],"trace":[{"time":0,"target_position":[0.0,40.0],"agent_positions":{"F5_UAV_observer":[5.0,40.0],"F5_USV_observer":[9.0,44.0],"F5_UUV_leader":[7.0,45.0],"F5_USV_marker":[38.0,70.0],"F5_UAV_marker":[40.0,68.0]},"support_streaks":{"F5_USV_marker":0,"F5_UAV_marker":0}}],"events":[{"time":0,"type":"initial_discovery_and_team_ready"},{"time":0,"type":"aborted","reason":"HTTPError during launch_goal at t=0 after 182.1s: HTTP Error 500: Internal Server Error"}],"team_selection":{"rule":"nearest_per_role_then_agent_id","radius":50.0,"role_counts":{"observer":2,"leader":1,"marker":2},"candidate_count":9,"team_size":5,"initial_report":{"observer_id":"F5_UAV_observer","observed_at":0,"target_position":[0.0,40.0]},"leader_id":"F5_UUV_leader","selected_ids":["F5_UAV_observer","F5_USV_observer","F5_UUV_leader","F5_USV_marker","F5_UAV_marker"],"candidates":[{"id":"F5_UAV_leader","carrier_type":"UAV","role":"leader","position":[28.0,40.0],"distance":28.0,"selected":false,"reason":"role_quota_filled"},{"id":"F5_UAV_marker","carrier_type":"UAV","role":"marker","position":[40.0,68.0],"distance":48.82622246293481,"selected":true,"reason":"selected"},{"id":"F5_UAV_observer","carrier_type":"UAV","role":"observer","position":[5.0,40.0],"distance":5.0,"selected":true,"reason":"selected"},{"id":"F5_USV_leader","carrier_type":"USV","role":"leader","position":[60.0,70.0],"distance":67.08203932499369,"selected":false,"reason":"outside_radius"},{"id":"F5_USV_marker","carrier_type":"USV","role":"marker","position":[38.0,70.0],"distance":48.41487374764082,"selected":true,"reason":"selected"},{"id":"F5_USV_observer","carrier_type":"USV","role":"observer","position":[9.0,44.0],"distance":9.848857801796104,"selected":true,"reason":"selected"},{"id":"F5_UUV_leader","carrier_type":"UUV","role":"leader","position":[7.0,45.0],"distance":8.602325267042627,"selected":true,"reason":"selected"},{"id":"F5_UUV_marker","carrier_type":"UUV","role":"marker","position":[42.0,65.0],"distance":48.877397639399746,"selected":false,"reason":"role_quota_filled"},{"id":"F5_UUV_observer","carrier_type":"UUV","role":"observer","position":[22.0,45.0],"distance":22.561028345356956,"selected":false,"reason":"role_quota_filled"}]}};
+    const frames = replay.trace;
+    const canvas = document.getElementById("map");
+    const ctx = canvas.getContext("2d");
+    const scrub = document.getElementById("scrub");
+    const playButton = document.getElementById("play");
+    const speedSelect = document.getElementById("speed");
+    const showPlan = document.getElementById("show-plan");
+    const showRadii = document.getElementById("show-radii");
+    const colorByRole = {observer: "#1c83a5", leader: "#7763b2", marker: "#d58a2d"};
+    const roleName = {observer: "搜索观测", leader: "跟踪协调", marker: "接近标记"};
+    const mapWidth = replay.config.width;
+    const mapHeight = replay.config.height;
+    const scale = Math.min((canvas.width - 150) / mapWidth, (canvas.height - 150) / mapHeight);
+    const plotLeft = (canvas.width - mapWidth * scale) / 2;
+    const plotTop = (canvas.height - mapHeight * scale) / 2;
+    let frameIndex = 0;
+    let timer = null;
+
+    function xy(point) {
+      return [plotLeft + point[0] * scale, plotTop + (mapHeight - point[1]) * scale];
+    }
+
+    function path(points, color, width, dashed = false) {
+      if (points.length < 2) return;
+      ctx.save();
+      ctx.beginPath();
+      points.forEach((p, i) => {
+        const [x, y] = xy(p);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      });
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      if (dashed) ctx.setLineDash([8, 7]);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawMap() {
+      ctx.fillStyle = "#f8fcfd";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#e8f2f6";
+      ctx.fillRect(plotLeft, plotTop, mapWidth * scale, mapHeight * scale);
+      ctx.save();
+      ctx.strokeStyle = "#d4e2e9";
+      ctx.lineWidth = 1;
+      ctx.fillStyle = "#78909e";
+      ctx.font = "13px system-ui";
+      for (let x = 0; x <= mapWidth; x += 10) {
+        const px = plotLeft + x * scale;
+        ctx.beginPath();
+        ctx.moveTo(px, plotTop);
+        ctx.lineTo(px, plotTop + mapHeight * scale);
+        ctx.stroke();
+        if (x % 20 === 0) ctx.fillText(String(x), px - 8, plotTop + mapHeight * scale + 22);
+      }
+      for (let y = 0; y <= mapHeight; y += 10) {
+        const py = plotTop + (mapHeight - y) * scale;
+        ctx.beginPath();
+        ctx.moveTo(plotLeft, py);
+        ctx.lineTo(plotLeft + mapWidth * scale, py);
+        ctx.stroke();
+        if (y % 20 === 0) ctx.fillText(String(y), plotLeft - 30, py + 5);
+      }
+      ctx.strokeStyle = "#7795a5";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(plotLeft, plotTop, mapWidth * scale, mapHeight * scale);
+      ctx.fillText("x / 米", plotLeft + mapWidth * scale - 24, plotTop + mapHeight * scale + 46);
+      ctx.fillText("y / 米", plotLeft - 32, plotTop - 12);
+      ctx.restore();
+    }
+
+    function drawTarget(point) {
+      const [x, y] = xy(point);
+      if (showRadii.checked) {
+        ctx.save();
+        ctx.fillStyle = "rgba(28, 131, 165, .075)";
+        ctx.strokeStyle = "rgba(28, 131, 165, .35)";
+        ctx.beginPath();
+        ctx.arc(x, y, replay.config.support_radius * scale, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "rgba(213, 138, 45, .12)";
+        ctx.strokeStyle = "rgba(213, 138, 45, .7)";
+        ctx.beginPath();
+        ctx.arc(x, y, replay.config.marker_radius * scale, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+      }
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(Math.PI / 4);
+      ctx.fillStyle = "#d44c54";
+      ctx.fillRect(-9, -9, 18, 18);
+      ctx.strokeStyle = "white";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(-9, -9, 18, 18);
+      ctx.restore();
+      ctx.fillStyle = "#a6323c";
+      ctx.font = "bold 14px system-ui";
+      ctx.fillText("目标", x + 13, y - 12);
+    }
+
+    function drawAgent(agent, point) {
+      const [x, y] = xy(point);
+      ctx.save();
+      ctx.fillStyle = colorByRole[agent.role] || "#425c6c";
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      if (agent.carrier_type === "UAV") {
+        ctx.moveTo(x, y - 10);
+        ctx.lineTo(x + 10, y + 8);
+        ctx.lineTo(x - 10, y + 8);
+        ctx.closePath();
+      } else if (agent.carrier_type === "USV") {
+        ctx.rect(x - 9, y - 9, 18, 18);
+      } else {
+        ctx.arc(x, y, 9, 0, 2 * Math.PI);
+      }
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+      ctx.font = "13px system-ui";
+      ctx.fillStyle = "#203d51";
+      ctx.fillText(agent.id, x + 12, y + 17);
+    }
+
+    function keyEvents(time) {
+      const selected = replay.events.filter(e =>
+        e.time <= time && (
+          e.type === "initial_discovery_and_team_ready" ||
+          e.type === "target_escaped" ||
+          e.type === "timeout" ||
+          e.type === "aborted" ||
+          (e.type === "tag_request" && e.accepted)
+        )
+      );
+      return selected.slice(-5);
+    }
+
+    function eventText(event) {
+      const labels = {
+        initial_discovery_and_team_ready: "首次发现，队伍初始化完成",
+        target_escaped: "目标越过区域边界，逃脱",
+        timeout: "达到仿真时限",
+        aborted: "实验中止：" + (event.reason || ""),
+        tag_request: event.agent_id + " 提交有效标记请求"
+      };
+      return "t=" + event.time + "：" + (labels[event.type] || event.type);
+    }
+
+    function render() {
+      const frame = frames[frameIndex];
+      drawMap();
+      if (showPlan.checked) path(replay.target_route, "rgba(190, 74, 82, .45)", 2, true);
+      path(frames.slice(0, frameIndex + 1).map(f => f.target_position), "#d44c54", 3);
+      for (const agent of replay.agents) {
+        path(
+          frames.slice(0, frameIndex + 1).map(f => f.agent_positions[agent.id]),
+          colorByRole[agent.role] + "99", 2
+        );
+      }
+      drawTarget(frame.target_position);
+      for (const agent of replay.agents) drawAgent(agent, frame.agent_positions[agent.id]);
+      scrub.value = String(frameIndex);
+      document.getElementById("time-value").textContent = String(frame.time);
+      const status = document.getElementById("status");
+      const ended = frameIndex === frames.length - 1;
+      status.textContent = ended
+        ? ({captured: "捕获成功", escaped: "目标逃脱", timeout: "仿真超时", aborted: "实验中止"}[replay.status] || replay.status)
+        : "运行中";
+      status.className = "status" + (ended ? " " + replay.status : "");
+      const positions = "目标 (" + frame.target_position.map(n => n.toFixed(1)).join(", ") + ")";
+      const held = Object.entries(frame.support_streaks)
+        .map(([id, count]) => id + " 连续支持 " + count + " 秒").join("；");
+      document.getElementById("frame-detail").textContent = positions + (held ? "；" + held : "");
+      const list = document.getElementById("events");
+      list.replaceChildren();
+      for (const event of keyEvents(frame.time)) {
+        const li = document.createElement("li");
+        li.textContent = eventText(event);
+        list.appendChild(li);
+      }
+    }
+
+    function stop() {
+      if (timer !== null) clearInterval(timer);
+      timer = null;
+      playButton.textContent = "播放";
+    }
+
+    function start() {
+      if (frameIndex >= frames.length - 1) frameIndex = 0;
+      playButton.textContent = "暂停";
+      timer = setInterval(() => {
+        if (frameIndex >= frames.length - 1) {
+          stop();
+          return;
+        }
+        frameIndex += 1;
+        render();
+        if (frameIndex >= frames.length - 1) stop();
+      }, 450 / Number(speedSelect.value));
+      render();
+    }
+
+    playButton.addEventListener("click", () => timer === null ? start() : stop());
+    speedSelect.addEventListener("change", () => { if (timer !== null) { stop(); start(); } });
+    document.getElementById("previous").addEventListener("click", () => {
+      stop(); frameIndex = Math.max(0, frameIndex - 1); render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      stop(); frameIndex = Math.min(frames.length - 1, frameIndex + 1); render();
+    });
+    scrub.addEventListener("input", () => { stop(); frameIndex = Number(scrub.value); render(); });
+    showPlan.addEventListener("change", render);
+    showRadii.addEventListener("change", render);
+    document.addEventListener("keydown", event => {
+      if (event.target && /INPUT|SELECT|BUTTON/.test(event.target.tagName)) return;
+      if (event.key === " ") { event.preventDefault(); timer === null ? start() : stop(); }
+      if (event.key === "ArrowLeft") {
+        stop(); frameIndex = Math.max(0, frameIndex - 1); render();
+      }
+      if (event.key === "ArrowRight") {
+        stop(); frameIndex = Math.min(frames.length - 1, frameIndex + 1); render();
+      }
+    });
+
+    document.getElementById("scenario-name").textContent =
+      "场景：" + replay.scenario_id + " · 逐秒记录 · " + replay.agents.length + " 名成员";
+    document.getElementById("end-label").textContent = "结束：" + replay.end_time + " 秒";
+    scrub.max = String(frames.length - 1);
+    const legend = document.getElementById("legend");
+    for (const agent of replay.agents) {
+      const row = document.createElement("div");
+      row.className = "legend-item";
+      const swatch = document.createElement("span");
+      swatch.className = "swatch " + agent.carrier_type;
+      swatch.style.backgroundColor = colorByRole[agent.role] || "#425c6c";
+      const text = document.createElement("span");
+      text.className = "legend-text";
+      const strong = document.createElement("strong");
+      strong.textContent = agent.id;
+      const small = document.createElement("small");
+      small.textContent = agent.carrier_type + " · " + (roleName[agent.role] || agent.role);
+      text.append(strong, small);
+      row.append(swatch, text);
+      legend.appendChild(row);
+    }
+    start();
+    })();
+  </script>
+</body>
+</html>

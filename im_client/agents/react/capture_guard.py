@@ -29,10 +29,12 @@ class CaptureTaskEvidence:
 
     @property
     def has_action(self) -> bool:
+        if self.contract and self.contract["tool"] == "sim_self_state":
+            return any(row["tool"] == "sim_self_state" for row in self.receipts)
         return any(row["tool"] in ACTION_TOOLS for row in self.receipts)
 
     def check_call(self, tool, arguments):
-        if self.contract is None or tool == "sim_self_state":
+        if self.contract is None or (tool == "sim_self_state" and self.contract["tool"] != tool):
             return
         if tool != self.contract["tool"]:
             raise ValueError(f"this task requires {self.contract['tool']}; {tool} is not assigned")
@@ -73,7 +75,7 @@ class CaptureTaskEvidence:
         if not self.has_action:
             raise ValueError(
                 "submit_task rejected: this task has no real sim_observe, sim_move_to "
-                "or sim_try_tag receipt. Execute the action assigned in THIS task "
+                "or sim_try_tag receipt (or an explicitly assigned sim_self_state receipt). Execute the action assigned in THIS task "
                 "before submitting; prose, sim_self_state and past tasks are not "
                 "action evidence. Do not repeat an action that already returned a receipt."
             )

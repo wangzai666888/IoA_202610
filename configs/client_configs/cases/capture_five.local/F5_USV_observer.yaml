@@ -1,0 +1,39 @@
+{
+  "server": {
+    "hostname": "ioa-server",
+    "port": 7788
+  },
+  "tool_agent": {
+    "agent_type": "ReAct",
+    "agent_name": "F5_USV_observer",
+    "desc": "观测者。实际调用 sim_observe，把目标坐标或未发现结果及 observed_at 经 IoA 报告给 F5_UUV_leader；按协调指令调用 sim_move_to 设置自身航点。只处理任务指定的 episode_id 和 expected_time。工具仅操作自己；不等待位置移动，不推进时钟，不请求其他团队。",
+    "image_name": "react-agent:sim",
+    "container_name": "capture5-f5-usv-observer-tool",
+    "port": 7070,
+    "tools_config": "/app/simulator/tool_configs/observer.json",
+    "model": "Qwen3.8-Flash",
+    "max_num_steps": 6,
+    "rag": {
+      "persist_dir": "",
+      "chunk_size": 512,
+      "llm_model": "Qwen3.8-Flash",
+      "llm_temperature": 0.1,
+      "similarity_top_k": 2,
+      "data": ""
+    }
+  },
+  "comm": {
+    "name": "F5_USV_observer",
+    "desc": "观测者。实际调用 sim_observe，把目标坐标或未发现结果及 observed_at 经 IoA 报告给 F5_UUV_leader；按协调指令调用 sim_move_to 设置自身航点。只处理任务指定的 episode_id 和 expected_time。工具仅操作自己；不等待位置移动，不推进时钟，不请求其他团队。",
+    "type": "Thing Assistant",
+    "support_nested_teams": false,
+    "max_team_up_attempts": 3,
+    "llm": {
+      "llm_type": "openai-chat",
+      "model": "Qwen3.8-Flash",
+      "temperature": 0.1
+    },
+    "observation_func": "dummy",
+    "discussion_only": false
+  }
+}

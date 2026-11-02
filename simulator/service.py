@@ -14,11 +14,13 @@ import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import secrets
+from dataclasses import replace
 from threading import RLock
 from uuid import uuid4
 
 from simulator.replay import write_replay
 from simulator.scenario import load_scenario
+from simulator.experiment_rules import frozen_rules
 
 
 ROOT = Path(__file__).parent
@@ -101,10 +103,12 @@ class SimulationService:
         return {
             "episode_id": self.episode_id,
             "scenario_id": self.env.scenario_id,
+            "scenario_sha256": self.env.scenario_sha256,
             "time": self.env.time,
             "status": self.env.status,
             "capture_time": self.env.capture_time,
             "observation_period": self.env.config.observation_period,
+            "experiment_rules": self.env.experiment_rules,
             "max_time": self.env.config.max_time,
             "members": [
                 {"id": a.agent_id, "role": a.role, "carrier_type": a.carrier_type}
@@ -136,6 +140,8 @@ class SimulationService:
                 audit_file = self.output_dir / f"{self.episode_id}.audit.json"
                 audit_file.write_text(json.dumps({
                     "episode_id": self.episode_id, "calls": self.tool_audit,
+                    "experiment_rules": self.env.experiment_rules,
+                    "authorization_deliveries": list(self.env._authorizations.values()),
                 }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
                 selection_file = None
                 if self.env.team_selection is not None:
@@ -168,13 +174,26 @@ class SimulationService:
 
             if method == "GET" and path == "/control/status":
                 return self._status()
+            if method == "GET" and path == "/control/scenario":
+                # Controller-only preflight; no target route/coordinates are
+                # sent to any Agent or injected into its planning context.
+                env = load_scenario(self.scenario)
+                validate_auth(self.auth, {a.agent_id for a in env.agents})
+                return {"scenario_id": env.scenario_id, "scenario_sha256": env.scenario_sha256,
+                        "members": [{"id": a.agent_id, "role": a.role, "carrier_type": a.carrier_type}
+                                    for a in env.agents]}
             if method == "POST" and path == "/control/reset":
-                self._fields(body, set())
+                self._fields(body, {"experiment_rules"} if "experiment_rules" in body else set())
+                rules = frozen_rules(body["experiment_rules"]) if "experiment_rules" in body else None
                 if self.env is not None and self.env.status == "running":
                     raise APIError(409, "finish or explicitly abort the active episode first")
                 if self.env is not None:
                     self._export_if_done()
                 env = load_scenario(self.scenario)
+                if rules is not None:
+                    env.experiment_rules = rules
+                    env.config = replace(env.config, **{k: rules[k] for k in (
+                        "observation_period", "marker_radius", "hold_seconds", "support_required", "authorization_required")})
                 validate_auth(self.auth, {a.agent_id for a in env.agents})
                 self.env = env
                 self.episode_id = uuid4().hex
@@ -186,6 +205,8 @@ class SimulationService:
                 raise APIError(409, "controller must reset before starting an episode")
             if method == "GET":
                 if path == "/agent/state":
+                    if self.env.status == "running":
+                        self.tool_audit.append({"agent_id": agent_id, "time": self.env.time, "operation": "self_state"})
                     return {
                         **self.env.self_state(agent_id),
                         "episode_id": self.episode_id, "status": self.env.status,
@@ -208,6 +229,12 @@ class SimulationService:
                         "episode_id": self.episode_id,
                         "time": self.env.time,
                         "status": self.env.status,
+                        "experiment_rules": self.env.experiment_rules,
+                        "authorization_deliveries": [
+                            {"authorization_id": r["grant"]["authorization_id"],
+                             "marker_id": r["grant"]["marker_id"], "issued_at": r["grant"]["issued_at"],
+                             "expires_at": r["grant"]["expires_at"], "delivered_at": r["delivered_at"]}
+                            for r in self.env._authorizations.values()],
                         "calls": list(self.tool_audit),
                     }
                 if path == "/control/result":
@@ -223,7 +250,8 @@ class SimulationService:
 
             fields = {
                 "/agent/waypoint": {"episode_id", "expected_time", "point"},
-                "/agent/tag": {"episode_id", "expected_time"},
+                "/agent/tag": {"episode_id", "expected_time"} | ({"authorization_id"} if self.env.config.authorization_required else set()),
+                "/control/authorizations": {"episode_id", "expected_time", "receipts"},
                 "/control/step": {"episode_id", "expected_time"},
                 "/control/finish": {"episode_id", "expected_time"},
                 "/control/abort": {"episode_id", "expected_time", "reason"},
@@ -237,7 +265,13 @@ class SimulationService:
                     raise APIError(403, "only marker agents can request a tag")
                 # A concurrent second marker can acknowledge a terminal result.
                 # This is a read-only reply: no second capture or audit mutation.
+                if self.env.config.authorization_required:
+                    valid, reason = self.env.authorization_check(agent_id, body["authorization_id"])
+                    if not valid:
+                        raise APIError(403, reason)
                 return {"accepted": False, "reason": "already_captured",
+                        **({"authorization_id": body["authorization_id"], "authorization_valid": True}
+                           if self.env.config.authorization_required else {}),
                         "time": self.env.time, "episode_id": self.episode_id,
                         "status": "captured"}
             response = None
@@ -248,11 +282,20 @@ class SimulationService:
                     "operation": "waypoint", "point": body["point"],
                 })
             elif path == "/agent/tag":
-                response = self.env.try_tag(agent_id)
+                if self.env.config.authorization_required and not isinstance(body["authorization_id"], str):
+                    raise APIError(400, "authorization_id must be a string")
+                response = self.env.try_tag(agent_id, body.get("authorization_id"))
                 self.tool_audit.append({
                     "agent_id": agent_id, "time": self.env.time,
-                    "operation": "tag", "accepted": response["accepted"],
+                    "operation": "tag", **response,
                 })
+            elif path == "/control/authorizations":
+                if not self.env.config.authorization_required or not isinstance(body["receipts"], list):
+                    raise APIError(400, "authorization delivery registry requires the frozen experiment rules")
+                for receipt in body["receipts"]:
+                    if receipt.get("grant", {}).get("episode_id") != self.episode_id:
+                        raise APIError(409, "authorization belongs to another episode")
+                    self.env.register_authorization_delivery(receipt)
             elif path == "/control/step":
                 self.env.advance_one_second()
             elif path == "/control/finish":

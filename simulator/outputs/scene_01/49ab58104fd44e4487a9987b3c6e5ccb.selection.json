@@ -1,0 +1,137 @@
+{
+  "rule": "nearest_per_role_then_agent_id",
+  "radius": null,
+  "role_counts": {
+    "observer": 2,
+    "leader": 1,
+    "marker": 2
+  },
+  "candidate_count": 9,
+  "team_size": 5,
+  "initial_report": {
+    "observer_id": "F5_UUV_observer",
+    "observed_at": 0,
+    "target_position": [
+      0.0,
+      40.0
+    ]
+  },
+  "leader_id": "F5_UUV_leader",
+  "selected_ids": [
+    "F5_UUV_observer",
+    "F5_USV_observer",
+    "F5_UUV_leader",
+    "F5_USV_marker",
+    "F5_UAV_marker"
+  ],
+  "candidates": [
+    {
+      "id": "F5_UAV_leader",
+      "carrier_type": "UAV",
+      "role": "leader",
+      "position": [
+        77.77234284077255,
+        87.26201039444962
+      ],
+      "distance": 91.00678511774674,
+      "selected": false,
+      "reason": "role_quota_filled"
+    },
+    {
+      "id": "F5_UAV_marker",
+      "carrier_type": "UAV",
+      "role": "marker",
+      "position": [
+        56.3262652419975,
+        18.26591325765984
+      ],
+      "distance": 60.37399011689903,
+      "selected": true,
+      "reason": "selected"
+    },
+    {
+      "id": "F5_UAV_observer",
+      "carrier_type": "UAV",
+      "role": "observer",
+      "position": [
+        30.576168180957975,
+        76.38064305024812
+      ],
+      "distance": 47.523186439671676,
+      "selected": false,
+      "reason": "role_quota_filled"
+    },
+    {
+      "id": "F5_USV_leader",
+      "carrier_type": "USV",
+      "role": "leader",
+      "position": [
+        76.40180139775322,
+        58.68172126459864
+      ],
+      "distance": 78.65266661868422,
+      "selected": false,
+      "reason": "role_quota_filled"
+    },
+    {
+      "id": "F5_USV_marker",
+      "carrier_type": "USV",
+      "role": "marker",
+      "position": [
+        27.053617111264504,
+        7.9088674700757196
+      ],
+      "distance": 41.97307453423049,
+      "selected": true,
+      "reason": "selected"
+    },
+    {
+      "id": "F5_USV_observer",
+      "carrier_type": "USV",
+      "role": "observer",
+      "position": [
+        37.565150911206956,
+        51.25186222856366
+      ],
+      "distance": 39.214091428877076,
+      "selected": true,
+      "reason": "selected"
+    },
+    {
+      "id": "F5_UUV_leader",
+      "carrier_type": "UUV",
+      "role": "leader",
+      "position": [
+        63.13199636230825,
+        10.789889031473132
+      ],
+      "distance": 69.56205537133125,
+      "selected": true,
+      "reason": "selected"
+    },
+    {
+      "id": "F5_UUV_marker",
+      "carrier_type": "UUV",
+      "role": "marker",
+      "position": [
+        96.01793391853823,
+        87.3107892806344
+      ],
+      "distance": 107.04090067045104,
+      "selected": false,
+      "reason": "role_quota_filled"
+    },
+    {
+      "id": "F5_UUV_observer",
+      "carrier_type": "UUV",
+      "role": "observer",
+      "position": [
+        20.873809044889136,
+        47.584420607369495
+      ],
+      "distance": 22.208992322750408,
+      "selected": true,
+      "reason": "selected"
+    }
+  ]
+}

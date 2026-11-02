@@ -1,0 +1,8 @@
+.git
+**/node_modules
+logs/
+**/__pycache__
+temp
+simulator/*.local.json
+simulator/*.local.env
+simulator/outputs
